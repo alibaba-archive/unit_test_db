@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="KeyValueConfigInfo" >
+
+	<typeAlias alias="keyValueConfigInfoDO" type="com.aliyun.kongming.unittest.fit.dao.test1.KeyValueConfigInfoDO" />
+  
+	<resultMap id="keyValueConfigInfoDOResultMap" class="keyValueConfigInfoDO" >
+		<result property="id" column="id" />
+		<result property="configKey" column="config_key" />
+		<result property="configValue" column="config_value" />
+		<result property="gmtCreate" column="gmt_create" />
+		<result property="gmtModify" column="gmt_modify" />
+	</resultMap>
+
+	<insert id="insert" parameterClass="keyValueConfigInfoDO" >
+	    INSERT INTO key_value_config_info (
+			id,
+			config_key,
+			config_value,
+			gmt_create,
+			gmt_modify
+		) VALUES (
+			#id#,
+			#configKey#,
+			#configValue#,
+			now(),
+			now()
+	    )
+	    <selectKey resultClass="long" keyProperty="id">
+			select last_insert_id() as ID from key_value_config_info limit 1
+	    </selectKey>
+	</insert>
+
+	<select id="readByConfigKey" resultMap="keyValueConfigInfoDOResultMap" >
+		<![CDATA[
+	    	SELECT
+	            id,
+				config_key,
+				config_value,
+				gmt_create,
+				gmt_modify
+	    	FROM key_value_config_info
+	    	WHERE config_key = #configKey#
+		]]> 
+	</select>
+	
+	<update id="update" parameterClass="keyValueConfigInfoDO">
+		update key_value_config_info 
+		set gmt_modify = now(),
+			config_value = #configValue#
+		where config_key=#configKey#
+	</update>
+  
+</sqlMap>

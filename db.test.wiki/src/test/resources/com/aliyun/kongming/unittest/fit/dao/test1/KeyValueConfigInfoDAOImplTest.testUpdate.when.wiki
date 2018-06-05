@@ -1,0 +1,6 @@
+|connect|
+|clean table|key_value_config_info|
+|insert|key_value_config_info|
+|id|config_key|config_value|gmt_create|gmt_modify|
+|1|best|kaka|2014-02-20|2014-02-20|
+|2|good|ronaldo|2014-02-20|2014-02-20|
