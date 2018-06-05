@@ -1,2 +1,0 @@
-|connect|
-|clean table|key_value_config_info|

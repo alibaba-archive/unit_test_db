@@ -1,4 +1,0 @@
-|connect|
-|query|select config_value from key_value_config_info where config_key = 'best'|
-|config_value|
-|messi|

@@ -1,4 +1,0 @@
-|connect|
-|query|select config_key, config_value from key_value_config_info|
-|config_key|config_value|
-|best|messi|
