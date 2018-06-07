@@ -18,7 +18,7 @@ package com.aliyun.ext.jtester.cglib.core;
 import com.aliyun.ext.jtester.asm.Label;
 
 public interface ProcessSwitchCallback {
-	void processCase(int key, Label end) throws Exception;
+    void processCase(int key, Label end) throws Exception;
 
-	void processDefault() throws Exception;
+    void processDefault() throws Exception;
 }

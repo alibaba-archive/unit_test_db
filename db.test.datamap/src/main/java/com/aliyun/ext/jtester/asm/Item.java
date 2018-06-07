@@ -40,7 +40,7 @@ final class Item {
     /**
      * Index of this item in the constant pool.
      */
-    int index;
+    int    index;
 
     /**
      * Type of this constant pool item. A single class is used to represent all
@@ -50,26 +50,25 @@ final class Item {
      * {@link ClassWriter#DOUBLE}, {@link ClassWriter#UTF8},
      * {@link ClassWriter#STR}, {@link ClassWriter#CLASS},
      * {@link ClassWriter#NAME_TYPE}, {@link ClassWriter#FIELD},
-     * {@link ClassWriter#METH}, {@link ClassWriter#IMETH}.
-     * 
-     * Special Item types are used for Items that are stored in the ClassWriter
+     * {@link ClassWriter#METH}, {@link ClassWriter#IMETH}. Special Item types
+     * are used for Items that are stored in the ClassWriter
      * {@link ClassWriter#typeTable}, instead of the constant pool, in order to
      * avoid clashes with normal constant pool items in the ClassWriter constant
      * pool's hash table. These special item types are
      * {@link ClassWriter#TYPE_NORMAL}, {@link ClassWriter#TYPE_UNINIT} and
      * {@link ClassWriter#TYPE_MERGED}.
      */
-    int type;
+    int    type;
 
     /**
      * Value of this item, for an integer item.
      */
-    int intVal;
+    int    intVal;
 
     /**
      * Value of this item, for a long item.
      */
-    long longVal;
+    long   longVal;
 
     /**
      * First part of the value of this item, for items that do not hold a
@@ -92,13 +91,13 @@ final class Item {
     /**
      * The hash code value of this constant pool item.
      */
-    int hashCode;
+    int    hashCode;
 
     /**
      * Link to another constant pool item, used for collision lists in the
      * constant pool's hash table.
      */
-    Item next;
+    Item   next;
 
     /**
      * Constructs an uninitialized {@link Item}.
@@ -185,12 +184,7 @@ final class Item {
      * @param strVal2 second part of the value of this item.
      * @param strVal3 third part of the value of this item.
      */
-    void set(
-        final int type,
-        final String strVal1,
-        final String strVal2,
-        final String strVal3)
-    {
+    void set(final int type, final String strVal1, final String strVal2, final String strVal3) {
         this.type = type;
         this.strVal1 = strVal1;
         this.strVal2 = strVal2;
@@ -203,24 +197,22 @@ final class Item {
                 hashCode = 0x7FFFFFFF & (type + strVal1.hashCode());
                 return;
             case ClassWriter.NAME_TYPE:
-                hashCode = 0x7FFFFFFF & (type + strVal1.hashCode()
-                        * strVal2.hashCode());
+                hashCode = 0x7FFFFFFF & (type + strVal1.hashCode() * strVal2.hashCode());
                 return;
-                // ClassWriter.FIELD:
-                // ClassWriter.METH:
-                // ClassWriter.IMETH:
+            // ClassWriter.FIELD:
+            // ClassWriter.METH:
+            // ClassWriter.IMETH:
             default:
-                hashCode = 0x7FFFFFFF & (type + strVal1.hashCode()
-                        * strVal2.hashCode() * strVal3.hashCode());
+                hashCode = 0x7FFFFFFF & (type + strVal1.hashCode() * strVal2.hashCode() * strVal3.hashCode());
         }
     }
 
     /**
      * Indicates if the given item is equal to this one. <i>This method assumes
-     * that the two items have the same {@link #type}</i>. 
+     * that the two items have the same {@link #type}</i>.
      * 
      * @param i the item to be compared to this one. Both items must have the
-     *       same {@link #type}.
+     *            same {@link #type}.
      * @return <tt>true</tt> if the given item if equal to this one,
      *         <tt>false</tt> otherwise.
      */
@@ -245,9 +237,8 @@ final class Item {
             // case ClassWriter.FIELD:
             // case ClassWriter.METH:
             // case ClassWriter.IMETH:
-            default:    
-                return i.strVal1.equals(strVal1) && i.strVal2.equals(strVal2)
-                        && i.strVal3.equals(strVal3);
+            default:
+                return i.strVal1.equals(strVal1) && i.strVal2.equals(strVal2) && i.strVal3.equals(strVal3);
         }
     }
 

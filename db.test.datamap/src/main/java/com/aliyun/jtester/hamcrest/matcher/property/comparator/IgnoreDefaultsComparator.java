@@ -1,22 +1,19 @@
 package com.aliyun.jtester.hamcrest.matcher.property.comparator;
 
 import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
-import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
 import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparator;
 
 /**
- * A comparator that filters out java-defaults.
- * If the left object is null, false or 0, both objects are considered equal.
- * This implements the IGNORE_DEFAULTS comparison mode.
- *
+ * A comparator that filters out java-defaults. If the left object is null,
+ * false or 0, both objects are considered equal. This implements the
+ * IGNORE_DEFAULTS comparison mode.
  */
 public class IgnoreDefaultsComparator implements Comparator {
-
 
     /**
      * Returns true if the left object is a java default
      *
-     * @param left  The left object
+     * @param left The left object
      * @param right The right object
      * @return True if left is null, false or 0
      */
@@ -40,17 +37,19 @@ public class IgnoreDefaultsComparator implements Comparator {
         return false;
     }
 
-
     /**
      * Always returns null: both objects are equal.
      *
-     * @param left                 The left object
-     * @param right                The right object
-     * @param onlyFirstDifference  True if only the first difference should be returned
-     * @param reflectionComparator The root comparator for inner comparisons, not null
+     * @param left The left object
+     * @param right The right object
+     * @param onlyFirstDifference True if only the first difference should be
+     *            returned
+     * @param reflectionComparator The root comparator for inner comparisons,
+     *            not null
      * @return null
      */
-    public Difference compare(Object left, Object right, boolean onlyFirstDifference, ReflectionComparator reflectionComparator) {
+    public Difference compare(Object left, Object right, boolean onlyFirstDifference,
+                              ReflectionComparator reflectionComparator) {
         // ignore
         return null;
     }

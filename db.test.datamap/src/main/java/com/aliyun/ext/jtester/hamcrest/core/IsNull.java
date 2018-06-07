@@ -4,10 +4,10 @@ package com.aliyun.ext.jtester.hamcrest.core;
 
 import static com.aliyun.ext.jtester.hamcrest.core.IsNot.not;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
-import com.aliyun.ext.jtester.hamcrest.Description;
-import com.aliyun.ext.jtester.hamcrest.Matcher;
 import com.aliyun.ext.jtester.hamcrest.BaseMatcher;
+import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
+import com.aliyun.ext.jtester.hamcrest.Matcher;
 
 /**
  * Is the value null?
@@ -53,4 +53,3 @@ public class IsNull<T> extends BaseMatcher<T> {
         return not(nullValue(type));
     }
 }
-

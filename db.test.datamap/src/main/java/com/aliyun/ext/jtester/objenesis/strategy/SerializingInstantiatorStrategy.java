@@ -18,12 +18,12 @@ package com.aliyun.ext.jtester.objenesis.strategy;
 import java.io.NotSerializableException;
 import java.io.Serializable;
 
-import com.aliyun.ext.jtester.objenesis.instantiator.basic.ObjectStreamClassInstantiator;
-import com.aliyun.ext.jtester.objenesis.instantiator.sun.Sun13SerializationInstantiator;
 import com.aliyun.ext.jtester.objenesis.ObjenesisException;
 import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
+import com.aliyun.ext.jtester.objenesis.instantiator.basic.ObjectStreamClassInstantiator;
 import com.aliyun.ext.jtester.objenesis.instantiator.gcj.GCJSerializationInstantiator;
 import com.aliyun.ext.jtester.objenesis.instantiator.perc.PercSerializationInstantiator;
+import com.aliyun.ext.jtester.objenesis.instantiator.sun.Sun13SerializationInstantiator;
 
 /**
  * Guess the best serializing instantiator for a given class. The returned
@@ -44,29 +44,28 @@ import com.aliyun.ext.jtester.objenesis.instantiator.perc.PercSerializationInsta
 @SuppressWarnings({ "rawtypes" })
 public class SerializingInstantiatorStrategy extends BaseInstantiatorStrategy {
 
-	/**
-	 * Return an {@link ObjectInstantiator} allowing to create instance
-	 * following the java serialization framework specifications.
-	 * 
-	 * @param type
-	 *            Class to instantiate
-	 * @return The ObjectInstantiator for the class
-	 */
-	public ObjectInstantiator newInstantiatorOf(Class type) {
-		if (!Serializable.class.isAssignableFrom(type)) {
-			throw new ObjenesisException(new NotSerializableException(type + " not serializable"));
-		}
-		if (JVM_NAME.startsWith(SUN)) {
-			if (VM_VERSION.startsWith("1.3")) {
-				return new Sun13SerializationInstantiator(type);
-			}
-		} else if (JVM_NAME.startsWith(GNU)) {
-			return new GCJSerializationInstantiator(type);
-		} else if (JVM_NAME.startsWith(PERC)) {
-			return new PercSerializationInstantiator(type);
-		}
+    /**
+     * Return an {@link ObjectInstantiator} allowing to create instance
+     * following the java serialization framework specifications.
+     * 
+     * @param type Class to instantiate
+     * @return The ObjectInstantiator for the class
+     */
+    public ObjectInstantiator newInstantiatorOf(Class type) {
+        if (!Serializable.class.isAssignableFrom(type)) {
+            throw new ObjenesisException(new NotSerializableException(type + " not serializable"));
+        }
+        if (JVM_NAME.startsWith(SUN)) {
+            if (VM_VERSION.startsWith("1.3")) {
+                return new Sun13SerializationInstantiator(type);
+            }
+        } else if (JVM_NAME.startsWith(GNU)) {
+            return new GCJSerializationInstantiator(type);
+        } else if (JVM_NAME.startsWith(PERC)) {
+            return new PercSerializationInstantiator(type);
+        }
 
-		return new ObjectStreamClassInstantiator(type);
-	}
+        return new ObjectStreamClassInstantiator(type);
+    }
 
 }

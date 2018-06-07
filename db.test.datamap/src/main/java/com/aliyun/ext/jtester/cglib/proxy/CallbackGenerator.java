@@ -24,23 +24,23 @@ import com.aliyun.ext.jtester.cglib.core.Signature;
 
 @SuppressWarnings({ "rawtypes" })
 interface CallbackGenerator {
-	void generate(ClassEmitter ce, Context context, List methods) throws Exception;
+    void generate(ClassEmitter ce, Context context, List methods) throws Exception;
 
-	void generateStatic(CodeEmitter e, Context context, List methods) throws Exception;
+    void generateStatic(CodeEmitter e, Context context, List methods) throws Exception;
 
-	interface Context {
-		ClassLoader getClassLoader();
+    interface Context {
+        ClassLoader getClassLoader();
 
-		CodeEmitter beginMethod(ClassEmitter ce, MethodInfo method);
+        CodeEmitter beginMethod(ClassEmitter ce, MethodInfo method);
 
-		int getOriginalModifiers(MethodInfo method);
+        int getOriginalModifiers(MethodInfo method);
 
-		int getIndex(MethodInfo method);
+        int getIndex(MethodInfo method);
 
-		void emitCallback(CodeEmitter ce, int index);
+        void emitCallback(CodeEmitter ce, int index);
 
-		Signature getImplSignature(MethodInfo method);
+        Signature getImplSignature(MethodInfo method);
 
-		void emitInvoke(CodeEmitter e, MethodInfo method);
-	}
+        void emitInvoke(CodeEmitter e, MethodInfo method);
+    }
 }

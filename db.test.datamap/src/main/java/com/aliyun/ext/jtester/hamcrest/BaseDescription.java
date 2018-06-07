@@ -17,12 +17,12 @@ public abstract class BaseDescription implements Description {
         append(text);
         return this;
     }
-    
+
     public Description appendDescriptionOf(SelfDescribing value) {
         value.describeTo(this);
         return this;
     }
-    
+
     public Description appendValue(Object value) {
         if (value == null) {
             append("null");
@@ -45,7 +45,7 @@ public abstract class BaseDescription implements Description {
             append(valueOf(value));
             append("F>");
         } else if (value.getClass().isArray()) {
-            appendValueList("[",", ","]", new ArrayIterator(value));
+            appendValueList("[", ", ", "]", new ArrayIterator(value));
         } else {
             append('<');
             append(valueOf(value));
@@ -53,50 +53,52 @@ public abstract class BaseDescription implements Description {
         }
         return this;
     }
-    
+
     public <T> Description appendValueList(String start, String separator, String end, T... values) {
         return appendValueList(start, separator, end, Arrays.asList(values));
     }
-    
+
     public <T> Description appendValueList(String start, String separator, String end, Iterable<T> values) {
         return appendValueList(start, separator, end, values.iterator());
     }
-    
+
     private <T> Description appendValueList(String start, String separator, String end, Iterator<T> values) {
         return appendList(start, separator, end, new SelfDescribingValueIterator<T>(values));
     }
-    
-    public Description appendList(String start, String separator, String end, Iterable<? extends SelfDescribing> values) {
+
+    public Description appendList(String start, String separator, String end,
+                                  Iterable<? extends SelfDescribing> values) {
         return appendList(start, separator, end, values.iterator());
     }
 
     private Description appendList(String start, String separator, String end, Iterator<? extends SelfDescribing> i) {
         boolean separate = false;
-        
+
         append(start);
         while (i.hasNext()) {
-            if (separate) append(separator);
+            if (separate)
+                append(separator);
             appendDescriptionOf(i.next());
             separate = true;
         }
         append(end);
-        
+
         return this;
     }
 
     /**
-     * Append the String <var>str</var> to the description.  
-     * The default implementation passes every character to {@link #append(char)}.  
-     * Override in subclasses to provide an efficient implementation.
+     * Append the String <var>str</var> to the description. The default
+     * implementation passes every character to {@link #append(char)}. Override
+     * in subclasses to provide an efficient implementation.
      */
     protected void append(String str) {
         for (int i = 0; i < str.length(); i++) {
             append(str.charAt(i));
         }
     }
-    
+
     /**
-     * Append the char <var>c</var> to the description.  
+     * Append the char <var>c</var> to the description.
      */
     protected abstract void append(char c);
 

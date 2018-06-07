@@ -8,13 +8,12 @@ import java.io.Serializable;
 
 import com.aliyun.ext.jtester.hamcrest.Description;
 
-
 public class EqualsWithDelta extends ArgumentMatcher<Number> implements Serializable {
     private static final long serialVersionUID = 5066980489920383664L;
 
-    private final Number wanted;
+    private final Number      wanted;
 
-    private final Number delta;
+    private final Number      delta;
 
     public EqualsWithDelta(Number value, Number delta) {
         this.wanted = value;
@@ -24,8 +23,7 @@ public class EqualsWithDelta extends ArgumentMatcher<Number> implements Serializ
     public boolean matches(Object actual) {
         Number actualNumber = (Number) actual;
         return wanted.doubleValue() - delta.doubleValue() <= actualNumber.doubleValue()
-                && actualNumber.doubleValue() <= wanted.doubleValue()
-                        + delta.doubleValue();
+                && actualNumber.doubleValue() <= wanted.doubleValue() + delta.doubleValue();
     }
 
     public void describeTo(Description description) {

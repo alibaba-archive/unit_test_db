@@ -3,12 +3,8 @@ package com.aliyun.jtester.tools.datagen;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aliyun.jtester.module.ICore;
-import com.aliyun.jtester.module.database.IDBInitial;
-import com.aliyun.jtester.tools.commons.ArrayHelper;
-import com.aliyun.jtester.tools.commons.ExceptionWrapper;
 import com.aliyun.jtester.json.JSON;
-import com.aliyun.jtester.module.ICore.DataMap;
+import com.aliyun.jtester.module.ICore;
 import com.aliyun.jtester.module.database.IDBInitial;
 import com.aliyun.jtester.tools.commons.ArrayHelper;
 import com.aliyun.jtester.tools.commons.ExceptionWrapper;

@@ -6,11 +6,11 @@ import com.aliyun.ext.jtester.hamcrest.SelfDescribing;
 
 public class SelfDescribingValueIterator<T> implements Iterator<SelfDescribing> {
     private Iterator<T> values;
-    
+
     public SelfDescribingValueIterator(Iterator<T> values) {
         this.values = values;
     }
-    
+
     public boolean hasNext() {
         return values.hasNext();
     }

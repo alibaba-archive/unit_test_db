@@ -19,9 +19,10 @@ import java.io.NotSerializableException;
 import java.lang.reflect.Constructor;
 
 import com.aliyun.ext.jtester.objenesis.ObjenesisException;
-import sun.reflect.ReflectionFactory;
 import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
 import com.aliyun.ext.jtester.objenesis.instantiator.SerializationInstantiatorHelper;
+
+import sun.reflect.ReflectionFactory;
 
 /**
  * Instantiates an object using internal sun.reflect.ReflectionFactory - a class
@@ -37,35 +38,36 @@ import com.aliyun.ext.jtester.objenesis.instantiator.SerializationInstantiatorHe
 @SuppressWarnings({ "unchecked", "rawtypes", "restriction" })
 public class SunReflectionFactorySerializationInstantiator implements ObjectInstantiator {
 
-	private final Constructor mungedConstructor;
+    private final Constructor mungedConstructor;
 
-	public SunReflectionFactorySerializationInstantiator(Class type) {
+    public SunReflectionFactorySerializationInstantiator(Class type) {
 
-		Class nonSerializableAncestor = SerializationInstantiatorHelper.getNonSerializableSuperClass(type);
-		ReflectionFactory reflectionFactory = ReflectionFactory.getReflectionFactory();
-		Constructor nonSerializableAncestorConstructor;
-		try {
-			nonSerializableAncestorConstructor = nonSerializableAncestor.getConstructor((Class[]) null);
-		} catch (NoSuchMethodException e) {
-			/**
-			 * @todo (Henri) I think we should throw a NotSerializableException
-			 *       just to put the same message a ObjectInputStream.
-			 *       Otherwise, the user won't know if the null returned if a
-			 *       "Not serializable", a "No default constructor on ancestor"
-			 *       or a "Exception in constructor"
-			 */
-			throw new ObjenesisException(new NotSerializableException(type + " has no suitable superclass constructor"));
-		}
+        Class nonSerializableAncestor = SerializationInstantiatorHelper.getNonSerializableSuperClass(type);
+        ReflectionFactory reflectionFactory = ReflectionFactory.getReflectionFactory();
+        Constructor nonSerializableAncestorConstructor;
+        try {
+            nonSerializableAncestorConstructor = nonSerializableAncestor.getConstructor((Class[]) null);
+        } catch (NoSuchMethodException e) {
+            /**
+             * @todo (Henri) I think we should throw a NotSerializableException
+             *       just to put the same message a ObjectInputStream.
+             *       Otherwise, the user won't know if the null returned if a
+             *       "Not serializable", a "No default constructor on ancestor"
+             *       or a "Exception in constructor"
+             */
+            throw new ObjenesisException(
+                    new NotSerializableException(type + " has no suitable superclass constructor"));
+        }
 
-		mungedConstructor = reflectionFactory.newConstructorForSerialization(type, nonSerializableAncestorConstructor);
-		mungedConstructor.setAccessible(true);
-	}
+        mungedConstructor = reflectionFactory.newConstructorForSerialization(type, nonSerializableAncestorConstructor);
+        mungedConstructor.setAccessible(true);
+    }
 
-	public Object newInstance() {
-		try {
-			return mungedConstructor.newInstance((Object[]) null);
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return mungedConstructor.newInstance((Object[]) null);
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
+    }
 }

@@ -18,5 +18,5 @@ package com.aliyun.ext.jtester.cglib.core;
 import com.aliyun.ext.jtester.asm.Type;
 
 public interface ProcessArrayCallback {
-	void processElement(Type type);
+    void processElement(Type type);
 }

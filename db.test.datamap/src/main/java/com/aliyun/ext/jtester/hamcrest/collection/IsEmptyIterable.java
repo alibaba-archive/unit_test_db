@@ -1,7 +1,7 @@
 package com.aliyun.ext.jtester.hamcrest.collection;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Matcher;
 import com.aliyun.ext.jtester.hamcrest.TypeSafeMatcher;
 
@@ -14,6 +14,7 @@ public class IsEmptyIterable<E> extends TypeSafeMatcher<Iterable<E>> {
     public boolean matchesSafely(Iterable<E> iterable) {
         return !iterable.iterator().hasNext();
     }
+
     @Override
     public void describeMismatchSafely(Iterable<E> iter, Description mismatchDescription) {
         mismatchDescription.appendValueList("[", ",", "]", iter);

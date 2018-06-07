@@ -5,27 +5,26 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
 import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
-import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
 
 public class SocketAddressEncoder extends FixedTypeEncoder<InetSocketAddress> {
 
-	public static SocketAddressEncoder instance = new SocketAddressEncoder();
+    public static SocketAddressEncoder instance = new SocketAddressEncoder();
 
-	private SocketAddressEncoder() {
-		super(InetSocketAddress.class);
-	}
+    private SocketAddressEncoder() {
+        super(InetSocketAddress.class);
+    }
 
-	@Override
-	protected void encodeSingleValue(InetSocketAddress target, Writer writer) throws Exception {
-		InetAddress address = target.getAddress();
-		int port = target.getPort();
+    @Override
+    protected void encodeSingleValue(InetSocketAddress target, Writer writer) throws Exception {
+        InetAddress address = target.getAddress();
+        int port = target.getPort();
 
-		String host = address == null ? "localhost" : address.getHostAddress();
+        String host = address == null ? "localhost" : address.getHostAddress();
 
-		writer.append(quote_Char);
-		StringEncoder.writeEscapeString(host, writer);
-		writer.append(':');
-		writer.append(String.valueOf(port));
-		writer.append(quote_Char);
-	}
+        writer.append(quote_Char);
+        StringEncoder.writeEscapeString(host, writer);
+        writer.append(':');
+        writer.append(String.valueOf(port));
+        writer.append(quote_Char);
+    }
 }

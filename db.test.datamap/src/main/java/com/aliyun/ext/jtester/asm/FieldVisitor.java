@@ -31,8 +31,8 @@ package com.aliyun.ext.jtester.asm;
 
 /**
  * A visitor to visit a Java field. The methods of this interface must be called
- * in the following order: ( <tt>visitAnnotation</tt> |
- * <tt>visitAttribute</tt> )* <tt>visitEnd</tt>.
+ * in the following order: ( <tt>visitAnnotation</tt> | <tt>visitAttribute</tt>
+ * )* <tt>visitEnd</tt>.
  * 
  * @author Eric Bruneton
  */

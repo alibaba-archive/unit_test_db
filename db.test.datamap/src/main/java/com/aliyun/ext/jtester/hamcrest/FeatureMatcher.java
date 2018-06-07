@@ -7,55 +7,49 @@ import com.aliyun.ext.jtester.hamcrest.internal.ReflectiveTypeFinder;
  * <code>featureValueOf()</code> in a subclass to pull out the feature to be
  * matched against.
  * 
- * @param <T>
- *            The type of the object to be matched
- * @param <U>
- *            The type of the feature to be matched
+ * @param <T> The type of the object to be matched
+ * @param <U> The type of the feature to be matched
  */
 public abstract class FeatureMatcher<T, U> extends TypeSafeDiagnosingMatcher<T> {
-	private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("featureValueOf", 1, 0);
-	private final Matcher<? super U> subMatcher;
-	private final String featureDescription;
-	private final String featureName;
+    private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("featureValueOf", 1, 0);
+    private final Matcher<? super U>          subMatcher;
+    private final String                      featureDescription;
+    private final String                      featureName;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param subMatcher
-	 *            The matcher to apply to the feature
-	 * @param featureDescription
-	 *            Descriptive text to use in describeTo
-	 * @param featureName
-	 *            Identifying text for mismatch message
-	 */
-	public FeatureMatcher(Matcher<? super U> subMatcher, String featureDescription, String featureName) {
-		super(TYPE_FINDER);
-		this.subMatcher = subMatcher;
-		this.featureDescription = featureDescription;
-		this.featureName = featureName;
-	}
+    /**
+     * Constructor
+     * 
+     * @param subMatcher The matcher to apply to the feature
+     * @param featureDescription Descriptive text to use in describeTo
+     * @param featureName Identifying text for mismatch message
+     */
+    public FeatureMatcher(Matcher<? super U> subMatcher, String featureDescription, String featureName) {
+        super(TYPE_FINDER);
+        this.subMatcher = subMatcher;
+        this.featureDescription = featureDescription;
+        this.featureName = featureName;
+    }
 
-	/**
-	 * Implement this to extract the interesting feature.
-	 * 
-	 * @param actual
-	 *            the target object
-	 * @return the feature to be matched
-	 */
-	protected abstract U featureValueOf(T actual);
+    /**
+     * Implement this to extract the interesting feature.
+     * 
+     * @param actual the target object
+     * @return the feature to be matched
+     */
+    protected abstract U featureValueOf(T actual);
 
-	@Override
-	protected boolean matchesSafely(T actual, Description mismatchDescription) {
-		final U featureValue = featureValueOf(actual);
-		if (!subMatcher.matches(featureValue)) {
-			mismatchDescription.appendText(featureName).appendText(" ");
-			subMatcher.describeMismatch(featureValue, mismatchDescription);
-			return false;
-		}
-		return true;
-	};
+    @Override
+    protected boolean matchesSafely(T actual, Description mismatchDescription) {
+        final U featureValue = featureValueOf(actual);
+        if (!subMatcher.matches(featureValue)) {
+            mismatchDescription.appendText(featureName).appendText(" ");
+            subMatcher.describeMismatch(featureValue, mismatchDescription);
+            return false;
+        }
+        return true;
+    };
 
-	public final void describeTo(Description description) {
-		description.appendText(featureDescription).appendText(" ").appendDescriptionOf(subMatcher);
-	}
+    public final void describeTo(Description description) {
+        description.appendText(featureDescription).appendText(" ").appendDescriptionOf(subMatcher);
+    }
 }

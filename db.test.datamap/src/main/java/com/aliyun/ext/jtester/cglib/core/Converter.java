@@ -17,5 +17,5 @@ package com.aliyun.ext.jtester.cglib.core;
 
 @SuppressWarnings({ "rawtypes" })
 public interface Converter {
-	Object convert(Object value, Class target, Object context);
+    Object convert(Object value, Class target, Object context);
 }

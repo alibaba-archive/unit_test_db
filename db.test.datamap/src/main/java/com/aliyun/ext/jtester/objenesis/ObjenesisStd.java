@@ -18,26 +18,30 @@ package com.aliyun.ext.jtester.objenesis;
 import com.aliyun.ext.jtester.objenesis.strategy.StdInstantiatorStrategy;
 
 /**
- * Objenesis implementation using the {@link org.objenesis.strategy.StdInstantiatorStrategy}.
+ * Objenesis implementation using the
+ * {@link StdInstantiatorStrategy}.
  * 
  * @author Henri Tremblay
  */
 public class ObjenesisStd extends ObjenesisBase {
 
-   /**
-    * Default constructor using the {@link org.objenesis.strategy.StdInstantiatorStrategy}
-    */
-   public ObjenesisStd() {
-      super(new StdInstantiatorStrategy());
-   }
+    /**
+     * Default constructor using the
+     * {@link StdInstantiatorStrategy}
+     */
+    public ObjenesisStd() {
+        super(new StdInstantiatorStrategy());
+    }
 
-   /**
-    * Instance using the {@link org.objenesis.strategy.StdInstantiatorStrategy} with or without
-    * caching {@link org.objenesis.instantiator.ObjectInstantiator}s
-    * 
-    * @param useCache If {@link org.objenesis.instantiator.ObjectInstantiator}s should be cached
-    */
-   public ObjenesisStd(boolean useCache) {
-      super(new StdInstantiatorStrategy(), useCache);
-   }
+    /**
+     * Instance using the {@link StdInstantiatorStrategy}
+     * with or without caching
+     * {@link StdInstantiatorStrategy}
+     * 
+     * @param useCache If {@link StdInstantiatorStrategy}
+     *            should be cached
+     */
+    public ObjenesisStd(boolean useCache) {
+        super(new StdInstantiatorStrategy(), useCache);
+    }
 }

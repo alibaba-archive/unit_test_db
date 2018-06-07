@@ -9,21 +9,19 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.aliyun.jtester.module.database.environment.typesmap.AbstractTypeMap;
-import com.aliyun.jtester.module.database.utility.DataSourceType;
-import com.aliyun.jtester.tools.commons.ExceptionWrapper;
-import com.aliyun.jtester.module.database.environment.typesmap.AbstractTypeMap;
-import com.aliyun.jtester.module.database.utility.DataSourceType;
-import com.aliyun.jtester.tools.commons.ExceptionWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.unitils.database.DatabaseUnitils;
+
+import com.aliyun.jtester.module.database.environment.typesmap.AbstractTypeMap;
+import com.aliyun.jtester.module.database.utility.DataSourceType;
+import com.aliyun.jtester.tools.commons.ExceptionWrapper;
 
 public abstract class BaseEnvironment implements DBEnvironment {
 
     private static Logger     logger = LoggerFactory.getLogger(BaseEnvironment.class);
     protected final String    dataSourceName;
-    protected DataSourceType dataSourceType;
+    protected DataSourceType  dataSourceType;
 
     protected AbstractTypeMap typeMap;
 
@@ -85,9 +83,6 @@ public abstract class BaseEnvironment implements DBEnvironment {
     /**
      * 获得数据表的元信息
      * 
-     * @param table
-     * @return
-     * @throws Exception
      */
     public TableMeta getTableMetaData(String table) {
         TableMeta meta = metas.get(table);

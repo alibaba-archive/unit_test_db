@@ -7,16 +7,16 @@ import com.aliyun.jtester.json.decoder.base.FixedTypeDecoder;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class AtomicIntegerDecoder extends FixedTypeDecoder {
-	public final static AtomicIntegerDecoder toATOMICINTEGER = new AtomicIntegerDecoder();
+    public final static AtomicIntegerDecoder toATOMICINTEGER = new AtomicIntegerDecoder();
 
-	public boolean accept(Type type) {
-		Class claz = this.getRawType(type, null);
-		return AtomicInteger.class.isAssignableFrom(claz);
-	}
+    public boolean accept(Type type) {
+        Class claz = this.getRawType(type, null);
+        return AtomicInteger.class.isAssignableFrom(claz);
+    }
 
-	@Override
-	protected AtomicInteger decodeFromString(String value) {
-		int newValue = Integer.parseInt(value);
-		return new AtomicInteger(newValue);
-	}
+    @Override
+    protected AtomicInteger decodeFromString(String value) {
+        int newValue = Integer.parseInt(value);
+        return new AtomicInteger(newValue);
+    }
 }

@@ -1,17 +1,16 @@
 package com.aliyun.jtester.hamcrest.iassert.object.impl;
 
 import com.aliyun.jtester.hamcrest.iassert.object.intf.IDoubleAssert;
-import com.aliyun.jtester.hamcrest.iassert.object.intf.IDoubleAssert;
 
 public class DoubleAssert extends NumberAssert<Double, IDoubleAssert> implements IDoubleAssert {
 
-	public DoubleAssert() {
-		super(IDoubleAssert.class);
-		this.valueClaz = Double.class;
-	}
+    public DoubleAssert() {
+        super(IDoubleAssert.class);
+        this.valueClaz = Double.class;
+    }
 
-	public DoubleAssert(Double dbl) {
-		super(dbl, IDoubleAssert.class);
-		this.valueClaz = Double.class;
-	}
+    public DoubleAssert(Double dbl) {
+        super(dbl, IDoubleAssert.class);
+        this.valueClaz = Double.class;
+    }
 }

@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
 
-import com.aliyun.jtester.tools.commons.ExceptionWrapper;
 import com.aliyun.jtester.hamcrest.iassert.object.impl.CollectionAssert;
 import com.aliyun.jtester.hamcrest.iassert.object.impl.MapAssert;
 import com.aliyun.jtester.hamcrest.iassert.object.impl.ObjectAssert;
@@ -16,7 +15,6 @@ import com.aliyun.jtester.module.database.environment.DBEnvironment;
 import com.aliyun.jtester.module.database.environment.DBEnvironmentFactory;
 import com.aliyun.jtester.module.database.utility.SqlRunner;
 import com.aliyun.jtester.tools.commons.ExceptionWrapper;
-import com.aliyun.jtester.tools.commons.Reflector;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class DBOperator implements IDBOperator {

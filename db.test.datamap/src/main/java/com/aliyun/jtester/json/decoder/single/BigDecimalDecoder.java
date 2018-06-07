@@ -9,21 +9,21 @@ import com.aliyun.jtester.json.decoder.base.FixedTypeDecoder;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class BigDecimalDecoder extends FixedTypeDecoder {
 
-	public final static BigDecimalDecoder toBIGDECIMAL = new BigDecimalDecoder();
+    public final static BigDecimalDecoder toBIGDECIMAL = new BigDecimalDecoder();
 
-	@Override
-	protected BigDecimal decodeFromString(String value) {
-		try {
-			value = value.trim();
-			return new BigDecimal(value);
-		} catch (Exception e) {
-			String message = String.format("the value{%s} can't be casted to BigDecimal.", value);
-			throw new DecoderException(message, e);
-		}
-	}
+    @Override
+    protected BigDecimal decodeFromString(String value) {
+        try {
+            value = value.trim();
+            return new BigDecimal(value);
+        } catch (Exception e) {
+            String message = String.format("the value{%s} can't be casted to BigDecimal.", value);
+            throw new DecoderException(message, e);
+        }
+    }
 
-	public boolean accept(Type type) {
-		Class claz = this.getRawType(type, null);
-		return BigDecimal.class.isAssignableFrom(claz);
-	}
+    public boolean accept(Type type) {
+        Class claz = this.getRawType(type, null);
+        return BigDecimal.class.isAssignableFrom(claz);
+    }
 }

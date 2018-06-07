@@ -34,36 +34,36 @@ import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
 @SuppressWarnings("rawtypes")
 public class ObjectStreamClassInstantiator implements ObjectInstantiator {
 
-	private static Method newInstanceMethod;
+    private static Method newInstanceMethod;
 
-	private static void initialize() {
-		if (newInstanceMethod == null) {
-			try {
-				newInstanceMethod = ObjectStreamClass.class.getDeclaredMethod("newInstance", new Class[] {});
-				newInstanceMethod.setAccessible(true);
-			} catch (RuntimeException e) {
-				throw new ObjenesisException(e);
-			} catch (NoSuchMethodException e) {
-				throw new ObjenesisException(e);
-			}
-		}
-	}
+    private static void initialize() {
+        if (newInstanceMethod == null) {
+            try {
+                newInstanceMethod = ObjectStreamClass.class.getDeclaredMethod("newInstance", new Class[] {});
+                newInstanceMethod.setAccessible(true);
+            } catch (RuntimeException e) {
+                throw new ObjenesisException(e);
+            } catch (NoSuchMethodException e) {
+                throw new ObjenesisException(e);
+            }
+        }
+    }
 
-	private final ObjectStreamClass objStreamClass;
+    private final ObjectStreamClass objStreamClass;
 
-	public ObjectStreamClassInstantiator(Class type) {
-		initialize();
-		objStreamClass = ObjectStreamClass.lookup(type);
-	}
+    public ObjectStreamClassInstantiator(Class type) {
+        initialize();
+        objStreamClass = ObjectStreamClass.lookup(type);
+    }
 
-	public Object newInstance() {
+    public Object newInstance() {
 
-		try {
-			return newInstanceMethod.invoke(objStreamClass, new Object[] {});
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
+        try {
+            return newInstanceMethod.invoke(objStreamClass, new Object[] {});
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
 
-	}
+    }
 
 }

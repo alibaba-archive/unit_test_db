@@ -1,6 +1,5 @@
 package com.aliyun.jtester.module;
 
-import com.aliyun.jtester.tools.datagen.AbstractDataMap;
 import com.aliyun.jtester.hamcrest.TheStyleAssertion;
 import com.aliyun.jtester.hamcrest.WantStyleAssertion;
 import com.aliyun.jtester.tools.commons.Reflector;

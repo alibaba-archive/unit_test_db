@@ -6,7 +6,6 @@ import com.aliyun.ext.jtester.hamcrest.Matcher;
  * jtester断言超基类接口
  * 
  * @author darui.wudr
- * 
  * @param <T>
  * @param <E>
  */

@@ -4,8 +4,6 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import com.aliyun.jtester.module.database.environment.TableMeta;
-import com.aliyun.jtester.tools.commons.ExceptionWrapper;
 import com.aliyun.jtester.module.ICore.DataMap;
 import com.aliyun.jtester.module.database.environment.DBEnvironment;
 import com.aliyun.jtester.module.database.environment.DBEnvironmentFactory;
@@ -20,7 +18,7 @@ public class InsertOp implements IInsertOp {
 
     private DBEnvironment dbEnvironment;
 
-    private TableMeta tableMeta;
+    private TableMeta     tableMeta;
 
     private String        quato;
 

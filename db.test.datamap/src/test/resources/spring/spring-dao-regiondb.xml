@@ -3,10 +3,11 @@
 
 <beans default-autowire="byName">
 
-	<bean id="baseHouyiRegionDAO" class="com.aliyun.datamap.unittest.BaseHouyiRegionDAO" abstract="true">
-		<property name="sqlMapClient" ref="sqlMapClient"/>
-	</bean>
+    <bean id="baseHouyiRegionDAO" class="com.aliyun.datamap.unittest.BaseHouyiRegionDAO" abstract="true">
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
 
-    <bean id="keyValueConfigInfoDAO" class="com.aliyun.datamap.unittest.KeyValueConfigInfoDAOImpl" parent="baseHouyiRegionDAO" />
+    <bean id="keyValueConfigInfoDAO" class="com.aliyun.datamap.unittest.KeyValueConfigInfoDAOImpl"
+          parent="baseHouyiRegionDAO"/>
 
 </beans>

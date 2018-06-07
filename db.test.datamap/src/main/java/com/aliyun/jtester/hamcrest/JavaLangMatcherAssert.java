@@ -11,11 +11,11 @@ import com.aliyun.ext.jtester.hamcrest.Matcher;
  * </pre>
  */
 public class JavaLangMatcherAssert {
-	private JavaLangMatcherAssert() {
-	};
+    private JavaLangMatcherAssert() {
+    };
 
-	@SuppressWarnings("rawtypes")
-	public static <T> boolean that(T argument, Matcher matcher) {
-		return matcher.matches(argument);
-	}
+    @SuppressWarnings("rawtypes")
+    public static <T> boolean that(T argument, Matcher matcher) {
+        return matcher.matches(argument);
+    }
 }

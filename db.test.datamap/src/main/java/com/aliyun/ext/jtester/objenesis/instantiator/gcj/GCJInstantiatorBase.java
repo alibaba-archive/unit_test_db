@@ -31,37 +31,37 @@ import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
  */
 @SuppressWarnings("rawtypes")
 public abstract class GCJInstantiatorBase implements ObjectInstantiator {
-	protected static Method newObjectMethod = null;
-	protected static ObjectInputStream dummyStream;
+    protected static Method            newObjectMethod = null;
+    protected static ObjectInputStream dummyStream;
 
-	private static class DummyStream extends ObjectInputStream {
-		public DummyStream() throws IOException {
-		}
-	}
+    private static class DummyStream extends ObjectInputStream {
+        public DummyStream() throws IOException {
+        }
+    }
 
-	private static void initialize() {
-		if (newObjectMethod == null) {
-			try {
-				newObjectMethod = ObjectInputStream.class.getDeclaredMethod("newObject", new Class[] { Class.class,
-						Class.class });
-				newObjectMethod.setAccessible(true);
-				dummyStream = new DummyStream();
-			} catch (RuntimeException e) {
-				throw new ObjenesisException(e);
-			} catch (NoSuchMethodException e) {
-				throw new ObjenesisException(e);
-			} catch (IOException e) {
-				throw new ObjenesisException(e);
-			}
-		}
-	}
+    private static void initialize() {
+        if (newObjectMethod == null) {
+            try {
+                newObjectMethod = ObjectInputStream.class.getDeclaredMethod("newObject",
+                        new Class[] { Class.class, Class.class });
+                newObjectMethod.setAccessible(true);
+                dummyStream = new DummyStream();
+            } catch (RuntimeException e) {
+                throw new ObjenesisException(e);
+            } catch (NoSuchMethodException e) {
+                throw new ObjenesisException(e);
+            } catch (IOException e) {
+                throw new ObjenesisException(e);
+            }
+        }
+    }
 
-	protected final Class type;
+    protected final Class type;
 
-	public GCJInstantiatorBase(Class type) {
-		this.type = type;
-		initialize();
-	}
+    public GCJInstantiatorBase(Class type) {
+        this.type = type;
+        initialize();
+    }
 
-	public abstract Object newInstance();
+    public abstract Object newInstance();
 }

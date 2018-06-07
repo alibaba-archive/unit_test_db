@@ -3,10 +3,9 @@
 package com.aliyun.ext.jtester.hamcrest.core;
 
 import com.aliyun.ext.jtester.hamcrest.BaseMatcher;
-import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Matcher;
-
 
 /**
  * Calculates the logical negation of a matcher.
@@ -26,7 +25,6 @@ public class IsNot<T> extends BaseMatcher<T> {
         description.appendText("not ").appendDescriptionOf(matcher);
     }
 
-    
     /**
      * Inverts the rule.
      */
@@ -36,10 +34,9 @@ public class IsNot<T> extends BaseMatcher<T> {
     }
 
     /**
-     * This is a shortcut to the frequently used not(equalTo(x)).
-     *
-     * For example:  assertThat(cheese, is(not(equalTo(smelly))))
-     *          vs.  assertThat(cheese, is(not(smelly)))
+     * This is a shortcut to the frequently used not(equalTo(x)). For example:
+     * assertThat(cheese, is(not(equalTo(smelly)))) vs. assertThat(cheese,
+     * is(not(smelly)))
      */
     @Factory
     public static <T> Matcher<T> not(T value) {

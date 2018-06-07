@@ -4,18 +4,17 @@ package com.aliyun.ext.jtester.hamcrest.object;
 
 import java.util.EventObject;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
-import com.aliyun.ext.jtester.hamcrest.TypeSafeDiagnosingMatcher;
 import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Matcher;
-
+import com.aliyun.ext.jtester.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * Tests if the value is an event announced by a specific object.
  */
 public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
     private final Class<?> eventClass;
-    private final Object source;
+    private final Object   source;
 
     public IsEventFrom(Class<?> eventClass, Object source) {
         this.eventClass = eventClass;
@@ -25,26 +24,23 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
     @Override
     public boolean matchesSafely(EventObject item, Description mismatchDescription) {
         if (!eventClass.isInstance(item)) {
-          mismatchDescription.appendText("item type was " + item.getClass().getName());
-          return false;
+            mismatchDescription.appendText("item type was " + item.getClass().getName());
+            return false;
         }
-        
+
         if (!eventHasSameSource(item)) {
-          mismatchDescription.appendText("source was ").appendValue(item.getSource());
-          return false;
+            mismatchDescription.appendText("source was ").appendValue(item.getSource());
+            return false;
         }
         return true;
     }
 
-    
     private boolean eventHasSameSource(EventObject ev) {
         return ev.getSource() == source;
     }
 
     public void describeTo(Description description) {
-        description.appendText("an event of type ")
-                .appendText(eventClass.getName())
-                .appendText(" from ")
+        description.appendText("an event of type ").appendText(eventClass.getName()).appendText(" from ")
                 .appendValue(source);
     }
 
@@ -59,8 +55,8 @@ public class IsEventFrom extends TypeSafeDiagnosingMatcher<EventObject> {
 
     /**
      * Constructs an IsEventFrom Matcher that returns true for any object
-     * derived from {@link java.util.EventObject} announced by <var>source
-     * </var>.
+     * derived from {@link java.util.EventObject} announced by
+     * <var>source </var>.
      */
     @Factory
     public static Matcher<EventObject> eventFrom(Object source) {

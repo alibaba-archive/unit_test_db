@@ -22,14 +22,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+import com.aliyun.ext.jtester.apache.commons.io.IOUtils;
+import com.aliyun.ext.jtester.objenesis.ObjenesisHelper;
 import com.aliyun.jtester.module.JTesterException;
 import com.aliyun.jtester.tools.datagen.ConstructorArgsGenerator;
 import com.aliyun.jtester.tools.exception.NewInstanceException;
 import com.aliyun.jtester.tools.reflector.MethodAccessor;
-
-import com.aliyun.ext.jtester.apache.commons.io.IOUtils;
-import com.aliyun.ext.jtester.objenesis.ObjenesisHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ClazzHelper {
@@ -133,8 +131,8 @@ public class ClazzHelper {
 
     public final static void generateClazz(String clazzName, byte[] r) throws IOException {
         // debug，调试生成的字节码
-        FileOutputStream file = new FileOutputStream("d:/" + clazzName.substring(clazzName.lastIndexOf('.') + 1)
-                + ".class");
+        FileOutputStream file = new FileOutputStream(
+                "d:/" + clazzName.substring(clazzName.lastIndexOf('.') + 1) + ".class");
         file.write(r);
         file.flush();
         file.close();
@@ -242,20 +240,20 @@ public class ClazzHelper {
                     || boolean.class.equals(toClass) && Boolean.class.isAssignableFrom(fromClass)) {
                 return true;
             }
-            if (char.class.equals(fromClass) && Character.class.isAssignableFrom(toClass) || char.class.equals(toClass)
-                    && Character.class.isAssignableFrom(fromClass)) {
+            if (char.class.equals(fromClass) && Character.class.isAssignableFrom(toClass)
+                    || char.class.equals(toClass) && Character.class.isAssignableFrom(fromClass)) {
                 return true;
             }
-            if (int.class.equals(fromClass) && Integer.class.isAssignableFrom(toClass) || int.class.equals(toClass)
-                    && Integer.class.isAssignableFrom(fromClass)) {
+            if (int.class.equals(fromClass) && Integer.class.isAssignableFrom(toClass)
+                    || int.class.equals(toClass) && Integer.class.isAssignableFrom(fromClass)) {
                 return true;
             }
-            if (long.class.equals(fromClass) && Long.class.isAssignableFrom(toClass) || long.class.equals(toClass)
-                    && Long.class.isAssignableFrom(fromClass)) {
+            if (long.class.equals(fromClass) && Long.class.isAssignableFrom(toClass)
+                    || long.class.equals(toClass) && Long.class.isAssignableFrom(fromClass)) {
                 return true;
             }
-            if (float.class.equals(fromClass) && Float.class.isAssignableFrom(toClass) || float.class.equals(toClass)
-                    && Float.class.isAssignableFrom(fromClass)) {
+            if (float.class.equals(fromClass) && Float.class.isAssignableFrom(toClass)
+                    || float.class.equals(toClass) && Float.class.isAssignableFrom(fromClass)) {
                 return true;
             }
             if (double.class.equals(fromClass) && Double.class.isAssignableFrom(toClass)
@@ -333,15 +331,16 @@ public class ClazzHelper {
                 return enumValue;
             }
         }
-        throw new JTesterException("Unable to find a enum value in enum: " + enumClass + ", with value name: "
-                + enumValueName);
+        throw new JTesterException(
+                "Unable to find a enum value in enum: " + enumClass + ", with value name: " + enumValueName);
     }
 
     /**
      * 获得泛型字段的参数类类型<br>
-     * Gets the T from a Class<T> field declaration. An exception is raised if
-     * the field type is not generic or has more than 1 generic type
-     * 
+     *     <pre>
+     Gets the T from a Class{@literal <}T{@literal >} field declaration. An exception is raised if
+     the field type is not generic or has more than 1 generic type
+     * </pre>
      * @param field The field to get the type from, not null
      * @return The declared generic type
      */
@@ -424,7 +423,7 @@ public class ClazzHelper {
 
     private static <T> T innerNewInstance(Class<T> claz) {
         if (claz.isInterface()) {
-            return (T) Proxy.getProxyClass(claz.getClassLoader(),claz);
+            return (T) Proxy.getProxyClass(claz.getClassLoader(), claz);
         }
         int modifiers = claz.getModifiers();
         if (Modifier.isAbstract(modifiers)) {

@@ -4,18 +4,17 @@ import java.io.Writer;
 import java.math.BigDecimal;
 
 import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
-import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
 
 public class BigDecimalEncoder extends FixedTypeEncoder<BigDecimal> {
 
-	public static BigDecimalEncoder instance = new BigDecimalEncoder();
+    public static BigDecimalEncoder instance = new BigDecimalEncoder();
 
-	protected BigDecimalEncoder() {
-		super(BigDecimal.class);
-	}
+    protected BigDecimalEncoder() {
+        super(BigDecimal.class);
+    }
 
-	@Override
-	protected void encodeSingleValue(BigDecimal target, Writer writer) throws Exception {
-		writer.append(target.toString());
-	}
+    @Override
+    protected void encodeSingleValue(BigDecimal target, Writer writer) throws Exception {
+        writer.append(target.toString());
+    }
 }

@@ -1,7 +1,5 @@
 package com.aliyun.jtester.module.database.dbop;
 
-import static com.aliyun.jtester.module.database.dbop.DBOperator.IN_DB_OPERATOR;
-
 import java.util.List;
 
 import com.aliyun.jtester.hamcrest.iassert.object.impl.CollectionAssert;
@@ -12,19 +10,6 @@ import com.aliyun.jtester.hamcrest.iassert.object.intf.INumberAssert;
 import com.aliyun.jtester.hamcrest.iassert.object.intf.IObjectAssert;
 import com.aliyun.jtester.json.JSON;
 import com.aliyun.jtester.module.ICore;
-import com.aliyun.jtester.module.database.utility.DBHelper;
-import com.aliyun.jtester.module.database.utility.SqlRunner;
-import com.aliyun.jtester.tools.commons.StringHelper;
-import com.aliyun.jtester.tools.datagen.DataSet;
-import com.aliyun.jtester.tools.datagen.EmptyDataSet;
-import com.aliyun.jtester.hamcrest.iassert.object.impl.CollectionAssert;
-import com.aliyun.jtester.hamcrest.iassert.object.impl.LongAssert;
-import com.aliyun.jtester.hamcrest.iassert.object.impl.ObjectAssert;
-import com.aliyun.jtester.hamcrest.iassert.object.intf.ICollectionAssert;
-import com.aliyun.jtester.hamcrest.iassert.object.intf.INumberAssert;
-import com.aliyun.jtester.hamcrest.iassert.object.intf.IObjectAssert;
-import com.aliyun.jtester.json.JSON;
-import com.aliyun.jtester.module.ICore.DataMap;
 import com.aliyun.jtester.module.database.utility.DBHelper;
 import com.aliyun.jtester.module.database.utility.SqlRunner;
 import com.aliyun.jtester.tools.commons.StringHelper;

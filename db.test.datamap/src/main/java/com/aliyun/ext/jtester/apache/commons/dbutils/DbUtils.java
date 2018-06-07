@@ -23,9 +23,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * A collection of JDBC helper methods.  This class is thread safe.
- *
- * TODO Make sure we use DataSourceUtils.getConnection and releaseConnection for getting / releasing Connections
+ * A collection of JDBC helper methods. This class is thread safe. TODO Make
+ * sure we use DataSourceUtils.getConnection and releaseConnection for getting /
+ * releasing Connections
  */
 public final class DbUtils {
 
@@ -66,8 +66,8 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Connection</code>, avoid closing if null and hide
-     * any SQLExceptions that occur.
+     * Close a <code>Connection</code>, avoid closing if null and hide any
+     * SQLExceptions that occur.
      *
      * @param conn Connection to close.
      */
@@ -81,12 +81,12 @@ public final class DbUtils {
 
     /**
      * Close a <code>Connection</code>, <code>Statement</code> and
-     * <code>ResultSet</code>.  Avoid closing if null and hide any
-     * SQLExceptions that occur.
+     * <code>ResultSet</code>. Avoid closing if null and hide any SQLExceptions
+     * that occur.
      *
      * @param conn Connection to close.
      * @param stmt Statement to close.
-     * @param rs   ResultSet to close.
+     * @param rs ResultSet to close.
      */
     public static void closeQuietly(Connection conn, Statement stmt, ResultSet rs) {
         try {
@@ -116,8 +116,8 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Statement</code>, avoid closing if null and hide
-     * any SQLExceptions that occur.
+     * Close a <code>Statement</code>, avoid closing if null and hide any
+     * SQLExceptions that occur.
      *
      * @param stmt Statement to close.
      */
@@ -162,11 +162,12 @@ public final class DbUtils {
     }
 
     /**
-     * Loads and registers a database driver class.
-     * If this succeeds, it returns true, else it returns false.
+     * Loads and registers a database driver class. If this succeeds, it returns
+     * true, else it returns false.
      *
      * @param driverClassName of driver to load
-     * @return boolean <code>true</code> if the driver was found, otherwise <code>false</code>
+     * @return boolean <code>true</code> if the driver was found, otherwise
+     *         <code>false</code>
      */
     public static boolean loadDriver(String driverClassName) {
         try {
@@ -198,10 +199,9 @@ public final class DbUtils {
     }
 
     /**
-     * Print the stack trace for a SQLException to a
-     * specified PrintWriter.
+     * Print the stack trace for a SQLException to a specified PrintWriter.
      *
-     * @param e  SQLException to print stack trace of
+     * @param e SQLException to print stack trace of
      * @param pw PrintWriter to print to
      */
     public static void printStackTrace(SQLException e, PrintWriter pw) {
@@ -228,7 +228,7 @@ public final class DbUtils {
      * Print warnings on a Connection to a specified PrintWriter.
      *
      * @param conn Connection to print warnings from
-     * @param pw   PrintWriter to print to
+     * @param pw PrintWriter to print to
      */
     public static void printWarnings(Connection conn, PrintWriter pw) {
         if (conn != null) {
@@ -243,7 +243,7 @@ public final class DbUtils {
     /**
      * Rollback any changes made on the given connection.
      *
-     * @param conn Connection to rollback.  A null value is legal.
+     * @param conn Connection to rollback. A null value is legal.
      * @throws SQLException if a database access error occurs
      */
     public static void rollback(Connection conn) throws SQLException {
@@ -253,10 +253,10 @@ public final class DbUtils {
     }
 
     /**
-     * Performs a rollback on the <code>Connection</code> then closes it,
-     * avoid closing if null.
+     * Performs a rollback on the <code>Connection</code> then closes it, avoid
+     * closing if null.
      *
-     * @param conn Connection to rollback.  A null value is legal.
+     * @param conn Connection to rollback. A null value is legal.
      * @throws SQLException if a database access error occurs
      * @since DbUtils 1.1
      */
@@ -271,10 +271,10 @@ public final class DbUtils {
     }
 
     /**
-     * Performs a rollback on the <code>Connection</code> then closes it,
-     * avoid closing if null and hide any SQLExceptions that occur.
+     * Performs a rollback on the <code>Connection</code> then closes it, avoid
+     * closing if null and hide any SQLExceptions that occur.
      *
-     * @param conn Connection to rollback.  A null value is legal.
+     * @param conn Connection to rollback. A null value is legal.
      * @since DbUtils 1.1
      */
     public static void rollbackAndCloseQuietly(Connection conn) {

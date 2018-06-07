@@ -16,6 +16,12 @@
         <jdk.version>1.6</jdk.version>
     </properties>
 
+    <scm>
+        <url>https://github.com/aliyun/unit_test_db</url>
+        <connection>scm:git:https://git@github.com/aliyun/unit_test_db.git</connection>
+    </scm>
+
+
     <organization>
         <name>Aliyun Group</name>
         <url>https://github.com/aliyun</url>
@@ -171,7 +177,27 @@
                     </includes>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <charset>UTF-8</charset>
+                    <additionalOptions>
+                        <additionalOption>-Xdoclint:none</additionalOption>
+                    </additionalOptions>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -190,4 +216,15 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+    <profile>
+        <id>deployment</id>
+        <properties>
+            <!-- 开发时使用较高的Java版本，以避免eclipse的警告，但编译时采用保守的Java 1.5格式。 -->
+            <java.version>1.6</java.version>
+            <!-- 确保生成GPG签名。 -->
+            <gpg.skip>false</gpg.skip>
+        </properties>
+    </profile>
+    </profiles>
 </project>

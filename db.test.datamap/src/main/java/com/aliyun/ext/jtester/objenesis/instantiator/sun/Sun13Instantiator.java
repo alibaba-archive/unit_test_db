@@ -18,6 +18,7 @@ package com.aliyun.ext.jtester.objenesis.instantiator.sun;
 import java.lang.reflect.InvocationTargetException;
 
 import com.aliyun.ext.jtester.objenesis.ObjenesisException;
+import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
 
 /**
  * Instantiates a class by making a call to internal Sun private methods. It is
@@ -25,24 +26,24 @@ import com.aliyun.ext.jtester.objenesis.ObjenesisException;
  * any constructors.
  * 
  * @author Leonardo Mesquita
- * @see org.objenesis.instantiator.ObjectInstantiator
+ * @see ObjectInstantiator
  */
 @SuppressWarnings("rawtypes")
 public class Sun13Instantiator extends Sun13InstantiatorBase {
-	public Sun13Instantiator(Class type) {
-		super(type);
-	}
+    public Sun13Instantiator(Class type) {
+        super(type);
+    }
 
-	public Object newInstance() {
-		try {
-			return allocateNewObjectMethod.invoke(null, new Object[] { type, Object.class });
-		} catch (RuntimeException e) {
-			throw new ObjenesisException(e);
-		} catch (IllegalAccessException e) {
-			throw new ObjenesisException(e);
-		} catch (InvocationTargetException e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return allocateNewObjectMethod.invoke(null, new Object[] { type, Object.class });
+        } catch (RuntimeException e) {
+            throw new ObjenesisException(e);
+        } catch (IllegalAccessException e) {
+            throw new ObjenesisException(e);
+        } catch (InvocationTargetException e) {
+            throw new ObjenesisException(e);
+        }
+    }
 
 }

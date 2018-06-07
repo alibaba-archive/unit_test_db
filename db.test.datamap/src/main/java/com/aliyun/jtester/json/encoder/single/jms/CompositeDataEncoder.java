@@ -7,28 +7,27 @@ import javax.management.openmbean.CompositeDataSupport;
 import javax.management.openmbean.CompositeType;
 
 import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
-import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
 
 public class CompositeDataEncoder<T extends CompositeData> extends FixedTypeEncoder<T> {
 
-	protected CompositeDataEncoder() {
-		super(CompositeDataSupport.class);
-	}
+    protected CompositeDataEncoder() {
+        super(CompositeDataSupport.class);
+    }
 
-	@Override
-	protected void encodeSingleValue(T target, Writer writer) throws Exception {
-		CompositeType type = target.getCompositeType();
+    @Override
+    protected void encodeSingleValue(T target, Writer writer) throws Exception {
+        CompositeType type = target.getCompositeType();
 
-		for (Object key : type.keySet()) {
-			Object value = target.get((String) key);
+        for (Object key : type.keySet()) {
+            Object value = target.get((String) key);
 
-			if (value == null) {
-				continue;
-			}
+            if (value == null) {
+                continue;
+            }
 
-			// encode key
+            // encode key
 
-			// encode value
-		}
-	}
+            // encode value
+        }
+    }
 }

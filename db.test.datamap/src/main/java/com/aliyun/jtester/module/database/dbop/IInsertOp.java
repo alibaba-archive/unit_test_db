@@ -1,7 +1,6 @@
 package com.aliyun.jtester.module.database.dbop;
 
 import com.aliyun.jtester.module.ICore;
-import com.aliyun.jtester.module.ICore.DataMap;
 
 /**
  * 往数据库插入数据操作接口

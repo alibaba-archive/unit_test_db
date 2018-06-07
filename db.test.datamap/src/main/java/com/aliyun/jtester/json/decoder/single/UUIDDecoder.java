@@ -7,16 +7,16 @@ import com.aliyun.jtester.json.decoder.base.FixedTypeDecoder;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class UUIDDecoder extends FixedTypeDecoder {
-	public final static UUIDDecoder toUUID = new UUIDDecoder();
+    public final static UUIDDecoder toUUID = new UUIDDecoder();
 
-	public boolean accept(Type type) {
-		Class claz = this.getRawType(type, null);
-		return UUID.class.isAssignableFrom(claz);
-	}
+    public boolean accept(Type type) {
+        Class claz = this.getRawType(type, null);
+        return UUID.class.isAssignableFrom(claz);
+    }
 
-	@Override
-	protected UUID decodeFromString(String value) {
-		UUID uuid = UUID.fromString(value);
-		return uuid;
-	}
+    @Override
+    protected UUID decodeFromString(String value) {
+        UUID uuid = UUID.fromString(value);
+        return uuid;
+    }
 }

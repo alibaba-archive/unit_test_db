@@ -16,5 +16,5 @@
 package com.aliyun.ext.jtester.cglib.core;
 
 public interface Predicate {
-	boolean evaluate(Object arg);
+    boolean evaluate(Object arg);
 }

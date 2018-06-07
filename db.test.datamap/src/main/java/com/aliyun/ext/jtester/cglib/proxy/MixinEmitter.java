@@ -16,8 +16,11 @@
 package com.aliyun.ext.jtester.cglib.proxy;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.aliyun.ext.jtester.asm.ClassVisitor;
+import com.aliyun.ext.jtester.asm.Type;
 import com.aliyun.ext.jtester.cglib.core.ClassEmitter;
 import com.aliyun.ext.jtester.cglib.core.CodeEmitter;
 import com.aliyun.ext.jtester.cglib.core.Constants;
@@ -27,8 +30,6 @@ import com.aliyun.ext.jtester.cglib.core.MethodWrapper;
 import com.aliyun.ext.jtester.cglib.core.ReflectUtils;
 import com.aliyun.ext.jtester.cglib.core.Signature;
 import com.aliyun.ext.jtester.cglib.core.TypeUtils;
-import com.aliyun.ext.jtester.asm.ClassVisitor;
-import com.aliyun.ext.jtester.asm.Type;
 
 /**
  * @author Chris Nokleberg
@@ -36,58 +37,58 @@ import com.aliyun.ext.jtester.asm.Type;
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 class MixinEmitter extends ClassEmitter {
-	private static final String FIELD_NAME = "CGLIB$DELEGATES";
-	private static final Signature CSTRUCT_OBJECT_ARRAY = TypeUtils.parseConstructor("Object[]");
-	private static final Type MIXIN = TypeUtils.parseType("Mixin");
-	private static final Signature NEW_INSTANCE = new Signature("newInstance", MIXIN,
-			new Type[] { Constants.TYPE_OBJECT_ARRAY });
+    private static final String    FIELD_NAME           = "CGLIB$DELEGATES";
+    private static final Signature CSTRUCT_OBJECT_ARRAY = TypeUtils.parseConstructor("Object[]");
+    private static final Type      MIXIN                = TypeUtils.parseType("Mixin");
+    private static final Signature NEW_INSTANCE         = new Signature("newInstance", MIXIN,
+            new Type[] { Constants.TYPE_OBJECT_ARRAY });
 
-	public MixinEmitter(ClassVisitor v, String className, Class[] classes, int[] route) {
-		super(v);
+    public MixinEmitter(ClassVisitor v, String className, Class[] classes, int[] route) {
+        super(v);
 
-		begin_class(Constants.V1_2, Constants.ACC_PUBLIC, className, MIXIN, TypeUtils.getTypes(getInterfaces(classes)),
-				Constants.SOURCE_FILE);
-		EmitUtils.null_constructor(this);
-		EmitUtils.factory_method(this, NEW_INSTANCE);
+        begin_class(Constants.V1_2, Constants.ACC_PUBLIC, className, MIXIN, TypeUtils.getTypes(getInterfaces(classes)),
+                Constants.SOURCE_FILE);
+        EmitUtils.null_constructor(this);
+        EmitUtils.factory_method(this, NEW_INSTANCE);
 
-		declare_field(Constants.ACC_PRIVATE, FIELD_NAME, Constants.TYPE_OBJECT_ARRAY, null);
+        declare_field(Constants.ACC_PRIVATE, FIELD_NAME, Constants.TYPE_OBJECT_ARRAY, null);
 
-		CodeEmitter e = begin_method(Constants.ACC_PUBLIC, CSTRUCT_OBJECT_ARRAY, null);
-		e.load_this();
-		e.super_invoke_constructor();
-		e.load_this();
-		e.load_arg(0);
-		e.putfield(FIELD_NAME);
-		e.return_value();
-		e.end_method();
+        CodeEmitter e = begin_method(Constants.ACC_PUBLIC, CSTRUCT_OBJECT_ARRAY, null);
+        e.load_this();
+        e.super_invoke_constructor();
+        e.load_this();
+        e.load_arg(0);
+        e.putfield(FIELD_NAME);
+        e.return_value();
+        e.end_method();
 
-		Set unique = new HashSet();
-		for (int i = 0; i < classes.length; i++) {
-			Method[] methods = getMethods(classes[i]);
-			for (int j = 0; j < methods.length; j++) {
-				if (unique.add(MethodWrapper.create(methods[j]))) {
-					MethodInfo method = ReflectUtils.getMethodInfo(methods[j]);
-					e = EmitUtils.begin_method(this, method, Constants.ACC_PUBLIC);
-					e.load_this();
-					e.getfield(FIELD_NAME);
-					e.aaload((route != null) ? route[i] : i);
-					e.checkcast(method.getClassInfo().getType());
-					e.load_args();
-					e.invoke(method);
-					e.return_value();
-					e.end_method();
-				}
-			}
-		}
+        Set unique = new HashSet();
+        for (int i = 0; i < classes.length; i++) {
+            Method[] methods = getMethods(classes[i]);
+            for (int j = 0; j < methods.length; j++) {
+                if (unique.add(MethodWrapper.create(methods[j]))) {
+                    MethodInfo method = ReflectUtils.getMethodInfo(methods[j]);
+                    e = EmitUtils.begin_method(this, method, Constants.ACC_PUBLIC);
+                    e.load_this();
+                    e.getfield(FIELD_NAME);
+                    e.aaload((route != null) ? route[i] : i);
+                    e.checkcast(method.getClassInfo().getType());
+                    e.load_args();
+                    e.invoke(method);
+                    e.return_value();
+                    e.end_method();
+                }
+            }
+        }
 
-		end_class();
-	}
+        end_class();
+    }
 
-	protected Class[] getInterfaces(Class[] classes) {
-		return classes;
-	}
+    protected Class[] getInterfaces(Class[] classes) {
+        return classes;
+    }
 
-	protected Method[] getMethods(Class type) {
-		return type.getMethods();
-	}
+    protected Method[] getMethods(Class type) {
+        return type.getMethods();
+    }
 }

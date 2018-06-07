@@ -1,29 +1,28 @@
 package com.aliyun.jtester.json.encoder.array;
 
-import com.aliyun.jtester.json.encoder.single.fixed.LongEncoder;
 import com.aliyun.jtester.json.encoder.JSONEncoder;
 import com.aliyun.jtester.json.encoder.single.fixed.LongEncoder;
 
 @SuppressWarnings("rawtypes")
 public class LongArrayEncoder extends ArraysEncoder<long[]> {
-	public final static LongArrayEncoder instance = new LongArrayEncoder();
+    public final static LongArrayEncoder instance = new LongArrayEncoder();
 
-	private LongArrayEncoder() {
-		super(long.class);
-	}
+    private LongArrayEncoder() {
+        super(long.class);
+    }
 
-	@Override
-	protected int getArraySize(long[] target) {
-		return target.length;
-	}
+    @Override
+    protected int getArraySize(long[] target) {
+        return target.length;
+    }
 
-	@Override
-	protected JSONEncoder getEncoderByItem(Object item) {
-		return LongEncoder.instance;
-	}
+    @Override
+    protected JSONEncoder getEncoderByItem(Object item) {
+        return LongEncoder.instance;
+    }
 
-	@Override
-	protected Object getItemByIndex(long[] target, int index) {
-		return target[index];
-	}
+    @Override
+    protected Object getItemByIndex(long[] target, int index) {
+        return target[index];
+    }
 }

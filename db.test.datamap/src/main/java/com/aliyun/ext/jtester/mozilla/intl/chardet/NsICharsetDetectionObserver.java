@@ -36,5 +36,5 @@ package com.aliyun.ext.jtester.mozilla.intl.chardet;
 
 public interface NsICharsetDetectionObserver {
 
-	void notify(String charset);
+    void notify(String charset);
 }

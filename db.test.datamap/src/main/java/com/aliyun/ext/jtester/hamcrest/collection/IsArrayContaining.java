@@ -1,12 +1,13 @@
 package com.aliyun.ext.jtester.hamcrest.collection;
 
+import static com.aliyun.ext.jtester.hamcrest.core.IsEqual.equalTo;
+
 import java.util.Arrays;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Matcher;
 import com.aliyun.ext.jtester.hamcrest.TypeSafeMatcher;
-import static com.aliyun.ext.jtester.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Matches if an array contains an item satisfying a nested matcher.
@@ -27,16 +28,14 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
         }
         return false;
     }
-    
+
     @Override
     public void describeMismatchSafely(T[] item, Description mismatchDescription) {
-      super.describeMismatch(Arrays.asList(item), mismatchDescription);
+        super.describeMismatch(Arrays.asList(item), mismatchDescription);
     };
 
     public void describeTo(Description description) {
-        description
-            .appendText("an array containing ")
-            .appendDescriptionOf(elementMatcher);
+        description.appendText("an array containing ").appendDescriptionOf(elementMatcher);
     }
 
     /**
@@ -48,14 +47,13 @@ public class IsArrayContaining<T> extends TypeSafeMatcher<T[]> {
     }
 
     /**
-     * This is a shortcut to the frequently used hasItemInArray(equalTo(x)).
-     *
-     * For example,  assertThat(hasItemInArray(equal_to(x)))
-     *          vs.  assertThat(hasItemInArray(x))
+     * This is a shortcut to the frequently used hasItemInArray(equalTo(x)). For
+     * example, assertThat(hasItemInArray(equal_to(x))) vs.
+     * assertThat(hasItemInArray(x))
      */
     @Factory
     public static <T> Matcher<T[]> hasItemInArray(T element) {
         Matcher<? super T> matcher = equalTo(element);
-        return IsArrayContaining.<T>hasItemInArray(matcher);
+        return IsArrayContaining.<T> hasItemInArray(matcher);
     }
 }

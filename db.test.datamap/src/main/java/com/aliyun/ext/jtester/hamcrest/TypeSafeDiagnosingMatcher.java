@@ -20,59 +20,57 @@ import com.aliyun.ext.jtester.hamcrest.internal.ReflectiveTypeFinder;
  * @author Steve Freeman
  */
 public abstract class TypeSafeDiagnosingMatcher<T> extends BaseMatcher<T> {
-	private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 2, 0);
-	private final Class<?> expectedType;
+    private static final ReflectiveTypeFinder TYPE_FINDER = new ReflectiveTypeFinder("matchesSafely", 2, 0);
+    private final Class<?>                    expectedType;
 
-	/**
-	 * Subclasses should implement this. The item will already have been checked
-	 * for the specific type and will never be null.
-	 */
-	protected abstract boolean matchesSafely(T item, Description mismatchDescription);
+    /**
+     * Subclasses should implement this. The item will already have been checked
+     * for the specific type and will never be null.
+     */
+    protected abstract boolean matchesSafely(T item, Description mismatchDescription);
 
-	/**
-	 * Use this constructor if the subclass that implements
-	 * <code>matchesSafely</code> is <em>not</em> the class that binds &lt;T&gt;
-	 * to a type.
-	 * 
-	 * @param expectedType
-	 *            The expectedType of the actual value.
-	 */
-	protected TypeSafeDiagnosingMatcher(Class<?> expectedType) {
-		this.expectedType = expectedType;
-	}
+    /**
+     * Use this constructor if the subclass that implements
+     * <code>matchesSafely</code> is <em>not</em> the class that binds &lt;T&gt;
+     * to a type.
+     * 
+     * @param expectedType The expectedType of the actual value.
+     */
+    protected TypeSafeDiagnosingMatcher(Class<?> expectedType) {
+        this.expectedType = expectedType;
+    }
 
-	/**
-	 * Use this constructor if the subclass that implements
-	 * <code>matchesSafely</code> is <em>not</em> the class that binds &lt;T&gt;
-	 * to a type.
-	 * 
-	 * @param typeFinder
-	 *            A type finder to extract the type
-	 */
-	protected TypeSafeDiagnosingMatcher(ReflectiveTypeFinder typeFinder) {
-		this.expectedType = typeFinder.findExpectedType(getClass());
-	}
+    /**
+     * Use this constructor if the subclass that implements
+     * <code>matchesSafely</code> is <em>not</em> the class that binds &lt;T&gt;
+     * to a type.
+     * 
+     * @param typeFinder A type finder to extract the type
+     */
+    protected TypeSafeDiagnosingMatcher(ReflectiveTypeFinder typeFinder) {
+        this.expectedType = typeFinder.findExpectedType(getClass());
+    }
 
-	/**
-	 * The default constructor for simple sub types
-	 */
-	protected TypeSafeDiagnosingMatcher() {
-		this(TYPE_FINDER);
-	}
+    /**
+     * The default constructor for simple sub types
+     */
+    protected TypeSafeDiagnosingMatcher() {
+        this(TYPE_FINDER);
+    }
 
-	@SuppressWarnings("unchecked")
-	public final boolean matches(Object actualItem) {
-		return actualItem != null && expectedType.isInstance(actualItem)
-				&& matchesSafely((T) actualItem, new Description.NullDescription());
-	}
+    @SuppressWarnings("unchecked")
+    public final boolean matches(Object actualItem) {
+        return actualItem != null && expectedType.isInstance(actualItem)
+                && matchesSafely((T) actualItem, new Description.NullDescription());
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public final void describeMismatch(Object item, Description mismatchDescription) {
-		if (item == null || !expectedType.isInstance(item)) {
-			super.describeMismatch(item, mismatchDescription);
-		} else {
-			matchesSafely((T) item, mismatchDescription);
-		}
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public final void describeMismatch(Object item, Description mismatchDescription) {
+        if (item == null || !expectedType.isInstance(item)) {
+            super.describeMismatch(item, mismatchDescription);
+        } else {
+            matchesSafely((T) item, mismatchDescription);
+        }
+    }
 }

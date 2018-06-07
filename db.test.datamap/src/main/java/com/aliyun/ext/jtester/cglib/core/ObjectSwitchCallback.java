@@ -18,7 +18,7 @@ package com.aliyun.ext.jtester.cglib.core;
 import com.aliyun.ext.jtester.asm.Label;
 
 public interface ObjectSwitchCallback {
-	void processCase(Object key, Label end) throws Exception;
+    void processCase(Object key, Label end) throws Exception;
 
-	void processDefault() throws Exception;
+    void processDefault() throws Exception;
 }

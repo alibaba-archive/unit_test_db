@@ -2,11 +2,11 @@ package com.aliyun.datamap.unittest;
 
 import java.util.Date;
 
-import com.aliyun.jtester.module.ICore;
-import com.aliyun.jtester.module.database.IDatabase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.unitils.spring.annotation.SpringBeanByName;
+
+import com.aliyun.jtester.module.database.IDatabase;
 
 public class KeyValueConfigInfoDAOImplTest extends BaseRegionDbDAOTestCase {
 

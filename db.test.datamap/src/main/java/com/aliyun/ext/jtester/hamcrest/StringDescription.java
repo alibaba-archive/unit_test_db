@@ -15,14 +15,12 @@ public class StringDescription extends BaseDescription {
     public StringDescription(Appendable out) {
         this.out = out;
     }
-    
+
     /**
      * Return the description of a {@link SelfDescribing} object as a String.
      * 
-     * @param selfDescribing
-     *   The object to be described.
-     * @return
-     *   The description of the object.
+     * @param selfDescribing The object to be described.
+     * @return The description of the object.
      */
     public static String toString(SelfDescribing selfDescribing) {
         return new StringDescription().appendDescriptionOf(selfDescribing).toString();
@@ -52,7 +50,7 @@ public class StringDescription extends BaseDescription {
             throw new RuntimeException("Could not write description", e);
         }
     }
-    
+
     /**
      * Returns the description as a string.
      */

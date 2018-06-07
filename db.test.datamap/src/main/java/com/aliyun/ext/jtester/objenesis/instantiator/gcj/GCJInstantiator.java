@@ -25,23 +25,23 @@ import com.aliyun.ext.jtester.objenesis.ObjenesisException;
  * constructors.
  * 
  * @author Leonardo Mesquita
- * @see org.objenesis.instantiator.ObjectInstantiator
+ * @see com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator
  */
 @SuppressWarnings("rawtypes")
 public class GCJInstantiator extends GCJInstantiatorBase {
-	public GCJInstantiator(Class type) {
-		super(type);
-	}
+    public GCJInstantiator(Class type) {
+        super(type);
+    }
 
-	public Object newInstance() {
-		try {
-			return newObjectMethod.invoke(dummyStream, new Object[] { type, Object.class });
-		} catch (RuntimeException e) {
-			throw new ObjenesisException(e);
-		} catch (IllegalAccessException e) {
-			throw new ObjenesisException(e);
-		} catch (InvocationTargetException e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return newObjectMethod.invoke(dummyStream, new Object[] { type, Object.class });
+        } catch (RuntimeException e) {
+            throw new ObjenesisException(e);
+        } catch (IllegalAccessException e) {
+            throw new ObjenesisException(e);
+        } catch (InvocationTargetException e) {
+            throw new ObjenesisException(e);
+        }
+    }
 }

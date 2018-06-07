@@ -4,7 +4,6 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 import com.aliyun.jtester.json.helper.JSONObject;
-import com.aliyun.jtester.json.helper.JSONObject;
 
 /**
  * json串解码器基类<br>
@@ -12,24 +11,23 @@ import com.aliyun.jtester.json.helper.JSONObject;
  * 加码：将java对象序列化为json字符串<br>
  * 
  * @author darui.wudr
- * 
  */
 public interface IDecoder {
-	/**
-	 * 将json串反序列为对象
-	 * 
-	 * @param from
-	 * @param toType
-	 * @param references
-	 * @return
-	 */
-	<T> T decode(JSONObject from, Type toType, Map<String, Object> references);
+    /**
+     * 将json串反序列为对象
+     * 
+     * @param from
+     * @param toType
+     * @param references
+     * @return
+     */
+    <T> T decode(JSONObject from, Type toType, Map<String, Object> references);
 
-	/**
-	 * 是否接受是该类型json解码器
-	 * 
-	 * @param type
-	 * @return
-	 */
-	boolean accept(Type type);
+    /**
+     * 是否接受是该类型json解码器
+     * 
+     * @param type
+     * @return
+     */
+    boolean accept(Type type);
 }

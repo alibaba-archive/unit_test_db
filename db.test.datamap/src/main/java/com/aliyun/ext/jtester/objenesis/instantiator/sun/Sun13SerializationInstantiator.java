@@ -16,6 +16,7 @@
 package com.aliyun.ext.jtester.objenesis.instantiator.sun;
 
 import com.aliyun.ext.jtester.objenesis.ObjenesisException;
+import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
 import com.aliyun.ext.jtester.objenesis.instantiator.SerializationInstantiatorHelper;
 
 /**
@@ -25,23 +26,23 @@ import com.aliyun.ext.jtester.objenesis.instantiator.SerializationInstantiatorHe
  * non-serializable superclass' no-arg constructor.
  * 
  * @author Leonardo Mesquita
- * @see org.objenesis.instantiator.ObjectInstantiator
+ * @see ObjectInstantiator
  */
 @SuppressWarnings("rawtypes")
 public class Sun13SerializationInstantiator extends Sun13InstantiatorBase {
-	private final Class superType;
+    private final Class superType;
 
-	public Sun13SerializationInstantiator(Class type) {
-		super(type);
-		this.superType = SerializationInstantiatorHelper.getNonSerializableSuperClass(type);
-	}
+    public Sun13SerializationInstantiator(Class type) {
+        super(type);
+        this.superType = SerializationInstantiatorHelper.getNonSerializableSuperClass(type);
+    }
 
-	public Object newInstance() {
-		try {
-			return allocateNewObjectMethod.invoke(null, new Object[] { type, superType });
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return allocateNewObjectMethod.invoke(null, new Object[] { type, superType });
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
+    }
 
 }

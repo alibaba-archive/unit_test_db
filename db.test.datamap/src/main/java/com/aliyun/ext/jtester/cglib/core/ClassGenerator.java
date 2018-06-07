@@ -18,5 +18,5 @@ package com.aliyun.ext.jtester.cglib.core;
 import com.aliyun.ext.jtester.asm.ClassVisitor;
 
 public interface ClassGenerator {
-	void generateClass(ClassVisitor v) throws Exception;
+    void generateClass(ClassVisitor v) throws Exception;
 }

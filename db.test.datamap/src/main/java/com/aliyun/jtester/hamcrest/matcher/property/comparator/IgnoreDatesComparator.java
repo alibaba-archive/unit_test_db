@@ -1,24 +1,22 @@
 package com.aliyun.jtester.hamcrest.matcher.property.comparator;
 
-import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
+import java.util.Date;
+
 import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
 import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparator;
 
-import java.util.Date;
-
 /**
- * Comparator that checks whether 2 dates are both null or not null, the actual time-value is not compared.
- * This can be useful when the actual time/date is not known is advance but you still want to check whether
- * a value has been set or not. E.g. a last modification timestamp in the databsse.
- *
+ * Comparator that checks whether 2 dates are both null or not null, the actual
+ * time-value is not compared. This can be useful when the actual time/date is
+ * not known is advance but you still want to check whether a value has been set
+ * or not. E.g. a last modification timestamp in the databsse.
  */
 public class IgnoreDatesComparator implements Comparator {
-
 
     /**
      * Returns true if both objects are null or both objects are Date instances.
      *
-     * @param left  The left object
+     * @param left The left object
      * @param right The right object
      * @return True if null or dates
      */
@@ -35,17 +33,20 @@ public class IgnoreDatesComparator implements Comparator {
         return false;
     }
 
-
     /**
      * Compares the given dates.
      *
-     * @param left                 The left date
-     * @param right                The right date
-     * @param onlyFirstDifference  True if only the first difference should be returned
-     * @param reflectionComparator The root comparator for inner comparisons, not null
-     * @return A difference if one of the dates is null and the other one not, else null
+     * @param left The left date
+     * @param right The right date
+     * @param onlyFirstDifference True if only the first difference should be
+     *            returned
+     * @param reflectionComparator The root comparator for inner comparisons,
+     *            not null
+     * @return A difference if one of the dates is null and the other one not,
+     *         else null
      */
-    public Difference compare(Object left, Object right, boolean onlyFirstDifference, ReflectionComparator reflectionComparator) {
+    public Difference compare(Object left, Object right, boolean onlyFirstDifference,
+                              ReflectionComparator reflectionComparator) {
         if ((right == null && left instanceof Date) || (left == null && right instanceof Date)) {
             return new Difference("Lenient dates, but not both instantiated or both null", left, right);
         }

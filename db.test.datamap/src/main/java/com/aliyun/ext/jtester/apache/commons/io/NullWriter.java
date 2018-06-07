@@ -27,7 +27,7 @@ import java.io.Writer;
  * @version $Id: NullWriter.java 610010 2008-01-08 14:50:59Z niallp $
  */
 public class NullWriter extends Writer {
-    
+
     /**
      * A singleton.
      */
@@ -41,6 +41,7 @@ public class NullWriter extends Writer {
 
     /**
      * Does nothing - output to <code>/dev/null</code>.
+     * 
      * @param idx The character to write
      */
     public void write(int idx) {
@@ -49,6 +50,7 @@ public class NullWriter extends Writer {
 
     /**
      * Does nothing - output to <code>/dev/null</code>.
+     * 
      * @param chr The characters to write
      */
     public void write(char[] chr) {
@@ -57,6 +59,7 @@ public class NullWriter extends Writer {
 
     /**
      * Does nothing - output to <code>/dev/null</code>.
+     * 
      * @param chr The characters to write
      * @param st The start offset
      * @param end The number of characters to write
@@ -67,6 +70,7 @@ public class NullWriter extends Writer {
 
     /**
      * Does nothing - output to <code>/dev/null</code>.
+     * 
      * @param str The string to write
      */
     public void write(String str) {
@@ -75,6 +79,7 @@ public class NullWriter extends Writer {
 
     /**
      * Does nothing - output to <code>/dev/null</code>.
+     * 
      * @param str The string to write
      * @param st The start offset
      * @param end The number of characters to write

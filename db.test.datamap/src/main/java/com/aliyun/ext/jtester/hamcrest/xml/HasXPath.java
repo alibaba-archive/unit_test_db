@@ -8,27 +8,29 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
-import com.aliyun.ext.jtester.hamcrest.TypeSafeDiagnosingMatcher;
-import com.aliyun.ext.jtester.hamcrest.Description;
-import com.aliyun.ext.jtester.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
+import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
+import com.aliyun.ext.jtester.hamcrest.Matcher;
+import com.aliyun.ext.jtester.hamcrest.TypeSafeDiagnosingMatcher;
+
 /**
- * Applies a Matcher to a given XML Node in an existing XML Node tree, specified by an XPath expression.
+ * Applies a Matcher to a given XML Node in an existing XML Node tree, specified
+ * by an XPath expression.
  *
  * @author Joe Walnes
  */
 public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     private final Matcher<? super String> valueMatcher;
-    private final XPathExpression compiledXPath;
-    private final String xpathString;
-    private final QName evaluationMode;
+    private final XPathExpression         compiledXPath;
+    private final String                  xpathString;
+    private final QName                   evaluationMode;
 
     /**
      * @param xPathExpression XPath expression.
-     * @param valueMatcher Matcher to use at given XPath.
-     *                     May be null to specify that the XPath must exist but the value is irrelevant.
+     * @param valueMatcher Matcher to use at given XPath. May be null to specify
+     *            that the XPath must exist but the value is irrelevant.
      */
     public HasXPath(String xPathExpression, Matcher<? super String> valueMatcher) {
         this(xPathExpression, null, valueMatcher);
@@ -36,15 +38,17 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
 
     /**
      * @param xPathExpression XPath expression.
-     * @param namespaceContext Resolves XML namespace prefixes in the XPath expression
-     * @param valueMatcher Matcher to use at given XPath.
-     *                     May be null to specify that the XPath must exist but the value is irrelevant.
+     * @param namespaceContext Resolves XML namespace prefixes in the XPath
+     *            expression
+     * @param valueMatcher Matcher to use at given XPath. May be null to specify
+     *            that the XPath must exist but the value is irrelevant.
      */
     public HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<? super String> valueMatcher) {
         this(xPathExpression, namespaceContext, valueMatcher, XPathConstants.STRING);
     }
 
-    private HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<? super String> valueMatcher, QName mode) {
+    private HasXPath(String xPathExpression, NamespaceContext namespaceContext, Matcher<? super String> valueMatcher,
+                     QName mode) {
         try {
             XPath xPath = XPathFactory.newInstance().newXPath();
             if (namespaceContext != null) {
@@ -60,7 +64,7 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     @Override
-	public boolean matchesSafely(Node item, Description mismatchDescription) {
+    public boolean matchesSafely(Node item, Description mismatchDescription) {
         try {
             return matchesResult(compiledXPath.evaluate(item, evaluationMode), mismatchDescription);
         } catch (XPathExpressionException e) {
@@ -76,19 +80,19 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     private boolean matchesResult(Object result, Description mismatchDescription) {
-      if (result == null) {
-          mismatchDescription.appendText("xpath returned no results.");
-          return false;
-      } else if (valueMatcher == null) {
-          return true;
-      } else {
-          boolean valueMatched = valueMatcher.matches(result);
-          if (!valueMatched) {
-            mismatchDescription.appendText("xpath result ");
-            valueMatcher.describeMismatch(result, mismatchDescription);
-          }
-          return valueMatched;
-      }
+        if (result == null) {
+            mismatchDescription.appendText("xpath returned no results.");
+            return false;
+        } else if (valueMatcher == null) {
+            return true;
+        } else {
+            boolean valueMatched = valueMatcher.matches(result);
+            if (!valueMatched) {
+                mismatchDescription.appendText("xpath result ");
+                valueMatcher.describeMismatch(result, mismatchDescription);
+            }
+            return valueMatched;
+        }
     }
 
     @Factory
@@ -97,7 +101,8 @@ public class HasXPath extends TypeSafeDiagnosingMatcher<Node> {
     }
 
     @Factory
-    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext, Matcher<? super String> valueMatcher) {
+    public static Matcher<Node> hasXPath(String xPath, NamespaceContext namespaceContext,
+                                         Matcher<? super String> valueMatcher) {
         return new HasXPath(xPath, namespaceContext, valueMatcher, XPathConstants.STRING);
     }
 

@@ -8,8 +8,6 @@ import java.util.List;
 
 import com.aliyun.jtester.module.database.utility.SqlRunner;
 import com.aliyun.jtester.tools.commons.ExceptionWrapper;
-import com.aliyun.jtester.module.database.utility.SqlRunner;
-import com.aliyun.jtester.tools.commons.ExceptionWrapper;
 
 public class SqlSet implements ISqlSet {
     private List<String> list = new ArrayList<String>();

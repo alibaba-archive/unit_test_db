@@ -7,14 +7,14 @@ import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
 
 public class BigIntegerEncoder extends FixedTypeEncoder<BigInteger> {
 
-	public static BigIntegerEncoder instance = new BigIntegerEncoder();
+    public static BigIntegerEncoder instance = new BigIntegerEncoder();
 
-	protected BigIntegerEncoder() {
-		super(BigInteger.class);
-	}
+    protected BigIntegerEncoder() {
+        super(BigInteger.class);
+    }
 
-	@Override
-	protected void encodeSingleValue(BigInteger target, Writer writer) throws Exception {
-		writer.append(target.toString());
-	}
+    @Override
+    protected void encodeSingleValue(BigInteger target, Writer writer) throws Exception {
+        writer.append(target.toString());
+    }
 }

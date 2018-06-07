@@ -23,11 +23,11 @@ package com.aliyun.ext.jtester.apache.commons.collections;
  */
 public interface Transformer {
 
-	/**
-	 * Transforms the input object (leaving it unchanged) into some output
-	 * object.
-	 * 
-	 * @return the transformation of the input object to the output object
-	 */
-	public Object transform(Object input);
+    /**
+     * Transforms the input object (leaving it unchanged) into some output
+     * object.
+     * 
+     * @return the transformation of the input object to the output object
+     */
+    public Object transform(Object input);
 }

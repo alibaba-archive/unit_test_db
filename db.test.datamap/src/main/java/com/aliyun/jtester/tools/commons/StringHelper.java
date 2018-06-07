@@ -218,7 +218,7 @@ public class StringHelper {
     }
 
     /**
-     * 把文本转义成正确格式的Html 比如:"<"转换成"&lt"等等
+     * 把文本转义成正确格式的Html
      * 
      * @param html
      * @return format后的文本
@@ -482,8 +482,6 @@ public class StringHelper {
     /**
      * 忽略字符串中所有的空白符
      * 
-     * @param input
-     * @return
      */
     public static String ignoreWhiteSpace(String str) {
         if (str == null) {

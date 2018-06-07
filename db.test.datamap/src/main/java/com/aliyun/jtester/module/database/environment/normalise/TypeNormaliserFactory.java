@@ -3,17 +3,15 @@ package com.aliyun.jtester.module.database.environment.normalise;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 @SuppressWarnings({ "rawtypes" })
 public class TypeNormaliserFactory {
-	private static Map<Class, TypeNormaliser> normalisers = new HashMap<Class, TypeNormaliser>();
+    private static Map<Class, TypeNormaliser> normalisers = new HashMap<Class, TypeNormaliser>();
 
-	public static void setNormaliser(Class targetClass, TypeNormaliser normaliser) {
-		normalisers.put(targetClass, normaliser);
-	}
+    public static void setNormaliser(Class targetClass, TypeNormaliser normaliser) {
+        normalisers.put(targetClass, normaliser);
+    }
 
-	public static TypeNormaliser getNormaliser(Class targetClass) {
-		return normalisers.get(targetClass);
-	}
+    public static TypeNormaliser getNormaliser(Class targetClass) {
+        return normalisers.get(targetClass);
+    }
 }

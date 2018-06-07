@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import com.aliyun.jtester.hamcrest.iassert.object.intf.IMapAssert;
 import com.aliyun.jtester.hamcrest.iassert.object.intf.ICollectionAssert;
 import com.aliyun.jtester.hamcrest.iassert.object.intf.IMapAssert;
 import com.aliyun.jtester.hamcrest.iassert.object.intf.IObjectAssert;
@@ -61,7 +60,7 @@ public interface IDBOperator {
 
     /**
      * 查询数据，并且返回的数据只有一行<br>
-     * 将数据自动填充到Map<String,Object>中,并对数据进行断言
+     * 将数据自动填充到Map{@literal <}String,Object{@literal >}中,并对数据进行断言
      * 
      * @param sql
      * @return
@@ -73,7 +72,7 @@ public interface IDBOperator {
      * 将数据自动填充到 pojo 类型的对象中,并且返回对象的断言器
      * 
      * @param sql
-     * @param PoJo
+     * @param pojo
      * @return
      */
     IObjectAssert queryAsPoJo(String sql, Class pojo);
@@ -129,9 +128,6 @@ public interface IDBOperator {
     /**
      * 返回表中所有的数据
      * 
-     * @param table
-     * @param pojoClazz
-     * @return
      */
     <T> List<T> returnList(String table, Class<T> clazz);
 
@@ -146,9 +142,6 @@ public interface IDBOperator {
     /**
      * 根据查询返回映射数据
      * 
-     * @param query
-     * @param pojoClazz
-     * @return
      */
     <T> List<T> returnQuery(String query, Class<T> clazz);
 }

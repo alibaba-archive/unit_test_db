@@ -4,21 +4,20 @@ import java.io.Writer;
 import java.util.Locale;
 
 import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
-import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
 
 public class LocaleEncoder extends FixedTypeEncoder<Locale> {
 
-	public static LocaleEncoder instance = new LocaleEncoder();
+    public static LocaleEncoder instance = new LocaleEncoder();
 
-	private LocaleEncoder() {
-		super(Locale.class);
-	}
+    private LocaleEncoder() {
+        super(Locale.class);
+    }
 
-	@Override
-	protected void encodeSingleValue(Locale target, Writer writer) throws Exception {
-		String locale = target.toString();
-		writer.append(quote_Char);
-		StringEncoder.writeEscapeString(locale, writer);
-		writer.append(quote_Char);
-	}
+    @Override
+    protected void encodeSingleValue(Locale target, Writer writer) throws Exception {
+        String locale = target.toString();
+        writer.append(quote_Char);
+        StringEncoder.writeEscapeString(locale, writer);
+        writer.append(quote_Char);
+    }
 }

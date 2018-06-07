@@ -22,15 +22,15 @@ package com.aliyun.ext.jtester.objenesis.instantiator.basic;
  * security manager allows it).
  * 
  * @author Joe Walnes
- * @see org.objenesis.instantiator.ObjectInstantiator
+ * @see com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator
  */
 public class AccessibleInstantiator extends ConstructorInstantiator {
 
-	@SuppressWarnings("rawtypes")
-	public AccessibleInstantiator(Class type) {
-		super(type);
-		if (constructor != null) {
-			constructor.setAccessible(true);
-		}
-	}
+    @SuppressWarnings("rawtypes")
+    public AccessibleInstantiator(Class type) {
+        super(type);
+        if (constructor != null) {
+            constructor.setAccessible(true);
+        }
+    }
 }

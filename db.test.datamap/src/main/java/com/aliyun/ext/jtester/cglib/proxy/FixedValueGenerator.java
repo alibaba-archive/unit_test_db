@@ -15,33 +15,34 @@
  */
 package com.aliyun.ext.jtester.cglib.proxy;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
+import com.aliyun.ext.jtester.asm.Type;
 import com.aliyun.ext.jtester.cglib.core.ClassEmitter;
 import com.aliyun.ext.jtester.cglib.core.CodeEmitter;
 import com.aliyun.ext.jtester.cglib.core.MethodInfo;
 import com.aliyun.ext.jtester.cglib.core.Signature;
 import com.aliyun.ext.jtester.cglib.core.TypeUtils;
-import com.aliyun.ext.jtester.asm.Type;
 
 @SuppressWarnings({ "rawtypes" })
 class FixedValueGenerator implements CallbackGenerator {
-	public static final FixedValueGenerator INSTANCE = new FixedValueGenerator();
-	private static final Type FIXED_VALUE = TypeUtils.parseType("FixedValue");
-	private static final Signature LOAD_OBJECT = TypeUtils.parseSignature("Object loadObject()");
+    public static final FixedValueGenerator INSTANCE    = new FixedValueGenerator();
+    private static final Type               FIXED_VALUE = TypeUtils.parseType("FixedValue");
+    private static final Signature          LOAD_OBJECT = TypeUtils.parseSignature("Object loadObject()");
 
-	public void generate(ClassEmitter ce, Context context, List methods) {
-		for (Iterator it = methods.iterator(); it.hasNext();) {
-			MethodInfo method = (MethodInfo) it.next();
-			CodeEmitter e = context.beginMethod(ce, method);
-			context.emitCallback(e, context.getIndex(method));
-			e.invoke_interface(FIXED_VALUE, LOAD_OBJECT);
-			e.unbox_or_zero(e.getReturnType());
-			e.return_value();
-			e.end_method();
-		}
-	}
+    public void generate(ClassEmitter ce, Context context, List methods) {
+        for (Iterator it = methods.iterator(); it.hasNext();) {
+            MethodInfo method = (MethodInfo) it.next();
+            CodeEmitter e = context.beginMethod(ce, method);
+            context.emitCallback(e, context.getIndex(method));
+            e.invoke_interface(FIXED_VALUE, LOAD_OBJECT);
+            e.unbox_or_zero(e.getReturnType());
+            e.return_value();
+            e.end_method();
+        }
+    }
 
-	public void generateStatic(CodeEmitter e, Context context, List methods) {
-	}
+    public void generateStatic(CodeEmitter e, Context context, List methods) {
+    }
 }

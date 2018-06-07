@@ -27,36 +27,36 @@ import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
  * constructors. The code was provided by Aonix Perc support team.
  * 
  * @author Henri Tremblay
- * @see org.objenesis.instantiator.ObjectInstantiator
+ * @see ObjectInstantiator
  */
 @SuppressWarnings("rawtypes")
 public class PercInstantiator implements ObjectInstantiator {
 
-	private final Method newInstanceMethod;
+    private final Method   newInstanceMethod;
 
-	private final Object[] typeArgs = new Object[] { null, Boolean.FALSE };
+    private final Object[] typeArgs = new Object[] { null, Boolean.FALSE };
 
-	public PercInstantiator(Class type) {
+    public PercInstantiator(Class type) {
 
-		typeArgs[0] = type;
+        typeArgs[0] = type;
 
-		try {
-			newInstanceMethod = ObjectInputStream.class.getDeclaredMethod("newInstance", new Class[] { Class.class,
-					Boolean.TYPE });
-			newInstanceMethod.setAccessible(true);
-		} catch (RuntimeException e) {
-			throw new ObjenesisException(e);
-		} catch (NoSuchMethodException e) {
-			throw new ObjenesisException(e);
-		}
-	}
+        try {
+            newInstanceMethod = ObjectInputStream.class.getDeclaredMethod("newInstance",
+                    new Class[] { Class.class, Boolean.TYPE });
+            newInstanceMethod.setAccessible(true);
+        } catch (RuntimeException e) {
+            throw new ObjenesisException(e);
+        } catch (NoSuchMethodException e) {
+            throw new ObjenesisException(e);
+        }
+    }
 
-	public Object newInstance() {
-		try {
-			return newInstanceMethod.invoke(null, typeArgs);
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return newInstanceMethod.invoke(null, typeArgs);
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
+    }
 
 }

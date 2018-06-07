@@ -4,34 +4,34 @@ package com.aliyun.ext.jtester.hamcrest.core;
 
 import java.util.regex.Pattern;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.BaseMatcher;
 import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Matcher;
 
 /**
  * Provides a custom description to another matcher.
  */
 public class DescribedAs<T> extends BaseMatcher<T> {
-    private final String descriptionTemplate;
-    private final Matcher<T> matcher;
-    private final Object[] values;
-    
-    private final static Pattern ARG_PATTERN = Pattern.compile("%([0-9]+)"); 
-    
+    private final String         descriptionTemplate;
+    private final Matcher<T>     matcher;
+    private final Object[]       values;
+
+    private final static Pattern ARG_PATTERN = Pattern.compile("%([0-9]+)");
+
     public DescribedAs(String descriptionTemplate, Matcher<T> matcher, Object[] values) {
         this.descriptionTemplate = descriptionTemplate;
         this.matcher = matcher;
         this.values = values.clone();
     }
-    
+
     public boolean matches(Object o) {
         return matcher.matches(o);
     }
 
     public void describeTo(Description description) {
         java.util.regex.Matcher arg = ARG_PATTERN.matcher(descriptionTemplate);
-        
+
         int textStart = 0;
         while (arg.find()) {
             description.appendText(descriptionTemplate.substring(textStart, arg.start()));
@@ -39,7 +39,7 @@ public class DescribedAs<T> extends BaseMatcher<T> {
             description.appendValue(values[argIndex]);
             textStart = arg.end();
         }
-        
+
         if (textStart < descriptionTemplate.length()) {
             description.appendText(descriptionTemplate.substring(textStart));
         }

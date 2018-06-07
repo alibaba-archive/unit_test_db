@@ -31,22 +31,22 @@ import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ConstructorInstantiator implements ObjectInstantiator {
 
-	protected Constructor constructor;
+    protected Constructor constructor;
 
-	public ConstructorInstantiator(Class type) {
-		try {
-			constructor = type.getDeclaredConstructor((Class[]) null);
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public ConstructorInstantiator(Class type) {
+        try {
+            constructor = type.getDeclaredConstructor((Class[]) null);
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
+    }
 
-	public Object newInstance() {
-		try {
-			return constructor.newInstance((Object[]) null);
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return constructor.newInstance((Object[]) null);
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
+    }
 
 }

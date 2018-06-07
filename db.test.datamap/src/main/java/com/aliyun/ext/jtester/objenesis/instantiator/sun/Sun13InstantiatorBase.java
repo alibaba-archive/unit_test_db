@@ -29,29 +29,29 @@ import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
  */
 @SuppressWarnings("rawtypes")
 public abstract class Sun13InstantiatorBase implements ObjectInstantiator {
-	protected static Method allocateNewObjectMethod = null;
+    protected static Method allocateNewObjectMethod = null;
 
-	private static void initialize() {
-		if (allocateNewObjectMethod == null) {
-			try {
-				allocateNewObjectMethod = ObjectInputStream.class.getDeclaredMethod("allocateNewObject", new Class[] {
-						Class.class, Class.class });
-				allocateNewObjectMethod.setAccessible(true);
-			} catch (RuntimeException e) {
-				throw new ObjenesisException(e);
-			} catch (NoSuchMethodException e) {
-				throw new ObjenesisException(e);
-			}
-		}
-	}
+    private static void initialize() {
+        if (allocateNewObjectMethod == null) {
+            try {
+                allocateNewObjectMethod = ObjectInputStream.class.getDeclaredMethod("allocateNewObject",
+                        new Class[] { Class.class, Class.class });
+                allocateNewObjectMethod.setAccessible(true);
+            } catch (RuntimeException e) {
+                throw new ObjenesisException(e);
+            } catch (NoSuchMethodException e) {
+                throw new ObjenesisException(e);
+            }
+        }
+    }
 
-	protected final Class type;
+    protected final Class type;
 
-	public Sun13InstantiatorBase(Class type) {
-		this.type = type;
-		initialize();
-	}
+    public Sun13InstantiatorBase(Class type) {
+        this.type = type;
+        initialize();
+    }
 
-	public abstract Object newInstance();
+    public abstract Object newInstance();
 
 }

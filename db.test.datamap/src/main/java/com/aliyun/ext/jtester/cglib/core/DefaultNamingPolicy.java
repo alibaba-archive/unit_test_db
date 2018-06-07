@@ -28,36 +28,36 @@ package com.aliyun.ext.jtester.cglib.core;
  * suffix is added to ensure uniqueness.
  */
 public class DefaultNamingPolicy implements NamingPolicy {
-	public static final DefaultNamingPolicy INSTANCE = new DefaultNamingPolicy();
+    public static final DefaultNamingPolicy INSTANCE = new DefaultNamingPolicy();
 
-	public String getClassName(String prefix, String source, Object key, Predicate names) {
-		if (prefix == null) {
-			prefix = "ext.jtester.cglib.empty.Object";
-		} else if (prefix.startsWith("java")) {
-			prefix = "$" + prefix;
-		}
-		String base = prefix + "$$" + source.substring(source.lastIndexOf('.') + 1) + getTag() + "$$"
-				+ Integer.toHexString(key.hashCode());
-		String attempt = base;
-		int index = 2;
-		while (names.evaluate(attempt))
-			attempt = base + "_" + index++;
-		return attempt;
-	}
+    public String getClassName(String prefix, String source, Object key, Predicate names) {
+        if (prefix == null) {
+            prefix = "ext.jtester.cglib.empty.Object";
+        } else if (prefix.startsWith("java")) {
+            prefix = "$" + prefix;
+        }
+        String base = prefix + "$$" + source.substring(source.lastIndexOf('.') + 1) + getTag() + "$$"
+                + Integer.toHexString(key.hashCode());
+        String attempt = base;
+        int index = 2;
+        while (names.evaluate(attempt))
+            attempt = base + "_" + index++;
+        return attempt;
+    }
 
-	/**
-	 * Returns a string which is incorporated into every generated class name.
-	 * By default returns "ByCGLIB"
-	 */
-	protected String getTag() {
-		return "ByCGLIB";
-	}
+    /**
+     * Returns a string which is incorporated into every generated class name.
+     * By default returns "ByCGLIB"
+     */
+    protected String getTag() {
+        return "ByCGLIB";
+    }
 
-	public int hashCode() {
-		return getTag().hashCode();
-	}
+    public int hashCode() {
+        return getTag().hashCode();
+    }
 
-	public boolean equals(Object o) {
-		return (o instanceof DefaultNamingPolicy) && ((DefaultNamingPolicy) o).getTag().equals(getTag());
-	}
+    public boolean equals(Object o) {
+        return (o instanceof DefaultNamingPolicy) && ((DefaultNamingPolicy) o).getTag().equals(getTag());
+    }
 }

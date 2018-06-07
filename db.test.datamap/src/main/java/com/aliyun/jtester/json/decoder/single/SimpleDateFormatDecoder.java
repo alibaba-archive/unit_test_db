@@ -8,18 +8,18 @@ import com.aliyun.jtester.json.decoder.base.FixedTypeDecoder;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class SimpleDateFormatDecoder extends FixedTypeDecoder {
-	public final static SimpleDateFormatDecoder toSIMPLEDATEFORMAT = new SimpleDateFormatDecoder();
+    public final static SimpleDateFormatDecoder toSIMPLEDATEFORMAT = new SimpleDateFormatDecoder();
 
-	public boolean accept(Type type) {
-		Class claz = this.getRawType(type, null);
-		return SimpleDateFormat.class.isAssignableFrom(claz);
-	}
+    public boolean accept(Type type) {
+        Class claz = this.getRawType(type, null);
+        return SimpleDateFormat.class.isAssignableFrom(claz);
+    }
 
-	@Override
-	protected <T> T decodeFromString(String value) {
-		Locale locale = Locale.getDefault();
-		SimpleDateFormat target = new SimpleDateFormat(value, locale);
+    @Override
+    protected <T> T decodeFromString(String value) {
+        Locale locale = Locale.getDefault();
+        SimpleDateFormat target = new SimpleDateFormat(value, locale);
 
-		return (T) target;
-	}
+        return (T) target;
+    }
 }

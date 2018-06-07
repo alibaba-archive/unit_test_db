@@ -45,23 +45,19 @@ final class Frame {
      * frame at the beginning of the basic block, starting from the input frame
      * of the first basic block (which is computed from the method descriptor),
      * and by using the previously computed output frames to compute the input
-     * state of the other blocks.
-     * 
-     * All output and input frames are stored as arrays of integers. Reference
-     * and array types are represented by an index into a type table (which is
-     * not the same as the constant pool of the class, in order to avoid adding
-     * unnecessary constants in the pool - not all computed frames will end up
-     * being stored in the stack map table). This allows very fast type
-     * comparisons.
-     * 
-     * Output stack map frames are computed relatively to the input frame of the
-     * basic block, which is not yet known when output frames are computed. It
-     * is therefore necessary to be able to represent abstract types such as
+     * state of the other blocks. All output and input frames are stored as
+     * arrays of integers. Reference and array types are represented by an index
+     * into a type table (which is not the same as the constant pool of the
+     * class, in order to avoid adding unnecessary constants in the pool - not
+     * all computed frames will end up being stored in the stack map table).
+     * This allows very fast type comparisons. Output stack map frames are
+     * computed relatively to the input frame of the basic block, which is not
+     * yet known when output frames are computed. It is therefore necessary to
+     * be able to represent abstract types such as
      * "the type at position x in the input frame locals" or "the type at
      * position x from the top of the input frame stack" or even "the type at
      * position x in the input frame, with y more (or less) array dimensions".
      * This explains the rather complicated type format used in output frames.
-     * 
      * This format is the following: DIM KIND VALUE (4, 4 and 24 bits). DIM is a
      * signed number of array dimensions (from -8 to 7). KIND is either BASE,
      * LOCAL or STACK. BASE is used for types that are not relative to the input
@@ -71,39 +67,36 @@ final class Frame {
      * the input local variable types. For STACK types, it is a position
      * relatively to the top of input frame stack. For BASE types, it is either
      * one of the constants defined in FrameVisitor, or for OBJECT and
-     * UNINITIALIZED types, a tag and an index in the type table.
-     * 
-     * Output frames can contain types of any kind and with a positive or
-     * negative dimension (and even unassigned types, represented by 0 - which
-     * does not correspond to any valid type value). Input frames can only
-     * contain BASE types of positive or null dimension. In all cases the type
-     * table contains only internal type names (array type descriptors are
-     * forbidden - dimensions must be represented through the DIM field).
-     * 
-     * The LONG and DOUBLE types are always represented by using two slots (LONG +
-     * TOP or DOUBLE + TOP), for local variable types as well as in the operand
-     * stack. This is necessary to be able to simulate DUPx_y instructions,
-     * whose effect would be dependent on the actual type values if types were
-     * always represented by a single slot in the stack (and this is not
-     * possible, since actual type values are not always known - cf LOCAL and
-     * STACK type kinds).
+     * UNINITIALIZED types, a tag and an index in the type table. Output frames
+     * can contain types of any kind and with a positive or negative dimension
+     * (and even unassigned types, represented by 0 - which does not correspond
+     * to any valid type value). Input frames can only contain BASE types of
+     * positive or null dimension. In all cases the type table contains only
+     * internal type names (array type descriptors are forbidden - dimensions
+     * must be represented through the DIM field). The LONG and DOUBLE types are
+     * always represented by using two slots (LONG + TOP or DOUBLE + TOP), for
+     * local variable types as well as in the operand stack. This is necessary
+     * to be able to simulate DUPx_y instructions, whose effect would be
+     * dependent on the actual type values if types were always represented by a
+     * single slot in the stack (and this is not possible, since actual type
+     * values are not always known - cf LOCAL and STACK type kinds).
      */
 
     /**
      * Mask to get the dimension of a frame type. This dimension is a signed
      * integer between -8 and 7.
      */
-    static final int DIM = 0xF0000000;
+    static final int         DIM                   = 0xF0000000;
 
     /**
      * Constant to be added to a type to get a type with one more dimension.
      */
-    static final int ARRAY_OF = 0x10000000;
+    static final int         ARRAY_OF              = 0x10000000;
 
     /**
      * Constant to be added to a type to get a type with one less dimension.
      */
-    static final int ELEMENT_OF = 0xF0000000;
+    static final int         ELEMENT_OF            = 0xF0000000;
 
     /**
      * Mask to get the kind of a frame type.
@@ -112,124 +105,124 @@ final class Frame {
      * @see #LOCAL
      * @see #STACK
      */
-    static final int KIND = 0xF000000;
+    static final int         KIND                  = 0xF000000;
 
     /**
      * Flag used for LOCAL and STACK types. Indicates that if this type happens
-     * to be a long or double type (during the computations of input frames), 
-     * then it must be set to TOP because the second word of this value has
-     * been reused to store other data in the basic block. Hence the first word 
-     * no longer stores a valid long or double value.
+     * to be a long or double type (during the computations of input frames),
+     * then it must be set to TOP because the second word of this value has been
+     * reused to store other data in the basic block. Hence the first word no
+     * longer stores a valid long or double value.
      */
-    static final int TOP_IF_LONG_OR_DOUBLE = 0x800000;
+    static final int         TOP_IF_LONG_OR_DOUBLE = 0x800000;
 
     /**
      * Mask to get the value of a frame type.
      */
-    static final int VALUE = 0x7FFFFF;
+    static final int         VALUE                 = 0x7FFFFF;
 
     /**
      * Mask to get the kind of base types.
      */
-    static final int BASE_KIND = 0xFF00000;
+    static final int         BASE_KIND             = 0xFF00000;
 
     /**
      * Mask to get the value of base types.
      */
-    static final int BASE_VALUE = 0xFFFFF;
+    static final int         BASE_VALUE            = 0xFFFFF;
 
     /**
      * Kind of the types that are not relative to an input stack map frame.
      */
-    static final int BASE = 0x1000000;
+    static final int         BASE                  = 0x1000000;
 
     /**
      * Base kind of the base reference types. The BASE_VALUE of such types is an
      * index into the type table.
      */
-    static final int OBJECT = BASE | 0x700000;
+    static final int         OBJECT                = BASE | 0x700000;
 
     /**
      * Base kind of the uninitialized base types. The BASE_VALUE of such types
      * in an index into the type table (the Item at that index contains both an
      * instruction offset and an internal class name).
      */
-    static final int UNINITIALIZED = BASE | 0x800000;
+    static final int         UNINITIALIZED         = BASE | 0x800000;
 
     /**
      * Kind of the types that are relative to the local variable types of an
      * input stack map frame. The value of such types is a local variable index.
      */
-    private static final int LOCAL = 0x2000000;
+    private static final int LOCAL                 = 0x2000000;
 
     /**
      * Kind of the the types that are relative to the stack of an input stack
      * map frame. The value of such types is a position relatively to the top of
      * this stack.
      */
-    private static final int STACK = 0x3000000;
+    private static final int STACK                 = 0x3000000;
 
     /**
      * The TOP type. This is a BASE type.
      */
-    static final int TOP = BASE | 0;
+    static final int         TOP                   = BASE | 0;
 
     /**
      * The BOOLEAN type. This is a BASE type mainly used for array types.
      */
-    static final int BOOLEAN = BASE | 9;
+    static final int         BOOLEAN               = BASE | 9;
 
     /**
      * The BYTE type. This is a BASE type mainly used for array types.
      */
-    static final int BYTE = BASE | 10;
+    static final int         BYTE                  = BASE | 10;
 
     /**
      * The CHAR type. This is a BASE type mainly used for array types.
      */
-    static final int CHAR = BASE | 11;
+    static final int         CHAR                  = BASE | 11;
 
     /**
      * The SHORT type. This is a BASE type mainly used for array types.
      */
-    static final int SHORT = BASE | 12;
+    static final int         SHORT                 = BASE | 12;
 
     /**
      * The INTEGER type. This is a BASE type.
      */
-    static final int INTEGER = BASE | 1;
+    static final int         INTEGER               = BASE | 1;
 
     /**
      * The FLOAT type. This is a BASE type.
      */
-    static final int FLOAT = BASE | 2;
+    static final int         FLOAT                 = BASE | 2;
 
     /**
      * The DOUBLE type. This is a BASE type.
      */
-    static final int DOUBLE = BASE | 3;
+    static final int         DOUBLE                = BASE | 3;
 
     /**
      * The LONG type. This is a BASE type.
      */
-    static final int LONG = BASE | 4;
+    static final int         LONG                  = BASE | 4;
 
     /**
      * The NULL type. This is a BASE type.
      */
-    static final int NULL = BASE | 5;
+    static final int         NULL                  = BASE | 5;
 
     /**
      * The UNINITIALIZED_THIS type. This is a BASE type.
      */
-    static final int UNINITIALIZED_THIS = BASE | 6;
+    static final int         UNINITIALIZED_THIS    = BASE | 6;
 
     /**
      * The stack size variation corresponding to each JVM instruction. This
      * stack variation is equal to the size of the values produced by an
      * instruction, minus the size of the values consumed by this instruction.
      */
-    static final int[] SIZE;
+    static final int[]       SIZE;
 
     /**
      * Computes the stack size variation corresponding to each JVM instruction.
@@ -239,8 +232,7 @@ final class Frame {
         int[] b = new int[202];
         String s = "EFFFFFFFFGGFFFGGFFFEEFGFGFEEEEEEEEEEEEEEEEEEEEDEDEDDDDD"
                 + "CDCDEEEEEEEEEEEEEEEEEEEEBABABBBBDCFFFGGGEDCDCDCDCDCDCDCDCD"
-                + "CDCEEEEDDDDDDDCDCDCEFEFDDEEFFDEDEEEBDDBBDDDDDDCCCCCCCCEFED"
-                + "DDCDCDEEEEEEEEEEFEEEEEEDDEEDDEE";
+                + "CDCEEEEDDDDDDDCDCDCEFEFDDEEFFDEDEEEBDDBBDDDDDDCCCCCCCCEFED" + "DDCDCDEEEEEEEEEEFEEEEEEDDEEDDEE";
         for (i = 0; i < b.length; ++i) {
             b[i] = s.charAt(i) - 'E';
         }
@@ -464,17 +456,17 @@ final class Frame {
      * The label (i.e. basic block) to which these input and output stack map
      * frames correspond.
      */
-    Label owner;
+    Label         owner;
 
     /**
      * The input stack map frame locals.
      */
-    int[] inputLocals;
+    int[]         inputLocals;
 
     /**
      * The input stack map frame stack.
      */
-    int[] inputStack;
+    int[]         inputStack;
 
     /**
      * The output stack map frame locals.
@@ -488,22 +480,20 @@ final class Frame {
 
     /**
      * Relative size of the output stack. The exact semantics of this field
-     * depends on the algorithm that is used.
-     * 
-     * When only the maximum stack size is computed, this field is the size of
-     * the output stack relatively to the top of the input stack.
-     * 
-     * When the stack map frames are completely computed, this field is the
-     * actual number of types in {@link #outputStack}.
+     * depends on the algorithm that is used. When only the maximum stack size
+     * is computed, this field is the size of the output stack relatively to the
+     * top of the input stack. When the stack map frames are completely
+     * computed, this field is the actual number of types in
+     * {@link #outputStack}.
      */
-    private int outputStackTop;
+    private int   outputStackTop;
 
     /**
      * Number of types that are initialized in the basic block.
      * 
      * @see #initializations
      */
-    private int initializationCount;
+    private int   initializationCount;
 
     /**
      * The types that are initialized in the basic block. A constructor
@@ -593,8 +583,8 @@ final class Frame {
      * 
      * @param cw the ClassWriter to which this label belongs.
      * @param desc the descriptor of the type to be pushed. Can also be a method
-     *        descriptor (in this case this method pushes its return type onto
-     *        the output frame stack).
+     *            descriptor (in this case this method pushes its return type
+     *            onto the output frame stack).
      */
     private void push(final ClassWriter cw, final String desc) {
         int type = type(cw, desc);
@@ -635,7 +625,7 @@ final class Frame {
                 // stores the internal name, not the descriptor!
                 t = desc.substring(index + 1, desc.length() - 1);
                 return OBJECT | cw.addType(t);
-                // case '[':
+            // case '[':
             default:
                 // extracts the dimensions and the element type
                 int data;
@@ -713,8 +703,8 @@ final class Frame {
      * Pops a type from the output frame stack.
      * 
      * @param desc the descriptor of the type to be popped. Can also be a method
-     *        descriptor (in this case this method pops the types corresponding
-     *        to the method arguments).
+     *            descriptor (in this case this method pops the types
+     *            corresponding to the method arguments).
      */
     private void pop(final String desc) {
         char c = desc.charAt(0);
@@ -792,12 +782,7 @@ final class Frame {
      * @param args the formal parameter types of this method.
      * @param maxLocals the maximum number of local variables of this method.
      */
-    void initInputFrame(
-        final ClassWriter cw,
-        final int access,
-        final Type[] args,
-        final int maxLocals)
-    {
+    void initInputFrame(final ClassWriter cw, final int access, final Type[] args, final int maxLocals) {
         inputLocals = new int[maxLocals];
         inputStack = new int[0];
         int i = 0;
@@ -828,12 +813,7 @@ final class Frame {
      * @param cw the class writer to which this label belongs.
      * @param item the operand of the instructions, if any.
      */
-    void execute(
-        final int opcode,
-        final int arg,
-        final ClassWriter cw,
-        final Item item)
-    {
+    void execute(final int opcode, final int arg, final ClassWriter cw, final Item item) {
         int t1, t2, t3, t4;
         switch (opcode) {
             case Opcodes.NOP:
@@ -1178,9 +1158,7 @@ final class Frame {
                 pop(item.strVal3);
                 if (opcode != Opcodes.INVOKESTATIC) {
                     t1 = pop();
-                    if (opcode == Opcodes.INVOKESPECIAL
-                            && item.strVal2.charAt(0) == '<')
-                    {
+                    if (opcode == Opcodes.INVOKESPECIAL && item.strVal2.charAt(0) == '<') {
                         init(t1);
                     }
                 }
@@ -1257,7 +1235,7 @@ final class Frame {
      * @param cw the ClassWriter to which this label belongs.
      * @param frame the basic block whose input frame must be updated.
      * @param edge the kind of the {@link Edge} between this label and 'label'.
-     *        See {@link Edge#info}.
+     *            See {@link Edge#info}.
      * @return <tt>true</tt> if the input frame of the given label has been
      *         changed by this operation.
      */
@@ -1364,12 +1342,7 @@ final class Frame {
      * @return <tt>true</tt> if the type array has been modified by this
      *         operation.
      */
-    private static boolean merge(
-        final ClassWriter cw,
-        int t,
-        final int[] types,
-        final int index)
-    {
+    private static boolean merge(final ClassWriter cw, int t, final int[] types, final int index) {
         int u = types[index];
         if (u == t) {
             // if the types are equal, merge(u,t)=u, so there is no change
@@ -1397,8 +1370,7 @@ final class Frame {
                     // if t is also a reference type, and if u and t have the
                     // same dimension merge(u,t) = dim(t) | common parent of the
                     // element types of u and t
-                    v = (t & DIM) | OBJECT
-                            | cw.getMergedType(t & BASE_VALUE, u & BASE_VALUE);
+                    v = (t & DIM) | OBJECT | cw.getMergedType(t & BASE_VALUE, u & BASE_VALUE);
                 } else {
                     // if u and t are array types, but not with the same element
                     // type, merge(u,t)=java/lang/Object

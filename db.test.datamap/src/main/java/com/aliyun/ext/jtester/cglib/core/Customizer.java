@@ -18,5 +18,5 @@ package com.aliyun.ext.jtester.cglib.core;
 import com.aliyun.ext.jtester.asm.Type;
 
 public interface Customizer {
-	void customize(CodeEmitter e, Type type);
+    void customize(CodeEmitter e, Type type);
 }

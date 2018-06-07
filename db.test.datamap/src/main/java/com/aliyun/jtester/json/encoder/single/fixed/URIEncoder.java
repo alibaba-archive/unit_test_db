@@ -6,17 +6,17 @@ import java.net.URI;
 import com.aliyun.jtester.json.encoder.single.FixedTypeEncoder;
 
 public class URIEncoder extends FixedTypeEncoder<URI> {
-	public static URIEncoder instance = new URIEncoder();
+    public static URIEncoder instance = new URIEncoder();
 
-	private URIEncoder() {
-		super(URI.class);
-	}
+    private URIEncoder() {
+        super(URI.class);
+    }
 
-	@Override
-	protected void encodeSingleValue(URI target, Writer writer) throws Exception {
-		String uri = target.toString();
-		writer.append(quote_Char);
-		StringEncoder.writeEscapeString(uri, writer);
-		writer.append(quote_Char);
-	}
+    @Override
+    protected void encodeSingleValue(URI target, Writer writer) throws Exception {
+        String uri = target.toString();
+        writer.append(quote_Char);
+        StringEncoder.writeEscapeString(uri, writer);
+        writer.append(quote_Char);
+    }
 }

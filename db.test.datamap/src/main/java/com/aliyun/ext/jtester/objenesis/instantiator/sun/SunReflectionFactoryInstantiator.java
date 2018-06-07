@@ -19,6 +19,7 @@ import java.lang.reflect.Constructor;
 
 import com.aliyun.ext.jtester.objenesis.ObjenesisException;
 import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
+
 import sun.reflect.ReflectionFactory;
 
 /**
@@ -34,27 +35,27 @@ import sun.reflect.ReflectionFactory;
 @SuppressWarnings({ "rawtypes", "restriction" })
 public class SunReflectionFactoryInstantiator implements ObjectInstantiator {
 
-	private final Constructor mungedConstructor;
+    private final Constructor mungedConstructor;
 
-	public SunReflectionFactoryInstantiator(Class type) {
+    public SunReflectionFactoryInstantiator(Class type) {
 
-		ReflectionFactory reflectionFactory = ReflectionFactory.getReflectionFactory();
-		Constructor javaLangObjectConstructor;
+        ReflectionFactory reflectionFactory = ReflectionFactory.getReflectionFactory();
+        Constructor javaLangObjectConstructor;
 
-		try {
-			javaLangObjectConstructor = Object.class.getConstructor((Class[]) null);
-		} catch (NoSuchMethodException e) {
-			throw new Error("Cannot find constructor for java.lang.Object!");
-		}
-		mungedConstructor = reflectionFactory.newConstructorForSerialization(type, javaLangObjectConstructor);
-		mungedConstructor.setAccessible(true);
-	}
+        try {
+            javaLangObjectConstructor = Object.class.getConstructor((Class[]) null);
+        } catch (NoSuchMethodException e) {
+            throw new Error("Cannot find constructor for java.lang.Object!");
+        }
+        mungedConstructor = reflectionFactory.newConstructorForSerialization(type, javaLangObjectConstructor);
+        mungedConstructor.setAccessible(true);
+    }
 
-	public Object newInstance() {
-		try {
-			return mungedConstructor.newInstance((Object[]) null);
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return mungedConstructor.newInstance((Object[]) null);
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
+    }
 }

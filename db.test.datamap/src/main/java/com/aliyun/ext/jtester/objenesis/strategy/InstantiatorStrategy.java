@@ -25,12 +25,11 @@ import com.aliyun.ext.jtester.objenesis.instantiator.ObjectInstantiator;
 @SuppressWarnings({ "rawtypes" })
 public interface InstantiatorStrategy {
 
-	/**
-	 * Create a dedicated instantiator for the given class
-	 * 
-	 * @param type
-	 *            Class that will be instantiate
-	 * @return Dedicated instantiator
-	 */
-	ObjectInstantiator newInstantiatorOf(Class type);
+    /**
+     * Create a dedicated instantiator for the given class
+     * 
+     * @param type Class that will be instantiate
+     * @return Dedicated instantiator
+     */
+    ObjectInstantiator newInstantiatorOf(Class type);
 }

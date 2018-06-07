@@ -45,43 +45,43 @@ final class AnnotationWriter implements AnnotationVisitor {
     /**
      * The number of values in this annotation.
      */
-    private int size;
+    private int               size;
 
     /**
-     * <tt>true<tt> if values are named, <tt>false</tt> otherwise. Annotation 
+     * <tt>true<tt> if values are named, <tt>false</tt> otherwise. Annotation
      * writers used for annotation default and annotation arrays use unnamed
      * values.
      */
-    private final boolean named;
+    private final boolean     named;
 
     /**
      * The annotation values in bytecode form. This byte vector only contains
      * the values themselves, i.e. the number of values must be stored as a
      * unsigned short just before these bytes.
      */
-    private final ByteVector bv;
+    private final ByteVector  bv;
 
     /**
      * The byte vector to be used to store the number of values of this
      * annotation. See {@link #bv}.
      */
-    private final ByteVector parent;
+    private final ByteVector  parent;
 
     /**
      * Where the number of values of this annotation must be stored in
      * {@link #parent}.
      */
-    private final int offset;
+    private final int         offset;
 
     /**
      * Next annotation writer. This field is used to store annotation lists.
      */
-    AnnotationWriter next;
+    AnnotationWriter          next;
 
     /**
      * Previous annotation writer. This field is used to store annotation lists.
      */
-    AnnotationWriter prev;
+    AnnotationWriter          prev;
 
     // ------------------------------------------------------------------------
     // Constructor
@@ -94,16 +94,11 @@ final class AnnotationWriter implements AnnotationVisitor {
      * @param named <tt>true<tt> if values are named, <tt>false</tt> otherwise.
      * @param bv where the annotation values must be stored.
      * @param parent where the number of annotation values must be stored.
-     * @param offset where in <tt>parent</tt> the number of annotation values must 
-     *      be stored.
+     * @param offset where in <tt>parent</tt> the number of annotation values
+     *            must be stored.
      */
-    AnnotationWriter(
-        final ClassWriter cw,
-        final boolean named,
-        final ByteVector bv,
-        final ByteVector parent,
-        final int offset)
-    {
+    AnnotationWriter(final ClassWriter cw, final boolean named, final ByteVector bv, final ByteVector parent,
+                     final int offset) {
         this.cw = cw;
         this.named = named;
         this.bv = bv;
@@ -187,11 +182,7 @@ final class AnnotationWriter implements AnnotationVisitor {
         }
     }
 
-    public void visitEnum(
-        final String name,
-        final String desc,
-        final String value)
-    {
+    public void visitEnum(final String name, final String desc, final String value) {
         ++size;
         if (named) {
             bv.putShort(cw.newUTF8(name));
@@ -199,10 +190,7 @@ final class AnnotationWriter implements AnnotationVisitor {
         bv.put12('e', cw.newUTF8(desc)).putShort(cw.newUTF8(value));
     }
 
-    public AnnotationVisitor visitAnnotation(
-        final String name,
-        final String desc)
-    {
+    public AnnotationVisitor visitAnnotation(final String name, final String desc) {
         ++size;
         if (named) {
             bv.putShort(cw.newUTF8(name));
@@ -284,11 +272,7 @@ final class AnnotationWriter implements AnnotationVisitor {
      * @param off index of the first annotation to be written.
      * @param out where the annotations must be put.
      */
-    static void put(
-        final AnnotationWriter[] panns,
-        final int off,
-        final ByteVector out)
-    {
+    static void put(final AnnotationWriter[] panns, final int off, final ByteVector out) {
         int size = 1 + 2 * (panns.length - off);
         for (int i = off; i < panns.length; ++i) {
             size += panns[i] == null ? 0 : panns[i].getSize();

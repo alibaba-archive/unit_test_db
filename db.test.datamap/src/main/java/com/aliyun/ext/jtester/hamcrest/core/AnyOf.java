@@ -2,8 +2,8 @@ package com.aliyun.ext.jtester.hamcrest.core;
 
 import java.util.Arrays;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
 import com.aliyun.ext.jtester.hamcrest.Matcher;
 
 /**
@@ -14,39 +14,39 @@ import com.aliyun.ext.jtester.hamcrest.Matcher;
 @SuppressWarnings({ "rawtypes" })
 public class AnyOf<T> extends ShortcutCombination<T> {
 
-	public AnyOf(Iterable<Matcher> matchers) {
-		super(matchers);
-	}
+    public AnyOf(Iterable<Matcher> matchers) {
+        super(matchers);
+    }
 
-	@Override
-	public boolean matches(Object o) {
-		return matches(o, true);
-	}
+    @Override
+    public boolean matches(Object o) {
+        return matches(o, true);
+    }
 
-	@Override
-	public void describeTo(Description description) {
-		describeTo(description, "or");
-	}
+    @Override
+    public void describeTo(Description description) {
+        describeTo(description, "or");
+    }
 
-	/**
-	 * Evaluates to true if ANY of the passed in matchers evaluate to true.
-	 */
-	@Factory
-	public static <T> AnyOf<T> anyOf(Iterable<Matcher> matchers) {
-		return new AnyOf<T>(matchers);
-	}
+    /**
+     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     */
+    @Factory
+    public static <T> AnyOf<T> anyOf(Iterable<Matcher> matchers) {
+        return new AnyOf<T>(matchers);
+    }
 
-	/**
-	 * Evaluates to true if ANY of the passed in matchers evaluate to true.
-	 */
-	@Factory
-	public static <T> AnyOf<T> anyOf(Matcher... matchers) {
-		return anyOf(Arrays.asList(matchers));
-	}
+    /**
+     * Evaluates to true if ANY of the passed in matchers evaluate to true.
+     */
+    @Factory
+    public static <T> AnyOf<T> anyOf(Matcher... matchers) {
+        return anyOf(Arrays.asList(matchers));
+    }
 
-	@Factory
-	public static <T> Matcher notAny(Iterable<Matcher> matchers) {
-		Matcher matcher = IsNot.not(AnyOf.anyOf(matchers));
-		return matcher;
-	}
+    @Factory
+    public static <T> Matcher notAny(Iterable<Matcher> matchers) {
+        Matcher matcher = IsNot.not(AnyOf.anyOf(matchers));
+        return matcher;
+    }
 }

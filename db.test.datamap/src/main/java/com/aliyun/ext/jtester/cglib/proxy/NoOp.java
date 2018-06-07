@@ -20,9 +20,9 @@ package com.aliyun.ext.jtester.cglib.proxy;
  * default (super) implementation in the base class.
  */
 public interface NoOp extends Callback {
-	/**
-	 * A thread-safe singleton instance of the <code>NoOp</code> callback.
-	 */
-	public static final NoOp INSTANCE = new NoOp() {
-	};
+    /**
+     * A thread-safe singleton instance of the <code>NoOp</code> callback.
+     */
+    public static final NoOp INSTANCE = new NoOp() {
+    };
 }

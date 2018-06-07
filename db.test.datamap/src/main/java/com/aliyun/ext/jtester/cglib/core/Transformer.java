@@ -16,5 +16,5 @@
 package com.aliyun.ext.jtester.cglib.core;
 
 public interface Transformer {
-	Object transform(Object value);
+    Object transform(Object value);
 }

@@ -4,9 +4,6 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.aliyun.jtester.json.helper.JSONMap;
-import com.aliyun.jtester.json.helper.JSONObject;
-import com.aliyun.jtester.json.helper.JSONSingle;
 import com.aliyun.jtester.json.JSONException;
 import com.aliyun.jtester.json.helper.JSONMap;
 import com.aliyun.jtester.json.helper.JSONObject;
@@ -26,8 +23,8 @@ public abstract class MapPoJoBaseDecoder<E> extends BaseDecoder {
             return (T) value;
         }
         if (!(json instanceof JSONMap)) {
-            throw new JSONException("illegal type for JavaBeanDecoder. the json\n" + json.toString()
-                    + "\n isn't a JSONMap");
+            throw new JSONException(
+                    "illegal type for JavaBeanDecoder. the json\n" + json.toString() + "\n isn't a JSONMap");
         }
         JSONMap map = (JSONMap) json;
         String referenceID = map.getReferFromJSONProp();
@@ -50,9 +47,9 @@ public abstract class MapPoJoBaseDecoder<E> extends BaseDecoder {
     /**
      * 根据JSONMap在#class属性或者 Decoder传进来的class创建对象实例<br>
      * 如果实例被标记了ReferenceID，往references中追加一条记录
-     * 
+     *
+     * @param toType
      * @param map
-     * @param references
      * @return
      */
     protected Class getTargetType(Type toType, final JSONMap map) {
@@ -67,7 +64,6 @@ public abstract class MapPoJoBaseDecoder<E> extends BaseDecoder {
      * @param target
      * @param jsonMap
      * @param references
-     * @return
      */
     protected abstract void parseFromJSONMap(E target, JSONMap jsonMap, Map<String, Object> references);
 }

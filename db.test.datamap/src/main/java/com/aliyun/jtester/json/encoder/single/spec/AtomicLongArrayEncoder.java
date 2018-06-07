@@ -8,21 +8,21 @@ import com.aliyun.jtester.json.encoder.single.SpecTypeEncoder;
 @SuppressWarnings("rawtypes")
 public class AtomicLongArrayEncoder<T extends AtomicLongArray> extends SpecTypeEncoder<T> {
 
-	public static AtomicLongArrayEncoder instance = new AtomicLongArrayEncoder();
+    public static AtomicLongArrayEncoder instance = new AtomicLongArrayEncoder();
 
-	protected AtomicLongArrayEncoder() {
-		super(AtomicLongArray.class);
-	}
+    protected AtomicLongArrayEncoder() {
+        super(AtomicLongArray.class);
+    }
 
-	@Override
-	protected void encodeSingleValue(T target, Writer writer) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    protected void encodeSingleValue(T target, Writer writer) throws Exception {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	protected void encodeOtherProperty(T target, Writer writer) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    protected void encodeOtherProperty(T target, Writer writer) throws Exception {
+        // TODO Auto-generated method stub
 
-	}
+    }
 }

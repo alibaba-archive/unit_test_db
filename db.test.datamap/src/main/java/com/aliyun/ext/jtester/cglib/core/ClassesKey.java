@@ -16,16 +16,16 @@
 package com.aliyun.ext.jtester.cglib.core;
 
 public class ClassesKey {
-	private static final Key FACTORY = (Key) KeyFactory.create(Key.class, KeyFactory.OBJECT_BY_CLASS);
+    private static final Key FACTORY = (Key) KeyFactory.create(Key.class, KeyFactory.OBJECT_BY_CLASS);
 
-	interface Key {
-		Object newInstance(Object[] array);
-	}
+    interface Key {
+        Object newInstance(Object[] array);
+    }
 
-	private ClassesKey() {
-	}
+    private ClassesKey() {
+    }
 
-	public static Object create(Object[] array) {
-		return FACTORY.newInstance(array);
-	}
+    public static Object create(Object[] array) {
+        return FACTORY.newInstance(array);
+    }
 }

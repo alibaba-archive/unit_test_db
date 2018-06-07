@@ -1,29 +1,23 @@
 package com.aliyun.jtester.hamcrest.matcher.property.comparator;
 
-import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
-import com.aliyun.jtester.hamcrest.matcher.property.difference.MapDifference;
-import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparatorFactory;
-import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
-import com.aliyun.jtester.hamcrest.matcher.property.difference.MapDifference;
-import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparator;
-
-import static com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
-
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
+import com.aliyun.jtester.hamcrest.matcher.property.difference.MapDifference;
+import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparator;
+import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparatorFactory;
 
 /**
  * Comparator for maps. This will compare all values with corresponding keys.
  */
 public class MapComparator implements Comparator {
 
-
     /**
      * Returns true when both values are not null and instance of Map
      *
-     * @param left  The left object
+     * @param left The left object
      * @param right The right object
      * @return True for maps
      */
@@ -37,18 +31,20 @@ public class MapComparator implements Comparator {
         return false;
     }
 
-
     /**
-     * Compares the given maps by looping over the keys and comparing their values.
-     * The key values are compared using a strict reflection comparison.
+     * Compares the given maps by looping over the keys and comparing their
+     * values. The key values are compared using a strict reflection comparison.
      *
-     * @param left                 The left map, not null
-     * @param right                The right map, not null
-     * @param onlyFirstDifference  True if only the first difference should be returned
-     * @param reflectionComparator The root comparator for inner comparisons, not null
+     * @param left The left map, not null
+     * @param right The right map, not null
+     * @param onlyFirstDifference True if only the first difference should be
+     *            returned
+     * @param reflectionComparator The root comparator for inner comparisons,
+     *            not null
      * @return A MapDifference or null if both maps are equal
      */
-    public Difference compare(Object left, Object right, boolean onlyFirstDifference, ReflectionComparator reflectionComparator) {
+    public Difference compare(Object left, Object right, boolean onlyFirstDifference,
+                              ReflectionComparator reflectionComparator) {
         Map<?, ?> leftMap = (Map<?, ?>) left;
         Map<?, ?> rightMap = (Map<?, ?>) right;
 
@@ -76,7 +72,8 @@ public class MapComparator implements Comparator {
                     rightIterator.remove();
 
                     // compare values
-                    Difference elementDifference = reflectionComparator.getDifference(leftValue, rightValue, onlyFirstDifference);
+                    Difference elementDifference = reflectionComparator.getDifference(leftValue, rightValue,
+                            onlyFirstDifference);
                     if (elementDifference != null) {
                         difference.addValueDifference(leftKey, elementDifference);
                         if (onlyFirstDifference) {
@@ -96,7 +93,8 @@ public class MapComparator implements Comparator {
             difference.addRightMissingKey(rightKey);
         }
 
-        if (difference.getValueDifferences().isEmpty() && difference.getLeftMissingKeys().isEmpty() && difference.getRightMissingKeys().isEmpty()) {
+        if (difference.getValueDifferences().isEmpty() && difference.getLeftMissingKeys().isEmpty()
+                && difference.getRightMissingKeys().isEmpty()) {
             return null;
         }
         return difference;

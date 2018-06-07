@@ -42,55 +42,55 @@ class MethodWriter implements MethodVisitor {
     /**
      * Pseudo access flag used to denote constructors.
      */
-    static final int ACC_CONSTRUCTOR = 262144;
+    static final int           ACC_CONSTRUCTOR                         = 262144;
 
     /**
      * Frame has exactly the same locals as the previous stack map frame and
      * number of stack items is zero.
      */
-    static final int SAME_FRAME = 0; // to 63 (0-3f)
+    static final int           SAME_FRAME                              = 0;               // to 63 (0-3f)
 
     /**
      * Frame has exactly the same locals as the previous stack map frame and
      * number of stack items is 1
      */
-    static final int SAME_LOCALS_1_STACK_ITEM_FRAME = 64; // to 127 (40-7f)
+    static final int           SAME_LOCALS_1_STACK_ITEM_FRAME          = 64;              // to 127 (40-7f)
 
     /**
      * Reserved for future use
      */
-    static final int RESERVED = 128;
+    static final int           RESERVED                                = 128;
 
     /**
      * Frame has exactly the same locals as the previous stack map frame and
      * number of stack items is 1. Offset is bigger then 63;
      */
-    static final int SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247; // f7
+    static final int           SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED = 247;             // f7
 
     /**
      * Frame where current locals are the same as the locals in the previous
      * frame, except that the k last locals are absent. The value of k is given
      * by the formula 251-frame_type.
      */
-    static final int CHOP_FRAME = 248; // to 250 (f8-fA)
+    static final int           CHOP_FRAME                              = 248;             // to 250 (f8-fA)
 
     /**
      * Frame has exactly the same locals as the previous stack map frame and
      * number of stack items is zero. Offset is bigger then 63;
      */
-    static final int SAME_FRAME_EXTENDED = 251; // fb
+    static final int           SAME_FRAME_EXTENDED                     = 251;             // fb
 
     /**
      * Frame where current locals are the same as the locals in the previous
      * frame, except that k additional locals are defined. The value of k is
      * given by the formula frame_type-251.
      */
-    static final int APPEND_FRAME = 252; // to 254 // fc-fe
+    static final int           APPEND_FRAME                            = 252;             // to 254 // fc-fe
 
     /**
      * Full frame
      */
-    static final int FULL_FRAME = 255; // ff
+    static final int           FULL_FRAME                              = 255;             // ff
 
     /**
      * Indicates that the stack map frames must be recomputed from scratch. In
@@ -99,7 +99,7 @@ class MethodWriter implements MethodVisitor {
      * 
      * @see #compute
      */
-    private static final int FRAMES = 0;
+    private static final int   FRAMES                                  = 0;
 
     /**
      * Indicates that the maximum stack size and number of local variables must
@@ -107,51 +107,51 @@ class MethodWriter implements MethodVisitor {
      * 
      * @see #compute
      */
-    private static final int MAXS = 1;
+    private static final int   MAXS                                    = 1;
 
     /**
      * Indicates that nothing must be automatically computed.
      * 
      * @see #compute
      */
-    private static final int NOTHING = 2;
+    private static final int   NOTHING                                 = 2;
 
     /**
      * Next method writer (see {@link ClassWriter#firstMethod firstMethod}).
      */
-    MethodWriter next;
+    MethodWriter               next;
 
     /**
      * The class writer to which this method must be added.
      */
-    final ClassWriter cw;
+    final ClassWriter          cw;
 
     /**
      * Access flags of this method.
      */
-    private int access;
+    private int                access;
 
     /**
      * The index of the constant pool item that contains the name of this
      * method.
      */
-    private final int name;
+    private final int          name;
 
     /**
      * The index of the constant pool item that contains the descriptor of this
      * method.
      */
-    private final int desc;
+    private final int          desc;
 
     /**
      * The descriptor of this method.
      */
-    private final String descriptor;
+    private final String       descriptor;
 
     /**
      * The signature of this method.
      */
-    String signature;
+    String                     signature;
 
     /**
      * If not zero, indicates that the code of this method must be copied from
@@ -159,7 +159,7 @@ class MethodWriter implements MethodVisitor {
      * precisely, this field gives the index of the first byte to copied from
      * <code>cw.cr.b</code>.
      */
-    int classReaderOffset;
+    int                        classReaderOffset;
 
     /**
      * If not zero, indicates that the code of this method must be copied from
@@ -167,34 +167,34 @@ class MethodWriter implements MethodVisitor {
      * precisely, this field gives the number of bytes to copied from
      * <code>cw.cr.b</code>.
      */
-    int classReaderLength;
+    int                        classReaderLength;
 
     /**
      * Number of exceptions that can be thrown by this method.
      */
-    int exceptionCount;
+    int                        exceptionCount;
 
     /**
      * The exceptions that can be thrown by this method. More precisely, this
      * array contains the indexes of the constant pool items that contain the
      * internal names of these exception classes.
      */
-    int[] exceptions;
+    int[]                      exceptions;
 
     /**
      * The annotation default attribute of this method. May be <tt>null</tt>.
      */
-    private ByteVector annd;
+    private ByteVector         annd;
 
     /**
      * The runtime visible annotations of this method. May be <tt>null</tt>.
      */
-    private AnnotationWriter anns;
+    private AnnotationWriter   anns;
 
     /**
      * The runtime invisible annotations of this method. May be <tt>null</tt>.
      */
-    private AnnotationWriter ianns;
+    private AnnotationWriter   ianns;
 
     /**
      * The runtime visible parameter annotations of this method. May be
@@ -211,55 +211,55 @@ class MethodWriter implements MethodVisitor {
     /**
      * The number of synthetic parameters of this method.
      */
-    private int synthetics;
+    private int                synthetics;
 
     /**
      * The non standard attributes of the method.
      */
-    private Attribute attrs;
+    private Attribute          attrs;
 
     /**
      * The bytecode of this method.
      */
-    private ByteVector code = new ByteVector();
+    private ByteVector         code                                    = new ByteVector();
 
     /**
      * Maximum stack size of this method.
      */
-    private int maxStack;
+    private int                maxStack;
 
     /**
      * Maximum number of local variables for this method.
      */
-    private int maxLocals;
+    private int                maxLocals;
 
     /**
      * Number of stack map frames in the StackMapTable attribute.
      */
-    private int frameCount;
+    private int                frameCount;
 
     /**
      * The StackMapTable attribute.
      */
-    private ByteVector stackMap;
+    private ByteVector         stackMap;
 
     /**
      * The offset of the last frame that was written in the StackMapTable
      * attribute.
      */
-    private int previousFrameOffset;
+    private int                previousFrameOffset;
 
     /**
      * The last frame that was written in the StackMapTable attribute.
      * 
      * @see #frame
      */
-    private int[] previousFrame;
+    private int[]              previousFrame;
 
     /**
      * Index of the next element to be added in {@link #frame}.
      */
-    private int frameIndex;
+    private int                frameIndex;
 
     /**
      * The current stack map frame. The first element contains the offset of the
@@ -270,67 +270,67 @@ class MethodWriter implements MethodVisitor {
      * nStack, frame[3] = nLocal. All types are encoded as integers, with the
      * same format as the one used in {@link Label}, but limited to BASE types.
      */
-    private int[] frame;
+    private int[]              frame;
 
     /**
      * Number of elements in the exception handler list.
      */
-    private int handlerCount;
+    private int                handlerCount;
 
     /**
      * The first element in the exception handler list.
      */
-    private Handler firstHandler;
+    private Handler            firstHandler;
 
     /**
      * The last element in the exception handler list.
      */
-    private Handler lastHandler;
+    private Handler            lastHandler;
 
     /**
      * Number of entries in the LocalVariableTable attribute.
      */
-    private int localVarCount;
+    private int                localVarCount;
 
     /**
      * The LocalVariableTable attribute.
      */
-    private ByteVector localVar;
+    private ByteVector         localVar;
 
     /**
      * Number of entries in the LocalVariableTypeTable attribute.
      */
-    private int localVarTypeCount;
+    private int                localVarTypeCount;
 
     /**
      * The LocalVariableTypeTable attribute.
      */
-    private ByteVector localVarType;
+    private ByteVector         localVarType;
 
     /**
      * Number of entries in the LineNumberTable attribute.
      */
-    private int lineNumberCount;
+    private int                lineNumberCount;
 
     /**
      * The LineNumberTable attribute.
      */
-    private ByteVector lineNumber;
+    private ByteVector         lineNumber;
 
     /**
      * The non standard attributes of the method's code.
      */
-    private Attribute cattrs;
+    private Attribute          cattrs;
 
     /**
      * Indicates if some jump instructions are too small and need to be resized.
      */
-    private boolean resize;
+    private boolean            resize;
 
     /**
      * The number of subroutines in this method.
      */
-    private int subroutines;
+    private int                subroutines;
 
     // ------------------------------------------------------------------------
 
@@ -351,25 +351,26 @@ class MethodWriter implements MethodVisitor {
      * @see #MAXS
      * @see #NOTHING
      */
-    private final int compute;
+    private final int          compute;
 
     /**
      * A list of labels. This list is the list of basic blocks in the method,
      * i.e. a list of Label objects linked to each other by their
      * {@link Label#successor} field, in the order they are visited by
-     * {@link MethodVisitor#visitLabel}, and starting with the first basic block.
+     * {@link MethodVisitor#visitLabel}, and starting with the first basic
+     * block.
      */
-    private Label labels;
+    private Label              labels;
 
     /**
      * The previous basic block.
      */
-    private Label previousBlock;
+    private Label              previousBlock;
 
     /**
      * The current basic block.
      */
-    private Label currentBlock;
+    private Label              currentBlock;
 
     /**
      * The (relative) stack size after the last visited instruction. This size
@@ -378,7 +379,7 @@ class MethodWriter implements MethodVisitor {
      * {@link Label#inputStackTop beginStackSize} of the current basic block
      * plus <tt>stackSize</tt>.
      */
-    private int stackSize;
+    private int                stackSize;
 
     /**
      * The (relative) maximum stack size after the last visited instruction.
@@ -387,7 +388,7 @@ class MethodWriter implements MethodVisitor {
      * to the {@link Label#inputStackTop beginStackSize} of the current basic
      * block plus <tt>stackSize</tt>.
      */
-    private int maxStackSize;
+    private int                maxStackSize;
 
     // ------------------------------------------------------------------------
     // Constructor
@@ -402,22 +403,14 @@ class MethodWriter implements MethodVisitor {
      * @param desc the method's descriptor (see {@link Type}).
      * @param signature the method's signature. May be <tt>null</tt>.
      * @param exceptions the internal names of the method's exceptions. May be
-     *        <tt>null</tt>.
-     * @param computeMaxs <tt>true</tt> if the maximum stack size and number
-     *        of local variables must be automatically computed.
+     *            <tt>null</tt>.
+     * @param computeMaxs <tt>true</tt> if the maximum stack size and number of
+     *            local variables must be automatically computed.
      * @param computeFrames <tt>true</tt> if the stack map tables must be
-     *        recomputed from scratch.
+     *            recomputed from scratch.
      */
-    MethodWriter(
-        final ClassWriter cw,
-        final int access,
-        final String name,
-        final String desc,
-        final String signature,
-        final String[] exceptions,
-        final boolean computeMaxs,
-        final boolean computeFrames)
-    {
+    MethodWriter(final ClassWriter cw, final int access, final String name, final String desc, final String signature,
+                 final String[] exceptions, final boolean computeMaxs, final boolean computeFrames) {
         if (cw.firstMethod == null) {
             cw.firstMethod = this;
         } else {
@@ -469,10 +462,7 @@ class MethodWriter implements MethodVisitor {
         return new AnnotationWriter(cw, false, annd, null, 0);
     }
 
-    public AnnotationVisitor visitAnnotation(
-        final String desc,
-        final boolean visible)
-    {
+    public AnnotationVisitor visitAnnotation(final String desc, final boolean visible) {
         if (!ClassReader.ANNOTATIONS) {
             return null;
         }
@@ -490,11 +480,7 @@ class MethodWriter implements MethodVisitor {
         return aw;
     }
 
-    public AnnotationVisitor visitParameterAnnotation(
-        final int parameter,
-        final String desc,
-        final boolean visible)
-    {
+    public AnnotationVisitor visitParameterAnnotation(final int parameter, final String desc, final boolean visible) {
         if (!ClassReader.ANNOTATIONS) {
             return null;
         }
@@ -537,13 +523,8 @@ class MethodWriter implements MethodVisitor {
     public void visitCode() {
     }
 
-    public void visitFrame(
-        final int type,
-        final int nLocal,
-        final Object[] local,
-        final int nStack,
-        final Object[] stack)
-    {
+    public void visitFrame(final int type, final int nLocal, final Object[] local, final int nStack,
+                           final Object[] stack) {
         if (!ClassReader.FRAMES || compute == FRAMES) {
             return;
         }
@@ -552,26 +533,22 @@ class MethodWriter implements MethodVisitor {
             startFrame(code.length, nLocal, nStack);
             for (int i = 0; i < nLocal; ++i) {
                 if (local[i] instanceof String) {
-                    frame[frameIndex++] = Frame.OBJECT
-                            | cw.addType((String) local[i]);
+                    frame[frameIndex++] = Frame.OBJECT | cw.addType((String) local[i]);
                 } else if (local[i] instanceof Integer) {
                     frame[frameIndex++] = ((Integer) local[i]).intValue();
                 } else {
                     frame[frameIndex++] = Frame.UNINITIALIZED
-                            | cw.addUninitializedType("",
-                                    ((Label) local[i]).position);
+                            | cw.addUninitializedType("", ((Label) local[i]).position);
                 }
             }
             for (int i = 0; i < nStack; ++i) {
                 if (stack[i] instanceof String) {
-                    frame[frameIndex++] = Frame.OBJECT
-                            | cw.addType((String) stack[i]);
+                    frame[frameIndex++] = Frame.OBJECT | cw.addType((String) stack[i]);
                 } else if (stack[i] instanceof Integer) {
                     frame[frameIndex++] = ((Integer) stack[i]).intValue();
                 } else {
                     frame[frameIndex++] = Frame.UNINITIALIZED
-                            | cw.addUninitializedType("",
-                                    ((Label) stack[i]).position);
+                            | cw.addUninitializedType("", ((Label) stack[i]).position);
                 }
             }
             endFrame();
@@ -593,9 +570,7 @@ class MethodWriter implements MethodVisitor {
 
             switch (type) {
                 case Opcodes.F_FULL:
-                    stackMap.putByte(FULL_FRAME)
-                            .putShort(delta)
-                            .putShort(nLocal);
+                    stackMap.putByte(FULL_FRAME).putShort(delta).putShort(nLocal);
                     for (int i = 0; i < nLocal; ++i) {
                         writeFrameType(local[i]);
                     }
@@ -605,15 +580,13 @@ class MethodWriter implements MethodVisitor {
                     }
                     break;
                 case Opcodes.F_APPEND:
-                    stackMap.putByte(SAME_FRAME_EXTENDED + nLocal)
-                            .putShort(delta);
+                    stackMap.putByte(SAME_FRAME_EXTENDED + nLocal).putShort(delta);
                     for (int i = 0; i < nLocal; ++i) {
                         writeFrameType(local[i]);
                     }
                     break;
                 case Opcodes.F_CHOP:
-                    stackMap.putByte(SAME_FRAME_EXTENDED - nLocal)
-                            .putShort(delta);
+                    stackMap.putByte(SAME_FRAME_EXTENDED - nLocal).putShort(delta);
                     break;
                 case Opcodes.F_SAME:
                     if (delta < 64) {
@@ -626,8 +599,7 @@ class MethodWriter implements MethodVisitor {
                     if (delta < 64) {
                         stackMap.putByte(SAME_LOCALS_1_STACK_ITEM_FRAME + delta);
                     } else {
-                        stackMap.putByte(SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED)
-                                .putShort(delta);
+                        stackMap.putByte(SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED).putShort(delta);
                     }
                     writeFrameType(stack[0]);
                     break;
@@ -655,9 +627,7 @@ class MethodWriter implements MethodVisitor {
                 stackSize = size;
             }
             // if opcode == ATHROW or xRETURN, ends current block (no successor)
-            if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)
-                    || opcode == Opcodes.ATHROW)
-            {
+            if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN) || opcode == Opcodes.ATHROW) {
                 noSuccessor();
             }
         }
@@ -712,9 +682,8 @@ class MethodWriter implements MethodVisitor {
         if (compute != NOTHING) {
             // updates max locals
             int n;
-            if (opcode == Opcodes.LLOAD || opcode == Opcodes.DLOAD
-                    || opcode == Opcodes.LSTORE || opcode == Opcodes.DSTORE)
-            {
+            if (opcode == Opcodes.LLOAD || opcode == Opcodes.DLOAD || opcode == Opcodes.LSTORE
+                    || opcode == Opcodes.DSTORE) {
                 n = var + 2;
             } else {
                 n = var + 1;
@@ -764,12 +733,7 @@ class MethodWriter implements MethodVisitor {
         code.put12(opcode, i.index);
     }
 
-    public void visitFieldInsn(
-        final int opcode,
-        final String owner,
-        final String name,
-        final String desc)
-    {
+    public void visitFieldInsn(final int opcode, final String owner, final String name, final String desc) {
         Item i = cw.newFieldItem(owner, name, desc);
         // Label currentBlock = this.currentBlock;
         if (currentBlock != null) {
@@ -805,16 +769,10 @@ class MethodWriter implements MethodVisitor {
         code.put12(opcode, i.index);
     }
 
-    public void visitMethodInsn(
-        final int opcode,
-        final String owner,
-        final String name,
-        final String desc)
-    {
+    public void visitMethodInsn(final int opcode, final String owner, final String name, final String desc) {
         boolean itf = opcode == Opcodes.INVOKEINTERFACE;
-        Item i = (opcode == Opcodes.INVOKEDYNAMIC) ?
-                cw.newNameTypeItem(name, desc):
-                cw.newMethodItem(owner, name, desc, itf);
+        Item i = (opcode == Opcodes.INVOKEDYNAMIC) ? cw.newNameTypeItem(name, desc)
+                : cw.newMethodItem(owner, name, desc, itf);
         int argSize = i.intVal;
         // Label currentBlock = this.currentBlock;
         if (currentBlock != null) {
@@ -859,7 +817,7 @@ class MethodWriter implements MethodVisitor {
             code.put12(Opcodes.INVOKEINTERFACE, i.index).put11(argSize >> 2, 0);
         } else {
             code.put12(opcode, i.index);
-            if (opcode==Opcodes.INVOKEDYNAMIC) {
+            if (opcode == Opcodes.INVOKEDYNAMIC) {
                 code.putShort(0);
             }
         }
@@ -905,9 +863,7 @@ class MethodWriter implements MethodVisitor {
             }
         }
         // adds the instruction to the bytecode of the method
-        if ((label.status & Label.RESOLVED) != 0
-                && label.position - code.length < Short.MIN_VALUE)
-        {
+        if ((label.status & Label.RESOLVED) != 0 && label.position - code.length < Short.MIN_VALUE) {
             /*
              * case of a backward jump with an offset < -32768. In this case we
              * automatically replace GOTO with GOTO_W, JSR with JSR_W and IFxxx
@@ -925,9 +881,7 @@ class MethodWriter implements MethodVisitor {
                 if (nextInsn != null) {
                     nextInsn.status |= Label.TARGET;
                 }
-                code.putByte(opcode <= 166
-                        ? ((opcode + 1) ^ 1) - 1
-                        : opcode ^ 1);
+                code.putByte(opcode <= 166 ? ((opcode + 1) ^ 1) - 1 : opcode ^ 1);
                 code.putShort(8); // jump offset
                 code.putByte(200); // GOTO_W
             }
@@ -1019,8 +973,7 @@ class MethodWriter implements MethodVisitor {
             } else {
                 int size;
                 // computes the stack size variation
-                if (i.type == ClassWriter.LONG || i.type == ClassWriter.DOUBLE)
-                {
+                if (i.type == ClassWriter.LONG || i.type == ClassWriter.DOUBLE) {
                     size = stackSize + 2;
                 } else {
                     size = stackSize + 1;
@@ -1058,20 +1011,13 @@ class MethodWriter implements MethodVisitor {
         }
         // adds the instruction to the bytecode of the method
         if ((var > 255) || (increment > 127) || (increment < -128)) {
-            code.putByte(196 /* WIDE */)
-                    .put12(Opcodes.IINC, var)
-                    .putShort(increment);
+            code.putByte(196 /* WIDE */).put12(Opcodes.IINC, var).putShort(increment);
         } else {
             code.putByte(Opcodes.IINC).put11(var, increment);
         }
     }
 
-    public void visitTableSwitchInsn(
-        final int min,
-        final int max,
-        final Label dflt,
-        final Label[] labels)
-    {
+    public void visitTableSwitchInsn(final int min, final int max, final Label dflt, final Label[] labels) {
         // adds the instruction to the bytecode of the method
         int source = code.length;
         code.putByte(Opcodes.TABLESWITCH);
@@ -1085,11 +1031,7 @@ class MethodWriter implements MethodVisitor {
         visitSwitchInsn(dflt, labels);
     }
 
-    public void visitLookupSwitchInsn(
-        final Label dflt,
-        final int[] keys,
-        final Label[] labels)
-    {
+    public void visitLookupSwitchInsn(final Label dflt, final int[] keys, final Label[] labels) {
         // adds the instruction to the bytecode of the method
         int source = code.length;
         code.putByte(Opcodes.LOOKUPSWITCH);
@@ -1146,12 +1088,7 @@ class MethodWriter implements MethodVisitor {
         code.put12(Opcodes.MULTIANEWARRAY, i.index).putByte(dims);
     }
 
-    public void visitTryCatchBlock(
-        final Label start,
-        final Label end,
-        final Label handler,
-        final String type)
-    {
+    public void visitTryCatchBlock(final Label start, final Label end, final Label handler, final String type) {
         ++handlerCount;
         Handler h = new Handler();
         h.start = start;
@@ -1167,34 +1104,22 @@ class MethodWriter implements MethodVisitor {
         lastHandler = h;
     }
 
-    public void visitLocalVariable(
-        final String name,
-        final String desc,
-        final String signature,
-        final Label start,
-        final Label end,
-        final int index)
-    {
+    public void visitLocalVariable(final String name, final String desc, final String signature, final Label start,
+                                   final Label end, final int index) {
         if (signature != null) {
             if (localVarType == null) {
                 localVarType = new ByteVector();
             }
             ++localVarTypeCount;
-            localVarType.putShort(start.position)
-                    .putShort(end.position - start.position)
-                    .putShort(cw.newUTF8(name))
-                    .putShort(cw.newUTF8(signature))
-                    .putShort(index);
+            localVarType.putShort(start.position).putShort(end.position - start.position).putShort(cw.newUTF8(name))
+                    .putShort(cw.newUTF8(signature)).putShort(index);
         }
         if (localVar == null) {
             localVar = new ByteVector();
         }
         ++localVarCount;
-        localVar.putShort(start.position)
-                .putShort(end.position - start.position)
-                .putShort(cw.newUTF8(name))
-                .putShort(cw.newUTF8(desc))
-                .putShort(index);
+        localVar.putShort(start.position).putShort(end.position - start.position).putShort(cw.newUTF8(name))
+                .putShort(cw.newUTF8(desc)).putShort(index);
         if (compute != NOTHING) {
             // updates max locals
             char c = desc.charAt(0);
@@ -1223,9 +1148,7 @@ class MethodWriter implements MethodVisitor {
                 Label h = handler.handler.getFirst();
                 Label e = handler.end.getFirst();
                 // computes the kind of the edges to 'h'
-                String t = handler.desc == null
-                        ? "java/lang/Throwable"
-                        : handler.desc;
+                String t = handler.desc == null ? "java/lang/Throwable" : handler.desc;
                 int kind = Frame.OBJECT | cw.addType(t);
                 // h is an exception handler
                 h.status |= Label.TARGET;
@@ -1312,14 +1235,13 @@ class MethodWriter implements MethodVisitor {
                         code.data[end] = (byte) Opcodes.ATHROW;
                         // emits a frame for this unreachable block
                         startFrame(start, 0, 1);
-                        frame[frameIndex++] = Frame.OBJECT
-                                | cw.addType("java/lang/Throwable");
+                        frame[frameIndex++] = Frame.OBJECT | cw.addType("java/lang/Throwable");
                         endFrame();
                     }
                 }
                 l = l.successor;
             }
-            
+
             this.maxStack = max;
         } else if (compute == MAXS) {
             // completes the control flow graph with exception handler blocks
@@ -1370,8 +1292,7 @@ class MethodWriter implements MethodVisitor {
                         if ((subroutine.status & Label.VISITED) == 0) {
                             // ...assigns it a new id and finds its basic blocks
                             id += 1;
-                            subroutine.visitSubroutine(null, (id / 32L) << 32
-                                    | (1L << (id % 32)), subroutines);
+                            subroutine.visitSubroutine(null, (id / 32L) << 32 | (1L << (id % 32)), subroutines);
                         }
                     }
                     l = l.successor;
@@ -1427,8 +1348,7 @@ class MethodWriter implements MethodVisitor {
                     // if this successor has not already been pushed...
                     if ((l.status & Label.PUSHED) == 0) {
                         // computes its true beginning stack size...
-                        l.inputStackTop = b.info == Edge.EXCEPTION ? 1 : start
-                                + b.info;
+                        l.inputStackTop = b.info == Edge.EXCEPTION ? 1 : start + b.info;
                         // ...and pushes it onto the stack
                         l.status |= Label.PUSHED;
                         l.next = stack;
@@ -1547,12 +1467,11 @@ class MethodWriter implements MethodVisitor {
      * Starts the visit of a stack map frame.
      * 
      * @param offset the offset of the instruction to which the frame
-     *        corresponds.
+     *            corresponds.
      * @param nLocal the number of local variables in the frame.
      * @param nStack the number of stack elements in the frame.
      */
-    private void startFrame(final int offset, final int nLocal, final int nStack)
-    {
+    private void startFrame(final int offset, final int nLocal, final int nStack) {
         int n = 3 + nLocal + nStack;
         if (frame == null || frame.length < n) {
             frame = new int[n];
@@ -1621,9 +1540,7 @@ class MethodWriter implements MethodVisitor {
                     break;
             }
         } else if (clocalsSize == localsSize && cstackSize == 1) {
-            type = delta < 63
-                    ? SAME_LOCALS_1_STACK_ITEM_FRAME
-                    : SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED;
+            type = delta < 63 ? SAME_LOCALS_1_STACK_ITEM_FRAME : SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED;
         }
         if (type != FULL_FRAME) {
             // verify if locals are the same
@@ -1645,8 +1562,7 @@ class MethodWriter implements MethodVisitor {
                 writeFrameTypes(3 + clocalsSize, 4 + clocalsSize);
                 break;
             case SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED:
-                stackMap.putByte(SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED)
-                        .putShort(delta);
+                stackMap.putByte(SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED).putShort(delta);
                 writeFrameTypes(3 + clocalsSize, 4 + clocalsSize);
                 break;
             case SAME_FRAME_EXTENDED:
@@ -1661,9 +1577,7 @@ class MethodWriter implements MethodVisitor {
                 break;
             // case FULL_FRAME:
             default:
-                stackMap.putByte(FULL_FRAME)
-                        .putShort(delta)
-                        .putShort(clocalsSize);
+                stackMap.putByte(FULL_FRAME).putShort(delta).putShort(clocalsSize);
                 writeFrameTypes(3, 3 + clocalsSize);
                 stackMap.putShort(cstackSize);
                 writeFrameTypes(3 + clocalsSize, 3 + clocalsSize + cstackSize);
@@ -1687,8 +1601,7 @@ class MethodWriter implements MethodVisitor {
                 int v = t & Frame.BASE_VALUE;
                 switch (t & Frame.BASE_KIND) {
                     case Frame.OBJECT:
-                        stackMap.putByte(7)
-                                .putShort(cw.newClass(cw.typeTable[v].strVal1));
+                        stackMap.putByte(7).putShort(cw.newClass(cw.typeTable[v].strVal1));
                         break;
                     case Frame.UNINITIALIZED:
                         stackMap.putByte(8).putShort(cw.typeTable[v].intVal);
@@ -1791,11 +1704,7 @@ class MethodWriter implements MethodVisitor {
                 size += 8 + stackMap.length;
             }
             if (cattrs != null) {
-                size += cattrs.getSize(cw,
-                        code.data,
-                        code.length,
-                        maxStack,
-                        maxLocals);
+                size += cattrs.getSize(cw, code.data, code.length, maxStack, maxLocals);
             }
         }
         if (exceptionCount > 0) {
@@ -1803,8 +1712,7 @@ class MethodWriter implements MethodVisitor {
             size += 8 + 2 * exceptionCount;
         }
         if ((access & Opcodes.ACC_SYNTHETIC) != 0
-                && ((cw.version & 0xFFFF) < Opcodes.V1_5 || (access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE) != 0))
-        {
+                && ((cw.version & 0xFFFF) < Opcodes.V1_5 || (access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE) != 0)) {
             cw.newUTF8("Synthetic");
             size += 6;
         }
@@ -1853,12 +1761,12 @@ class MethodWriter implements MethodVisitor {
      * Puts the bytecode of this method in the given byte vector.
      * 
      * @param out the byte vector into which the bytecode of this method must be
-     *        copied.
+     *            copied.
      */
     final void put(final ByteVector out) {
-        int mask = Opcodes.ACC_DEPRECATED
-                | ClassWriter.ACC_SYNTHETIC_ATTRIBUTE
-                | ((access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE) / (ClassWriter.ACC_SYNTHETIC_ATTRIBUTE / Opcodes.ACC_SYNTHETIC));
+        int mask = Opcodes.ACC_DEPRECATED | ClassWriter.ACC_SYNTHETIC_ATTRIBUTE
+                | ((access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE)
+                        / (ClassWriter.ACC_SYNTHETIC_ATTRIBUTE / Opcodes.ACC_SYNTHETIC));
         out.putShort(access & ~mask).putShort(name).putShort(desc);
         if (classReaderOffset != 0) {
             out.putByteArray(cw.cr.b, classReaderOffset, classReaderLength);
@@ -1872,8 +1780,7 @@ class MethodWriter implements MethodVisitor {
             ++attributeCount;
         }
         if ((access & Opcodes.ACC_SYNTHETIC) != 0
-                && ((cw.version & 0xFFFF) < Opcodes.V1_5 || (access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE) != 0))
-        {
+                && ((cw.version & 0xFFFF) < Opcodes.V1_5 || (access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE) != 0)) {
             ++attributeCount;
         }
         if ((access & Opcodes.ACC_DEPRECATED) != 0) {
@@ -1916,11 +1823,7 @@ class MethodWriter implements MethodVisitor {
                 size += 8 + stackMap.length;
             }
             if (cattrs != null) {
-                size += cattrs.getSize(cw,
-                        code.data,
-                        code.length,
-                        maxStack,
-                        maxLocals);
+                size += cattrs.getSize(cw, code.data, code.length, maxStack, maxLocals);
             }
             out.putShort(cw.newUTF8("Code")).putInt(size);
             out.putShort(maxStack).putShort(maxLocals);
@@ -1929,9 +1832,7 @@ class MethodWriter implements MethodVisitor {
             if (handlerCount > 0) {
                 Handler h = firstHandler;
                 while (h != null) {
-                    out.putShort(h.start.position)
-                            .putShort(h.end.position)
-                            .putShort(h.handler.position)
+                    out.putShort(h.start.position).putShort(h.end.position).putShort(h.handler.position)
                             .putShort(h.type);
                     h = h.next;
                 }
@@ -1979,25 +1880,21 @@ class MethodWriter implements MethodVisitor {
             }
         }
         if (exceptionCount > 0) {
-            out.putShort(cw.newUTF8("Exceptions"))
-                    .putInt(2 * exceptionCount + 2);
+            out.putShort(cw.newUTF8("Exceptions")).putInt(2 * exceptionCount + 2);
             out.putShort(exceptionCount);
             for (int i = 0; i < exceptionCount; ++i) {
                 out.putShort(exceptions[i]);
             }
         }
         if ((access & Opcodes.ACC_SYNTHETIC) != 0
-                && ((cw.version & 0xFFFF) < Opcodes.V1_5 || (access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE) != 0))
-        {
+                && ((cw.version & 0xFFFF) < Opcodes.V1_5 || (access & ClassWriter.ACC_SYNTHETIC_ATTRIBUTE) != 0)) {
             out.putShort(cw.newUTF8("Synthetic")).putInt(0);
         }
         if ((access & Opcodes.ACC_DEPRECATED) != 0) {
             out.putShort(cw.newUTF8("Deprecated")).putInt(0);
         }
         if (ClassReader.SIGNATURES && signature != null) {
-            out.putShort(cw.newUTF8("Signature"))
-                    .putInt(2)
-                    .putShort(cw.newUTF8(signature));
+            out.putShort(cw.newUTF8("Signature")).putInt(2).putShort(cw.newUTF8(signature));
         }
         if (ClassReader.ANNOTATIONS && annd != null) {
             out.putShort(cw.newUTF8("AnnotationDefault"));
@@ -2039,10 +1936,12 @@ class MethodWriter implements MethodVisitor {
      * 32768, in which case IFEQ 32766 must be replaced with IFNEQ 8 GOTO_W
      * 32765. This, in turn, may require to increase the size of another jump
      * instruction, and so on... All these operations are handled automatically
-     * by this method. <p> <i>This method must be called after all the method
-     * that is being built has been visited</i>. In particular, the
-     * {@link Label Label} objects used to construct the method are no longer
-     * valid after this method has been called.
+     * by this method.
+     * <p>
+     * <i>This method must be called after all the method that is being built
+     * has been visited</i>. In particular, the {@link Label Label} objects used
+     * to construct the method are no longer valid after this method has been
+     * called.
      */
     private void resizeInstructions() {
         byte[] b = code.data; // bytecode of the method
@@ -2053,25 +1952,22 @@ class MethodWriter implements MethodVisitor {
          * resize another one, which may require to resize yet another one, and
          * so on. The first step of the algorithm consists in finding all the
          * instructions that need to be resized, without modifying the code.
-         * This is done by the following "fix point" algorithm:
-         * 
-         * Parse the code to find the jump instructions whose offset will need
-         * more than 2 bytes to be stored (the future offset is computed from
-         * the current offset and from the number of bytes that will be inserted
-         * or removed between the source and target instructions). For each such
+         * This is done by the following "fix point" algorithm: Parse the code
+         * to find the jump instructions whose offset will need more than 2
+         * bytes to be stored (the future offset is computed from the current
+         * offset and from the number of bytes that will be inserted or removed
+         * between the source and target instructions). For each such
          * instruction, adds an entry in (a copy of) the indexes and sizes
          * arrays (if this has not already been done in a previous iteration!).
-         * 
          * If at least one entry has been added during the previous step, go
-         * back to the beginning, otherwise stop.
-         * 
-         * In fact the real algorithm is complicated by the fact that the size
-         * of TABLESWITCH and LOOKUPSWITCH instructions depends on their
-         * position in the bytecode (because of padding). In order to ensure the
-         * convergence of the algorithm, the number of bytes to be added or
-         * removed from these instructions is over estimated during the previous
-         * loop, and computed exactly only after the loop is finished (this
-         * requires another pass to parse the bytecode of the method).
+         * back to the beginning, otherwise stop. In fact the real algorithm is
+         * complicated by the fact that the size of TABLESWITCH and LOOKUPSWITCH
+         * instructions depends on their position in the bytecode (because of
+         * padding). In order to ensure the convergence of the algorithm, the
+         * number of bytes to be added or removed from these instructions is
+         * over estimated during the previous loop, and computed exactly only
+         * after the loop is finished (this requires another pass to parse the
+         * bytecode of the method).
          */
         int[] allIndexes = new int[0]; // copy of indexes
         int[] allSizes = new int[0]; // copy of sizes
@@ -2107,13 +2003,9 @@ class MethodWriter implements MethodVisitor {
                             label = u + readShort(b, u + 1);
                         }
                         newOffset = getNewOffset(allIndexes, allSizes, u, label);
-                        if (newOffset < Short.MIN_VALUE
-                                || newOffset > Short.MAX_VALUE)
-                        {
+                        if (newOffset < Short.MIN_VALUE || newOffset > Short.MAX_VALUE) {
                             if (!resize[u]) {
-                                if (opcode == Opcodes.GOTO
-                                        || opcode == Opcodes.JSR)
-                                {
+                                if (opcode == Opcodes.GOTO || opcode == Opcodes.JSR) {
                                     // two additional bytes will be required to
                                     // replace this GOTO or JSR instruction with
                                     // a GOTO_W or a JSR_W
@@ -2204,11 +2096,7 @@ class MethodWriter implements MethodVisitor {
                     // allSizes arrays
                     int[] newIndexes = new int[allIndexes.length + 1];
                     int[] newSizes = new int[allSizes.length + 1];
-                    System.arraycopy(allIndexes,
-                            0,
-                            newIndexes,
-                            0,
-                            allIndexes.length);
+                    System.arraycopy(allIndexes, 0, newIndexes, 0, allIndexes.length);
                     System.arraycopy(allSizes, 0, newSizes, 0, allSizes.length);
                     newIndexes[allIndexes.length] = u;
                     newSizes[allSizes.length] = insert;
@@ -2261,9 +2149,7 @@ class MethodWriter implements MethodVisitor {
                         } else if (opcode == Opcodes.JSR) {
                             newCode.putByte(201); // JSR_W
                         } else {
-                            newCode.putByte(opcode <= 166
-                                    ? ((opcode + 1) ^ 1) - 1
-                                    : opcode ^ 1);
+                            newCode.putByte(opcode <= 166 ? ((opcode + 1) ^ 1) - 1 : opcode ^ 1);
                             newCode.putShort(8); // jump offset
                             newCode.putByte(200); // GOTO_W
                             // newOffset now computed from start of GOTO_W
@@ -2385,8 +2271,7 @@ class MethodWriter implements MethodVisitor {
                      * must therefore never have been called for this label.
                      */
                     u = l.position - 3;
-                    if ((l.status & Label.STORE) != 0 || (u >= 0 && resize[u]))
-                    {
+                    if ((l.status & Label.STORE) != 0 || (u >= 0 && resize[u])) {
                         getNewOffset(allIndexes, allSizes, l);
                         // TODO update offsets in UNINITIALIZED values
                         visitFrame(l.frame);
@@ -2431,8 +2316,7 @@ class MethodWriter implements MethodVisitor {
                     newOffset = getNewOffset(allIndexes, allSizes, 0, label);
                     writeShort(b, u, newOffset);
                     label += readUnsignedShort(b, u + 2);
-                    newOffset = getNewOffset(allIndexes, allSizes, 0, label)
-                            - newOffset;
+                    newOffset = getNewOffset(allIndexes, allSizes, 0, label) - newOffset;
                     writeShort(b, u + 2, newOffset);
                     u += 10;
                 }
@@ -2442,10 +2326,7 @@ class MethodWriter implements MethodVisitor {
             b = lineNumber.data;
             u = 0;
             while (u < lineNumber.length) {
-                writeShort(b, u, getNewOffset(allIndexes,
-                        allSizes,
-                        0,
-                        readUnsignedShort(b, u)));
+                writeShort(b, u, getNewOffset(allIndexes, allSizes, 0, readUnsignedShort(b, u)));
                 u += 4;
             }
         }
@@ -2495,8 +2376,8 @@ class MethodWriter implements MethodVisitor {
      * @return the read value.
      */
     static int readInt(final byte[] b, final int index) {
-        return ((b[index] & 0xFF) << 24) | ((b[index + 1] & 0xFF) << 16)
-                | ((b[index + 2] & 0xFF) << 8) | (b[index + 3] & 0xFF);
+        return ((b[index] & 0xFF) << 24) | ((b[index + 1] & 0xFF) << 16) | ((b[index + 2] & 0xFF) << 8)
+                | (b[index + 3] & 0xFF);
     }
 
     /**
@@ -2512,32 +2393,29 @@ class MethodWriter implements MethodVisitor {
     }
 
     /**
-     * Computes the future value of a bytecode offset. <p> Note: it is possible
-     * to have several entries for the same instruction in the <tt>indexes</tt>
-     * and <tt>sizes</tt>: two entries (index=a,size=b) and (index=a,size=b')
-     * are equivalent to a single entry (index=a,size=b+b').
+     * Computes the future value of a bytecode offset.
+     * <p>
+     * Note: it is possible to have several entries for the same instruction in
+     * the <tt>indexes</tt> and <tt>sizes</tt>: two entries (index=a,size=b) and
+     * (index=a,size=b') are equivalent to a single entry (index=a,size=b+b').
      * 
      * @param indexes current positions of the instructions to be resized. Each
-     *        instruction must be designated by the index of its <i>last</i>
-     *        byte, plus one (or, in other words, by the index of the <i>first</i>
-     *        byte of the <i>next</i> instruction).
+     *            instruction must be designated by the index of its <i>last</i>
+     *            byte, plus one (or, in other words, by the index of the
+     *            <i>first</i> byte of the <i>next</i> instruction).
      * @param sizes the number of bytes to be <i>added</i> to the above
-     *        instructions. More precisely, for each i < <tt>len</tt>,
-     *        <tt>sizes</tt>[i] bytes will be added at the end of the
-     *        instruction designated by <tt>indexes</tt>[i] or, if
-     *        <tt>sizes</tt>[i] is negative, the <i>last</i> |<tt>sizes[i]</tt>|
-     *        bytes of the instruction will be removed (the instruction size
-     *        <i>must not</i> become negative or null).
+     *            instructions. More precisely, for each i < <tt>len</tt>,
+     *            <tt>sizes</tt>[i] bytes will be added at the end of the
+     *            instruction designated by <tt>indexes</tt>[i] or, if
+     *            <tt>sizes</tt>[i] is negative, the <i>last</i> |
+     *            <tt>sizes[i]</tt>| bytes of the instruction will be removed
+     *            (the instruction size <i>must not</i> become negative or
+     *            null).
      * @param begin index of the first byte of the source instruction.
      * @param end index of the first byte of the target instruction.
      * @return the future value of the given bytecode offset.
      */
-    static int getNewOffset(
-        final int[] indexes,
-        final int[] sizes,
-        final int begin,
-        final int end)
-    {
+    static int getNewOffset(final int[] indexes, final int[] sizes, final int begin, final int end) {
         int offset = end - begin;
         for (int i = 0; i < indexes.length; ++i) {
             if (begin < indexes[i] && indexes[i] <= end) {
@@ -2555,23 +2433,20 @@ class MethodWriter implements MethodVisitor {
      * Updates the offset of the given label.
      * 
      * @param indexes current positions of the instructions to be resized. Each
-     *        instruction must be designated by the index of its <i>last</i>
-     *        byte, plus one (or, in other words, by the index of the <i>first</i>
-     *        byte of the <i>next</i> instruction).
+     *            instruction must be designated by the index of its <i>last</i>
+     *            byte, plus one (or, in other words, by the index of the
+     *            <i>first</i> byte of the <i>next</i> instruction).
      * @param sizes the number of bytes to be <i>added</i> to the above
-     *        instructions. More precisely, for each i < <tt>len</tt>,
-     *        <tt>sizes</tt>[i] bytes will be added at the end of the
-     *        instruction designated by <tt>indexes</tt>[i] or, if
-     *        <tt>sizes</tt>[i] is negative, the <i>last</i> |<tt>sizes[i]</tt>|
-     *        bytes of the instruction will be removed (the instruction size
-     *        <i>must not</i> become negative or null).
+     *            instructions. More precisely, for each i < <tt>len</tt>,
+     *            <tt>sizes</tt>[i] bytes will be added at the end of the
+     *            instruction designated by <tt>indexes</tt>[i] or, if
+     *            <tt>sizes</tt>[i] is negative, the <i>last</i> |
+     *            <tt>sizes[i]</tt>| bytes of the instruction will be removed
+     *            (the instruction size <i>must not</i> become negative or
+     *            null).
      * @param label the label whose offset must be updated.
      */
-    static void getNewOffset(
-        final int[] indexes,
-        final int[] sizes,
-        final Label label)
-    {
+    static void getNewOffset(final int[] indexes, final int[] sizes, final Label label) {
         if ((label.status & Label.RESIZED) == 0) {
             label.position = getNewOffset(indexes, sizes, 0, label.position);
             label.status |= Label.RESIZED;

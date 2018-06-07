@@ -1,16 +1,16 @@
 package com.aliyun.ext.jtester.hamcrest.collection;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
-import com.aliyun.ext.jtester.hamcrest.core.IsEqual;
-import com.aliyun.ext.jtester.hamcrest.Description;
-import com.aliyun.ext.jtester.hamcrest.Matcher;
-import com.aliyun.ext.jtester.hamcrest.TypeSafeMatcher;
+import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
+import com.aliyun.ext.jtester.hamcrest.Matcher;
+import com.aliyun.ext.jtester.hamcrest.TypeSafeMatcher;
+import com.aliyun.ext.jtester.hamcrest.core.IsEqual;
 
 public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     private final Collection<Matcher<? super E>> matchers;
@@ -25,10 +25,10 @@ public class IsArrayContainingInOrder<E> extends TypeSafeMatcher<E[]> {
     public boolean matchesSafely(E[] item) {
         return iterableMatcher.matches(asList(item));
     }
-    
+
     @Override
     public void describeMismatchSafely(E[] item, Description mismatchDescription) {
-      iterableMatcher.describeMismatch(asList(item), mismatchDescription);
+        iterableMatcher.describeMismatch(asList(item), mismatchDescription);
     }
 
     public void describeTo(Description description) {

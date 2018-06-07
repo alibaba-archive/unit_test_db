@@ -18,7 +18,6 @@ public class IDBInitial {
         }
     }
 
-
     static Class dbInsertOpClazz = null;
 
     public static IInsertOp newInsertOp() {

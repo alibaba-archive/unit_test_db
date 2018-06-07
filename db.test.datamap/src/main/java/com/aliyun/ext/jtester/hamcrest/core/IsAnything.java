@@ -2,11 +2,10 @@
  */
 package com.aliyun.ext.jtester.hamcrest.core;
 
-import com.aliyun.ext.jtester.hamcrest.Factory;
-import com.aliyun.ext.jtester.hamcrest.Description;
-import com.aliyun.ext.jtester.hamcrest.Matcher;
 import com.aliyun.ext.jtester.hamcrest.BaseMatcher;
-
+import com.aliyun.ext.jtester.hamcrest.Description;
+import com.aliyun.ext.jtester.hamcrest.Factory;
+import com.aliyun.ext.jtester.hamcrest.Matcher;
 
 /**
  * A matcher that always returns <code>true</code>.

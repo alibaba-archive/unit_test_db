@@ -45,111 +45,102 @@ public class Type {
     /**
      * The sort of the <tt>void</tt> type. See {@link #getSort getSort}.
      */
-    public static final int VOID = 0;
+    public static final int  VOID         = 0;
 
     /**
      * The sort of the <tt>boolean</tt> type. See {@link #getSort getSort}.
      */
-    public static final int BOOLEAN = 1;
+    public static final int  BOOLEAN      = 1;
 
     /**
      * The sort of the <tt>char</tt> type. See {@link #getSort getSort}.
      */
-    public static final int CHAR = 2;
+    public static final int  CHAR         = 2;
 
     /**
      * The sort of the <tt>byte</tt> type. See {@link #getSort getSort}.
      */
-    public static final int BYTE = 3;
+    public static final int  BYTE         = 3;
 
     /**
      * The sort of the <tt>short</tt> type. See {@link #getSort getSort}.
      */
-    public static final int SHORT = 4;
+    public static final int  SHORT        = 4;
 
     /**
      * The sort of the <tt>int</tt> type. See {@link #getSort getSort}.
      */
-    public static final int INT = 5;
+    public static final int  INT          = 5;
 
     /**
      * The sort of the <tt>float</tt> type. See {@link #getSort getSort}.
      */
-    public static final int FLOAT = 6;
+    public static final int  FLOAT        = 6;
 
     /**
      * The sort of the <tt>long</tt> type. See {@link #getSort getSort}.
      */
-    public static final int LONG = 7;
+    public static final int  LONG         = 7;
 
     /**
      * The sort of the <tt>double</tt> type. See {@link #getSort getSort}.
      */
-    public static final int DOUBLE = 8;
+    public static final int  DOUBLE       = 8;
 
     /**
      * The sort of array reference types. See {@link #getSort getSort}.
      */
-    public static final int ARRAY = 9;
+    public static final int  ARRAY        = 9;
 
     /**
      * The sort of object reference type. See {@link #getSort getSort}.
      */
-    public static final int OBJECT = 10;
+    public static final int  OBJECT       = 10;
 
     /**
      * The <tt>void</tt> type.
      */
-    public static final Type VOID_TYPE = new Type(VOID, null, ('V' << 24)
-            | (5 << 16) | (0 << 8) | 0, 1);
+    public static final Type VOID_TYPE    = new Type(VOID, null, ('V' << 24) | (5 << 16) | (0 << 8) | 0, 1);
 
     /**
      * The <tt>boolean</tt> type.
      */
-    public static final Type BOOLEAN_TYPE = new Type(BOOLEAN, null, ('Z' << 24)
-            | (0 << 16) | (5 << 8) | 1, 1);
+    public static final Type BOOLEAN_TYPE = new Type(BOOLEAN, null, ('Z' << 24) | (0 << 16) | (5 << 8) | 1, 1);
 
     /**
      * The <tt>char</tt> type.
      */
-    public static final Type CHAR_TYPE = new Type(CHAR, null, ('C' << 24)
-            | (0 << 16) | (6 << 8) | 1, 1);
+    public static final Type CHAR_TYPE    = new Type(CHAR, null, ('C' << 24) | (0 << 16) | (6 << 8) | 1, 1);
 
     /**
      * The <tt>byte</tt> type.
      */
-    public static final Type BYTE_TYPE = new Type(BYTE, null, ('B' << 24)
-            | (0 << 16) | (5 << 8) | 1, 1);
+    public static final Type BYTE_TYPE    = new Type(BYTE, null, ('B' << 24) | (0 << 16) | (5 << 8) | 1, 1);
 
     /**
      * The <tt>short</tt> type.
      */
-    public static final Type SHORT_TYPE = new Type(SHORT, null, ('S' << 24)
-            | (0 << 16) | (7 << 8) | 1, 1);
+    public static final Type SHORT_TYPE   = new Type(SHORT, null, ('S' << 24) | (0 << 16) | (7 << 8) | 1, 1);
 
     /**
      * The <tt>int</tt> type.
      */
-    public static final Type INT_TYPE = new Type(INT, null, ('I' << 24)
-            | (0 << 16) | (0 << 8) | 1, 1);
+    public static final Type INT_TYPE     = new Type(INT, null, ('I' << 24) | (0 << 16) | (0 << 8) | 1, 1);
 
     /**
      * The <tt>float</tt> type.
      */
-    public static final Type FLOAT_TYPE = new Type(FLOAT, null, ('F' << 24)
-            | (2 << 16) | (2 << 8) | 1, 1);
+    public static final Type FLOAT_TYPE   = new Type(FLOAT, null, ('F' << 24) | (2 << 16) | (2 << 8) | 1, 1);
 
     /**
      * The <tt>long</tt> type.
      */
-    public static final Type LONG_TYPE = new Type(LONG, null, ('J' << 24)
-            | (1 << 16) | (1 << 8) | 2, 1);
+    public static final Type LONG_TYPE    = new Type(LONG, null, ('J' << 24) | (1 << 16) | (1 << 8) | 2, 1);
 
     /**
      * The <tt>double</tt> type.
      */
-    public static final Type DOUBLE_TYPE = new Type(DOUBLE, null, ('D' << 24)
-            | (3 << 16) | (3 << 8) | 2, 1);
+    public static final Type DOUBLE_TYPE  = new Type(DOUBLE, null, ('D' << 24) | (3 << 16) | (3 << 8) | 2, 1);
 
     // ------------------------------------------------------------------------
     // Fields
@@ -158,13 +149,13 @@ public class Type {
     /**
      * The sort of this Java type.
      */
-    private final int sort;
+    private final int        sort;
 
     /**
      * A buffer containing the internal name of this Java type. This field is
      * only used for reference types.
      */
-    private final char[] buf;
+    private final char[]     buf;
 
     /**
      * The offset of the internal name of this Java type in {@link #buf buf} or,
@@ -172,12 +163,12 @@ public class Type {
      * type (byte 0 contains the size, byte 1 the descriptor, byte 2 the offset
      * for IALOAD or IASTORE, byte 3 the offset for all other instructions).
      */
-    private final int off;
+    private final int        off;
 
     /**
      * The length of the internal name of this Java type.
      */
-    private final int len;
+    private final int        len;
 
     // ------------------------------------------------------------------------
     // Constructors
@@ -191,8 +182,7 @@ public class Type {
      * @param off the offset of this descriptor in the previous buffer.
      * @param len the length of this descriptor.
      */
-    private Type(final int sort, final char[] buf, final int off, final int len)
-    {
+    private Type(final int sort, final char[] buf, final int off, final int len) {
         this.sort = sort;
         this.buf = buf;
         this.off = off;
@@ -226,7 +216,7 @@ public class Type {
      * @param c a class.
      * @return the Java type corresponding to the given class.
      */
-	public static Type getType(final Class c) {
+    public static Type getType(final Class c) {
         if (c.isPrimitive()) {
             if (c == Integer.TYPE) {
                 return INT_TYPE;
@@ -244,7 +234,7 @@ public class Type {
                 return DOUBLE_TYPE;
             } else if (c == Float.TYPE) {
                 return FLOAT_TYPE;
-            } else /* if (c == Long.TYPE) */{
+            } else /* if (c == Long.TYPE) */ {
                 return LONG_TYPE;
             }
         } else {
@@ -335,9 +325,7 @@ public class Type {
      * @param desc the descriptor of a method.
      * @return the size of the arguments of the method (plus one for the
      *         implicit this argument), argSize, and the size of its return
-     *         value, retSize, packed into a single int i =
-     *         <tt>(argSize << 2) | retSize</tt> (argSize is therefore equal
-     *         to <tt>i >> 2</tt>, and retSize to <tt>i & 0x03</tt>).
+     *         value, retSize, packed into a single int 
      */
     public static int getArgumentsAndReturnSizes(final String desc) {
         int n = 1;
@@ -346,8 +334,7 @@ public class Type {
             char car = desc.charAt(c++);
             if (car == ')') {
                 car = desc.charAt(c);
-                return n << 2
-                        | (car == 'V' ? 0 : (car == 'D' || car == 'J' ? 2 : 1));
+                return n << 2 | (car == 'V' ? 0 : (car == 'D' || car == 'J' ? 2 : 1));
             } else if (car == 'L') {
                 while (desc.charAt(c++) != ';') {
                 }
@@ -407,7 +394,7 @@ public class Type {
                     }
                 }
                 return new Type(ARRAY, buf, off, len + 1);
-                // case 'L':
+            // case 'L':
             default:
                 len = 1;
                 while (buf[off + len] != ';') {
@@ -424,11 +411,10 @@ public class Type {
     /**
      * Returns the sort of this Java type.
      * 
-     * @return {@link #VOID VOID}, {@link #BOOLEAN BOOLEAN},
-     *         {@link #CHAR CHAR}, {@link #BYTE BYTE}, {@link #SHORT SHORT},
-     *         {@link #INT INT}, {@link #FLOAT FLOAT}, {@link #LONG LONG},
-     *         {@link #DOUBLE DOUBLE}, {@link #ARRAY ARRAY} or
-     *         {@link #OBJECT OBJECT}.
+     * @return {@link #VOID VOID}, {@link #BOOLEAN BOOLEAN}, {@link #CHAR CHAR},
+     *         {@link #BYTE BYTE}, {@link #SHORT SHORT}, {@link #INT INT},
+     *         {@link #FLOAT FLOAT}, {@link #LONG LONG}, {@link #DOUBLE DOUBLE},
+     *         {@link #ARRAY ARRAY} or {@link #OBJECT OBJECT}.
      */
     public int getSort() {
         return sort;
@@ -489,7 +475,7 @@ public class Type {
                     b.append("[]");
                 }
                 return b.toString();
-                // case OBJECT:
+            // case OBJECT:
             default:
                 return new String(buf, off, len).replace('/', '.');
         }
@@ -531,10 +517,7 @@ public class Type {
      * @return the descriptor corresponding to the given argument and return
      *         types.
      */
-    public static String getMethodDescriptor(
-        final Type returnType,
-        final Type[] argumentTypes)
-    {
+    public static String getMethodDescriptor(final Type returnType, final Type[] argumentTypes) {
         StringBuffer buf = new StringBuffer();
         buf.append('(');
         for (int i = 0; i < argumentTypes.length; ++i) {
@@ -654,7 +637,7 @@ public class Type {
                     car = 'D';
                 } else if (d == Float.TYPE) {
                     car = 'F';
-                } else /* if (d == Long.TYPE) */{
+                } else /* if (d == Long.TYPE) */ {
                     car = 'J';
                 }
                 buf.append(car);
@@ -695,8 +678,8 @@ public class Type {
      * Returns a JVM instruction opcode adapted to this Java type.
      * 
      * @param opcode a JVM instruction opcode. This opcode must be one of ILOAD,
-     *        ISTORE, IALOAD, IASTORE, IADD, ISUB, IMUL, IDIV, IREM, INEG, ISHL,
-     *        ISHR, IUSHR, IAND, IOR, IXOR and IRETURN.
+     *            ISTORE, IALOAD, IASTORE, IADD, ISUB, IMUL, IDIV, IREM, INEG,
+     *            ISHL, ISHR, IUSHR, IAND, IOR, IXOR and IRETURN.
      * @return an opcode that is similar to the given opcode, but adapted to
      *         this Java type. For example, if this type is <tt>float</tt> and
      *         <tt>opcode</tt> is IRETURN, this method returns FRETURN.

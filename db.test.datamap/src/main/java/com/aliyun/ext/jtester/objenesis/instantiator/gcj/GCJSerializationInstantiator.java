@@ -25,23 +25,22 @@ import com.aliyun.ext.jtester.objenesis.instantiator.SerializationInstantiatorHe
  * superclass' no-arg constructor.
  * 
  * @author Leonardo Mesquita
- * @see org.objenesis.instantiator.ObjectInstantiator
  */
 @SuppressWarnings("rawtypes")
 public class GCJSerializationInstantiator extends GCJInstantiatorBase {
-	private Class superType;
+    private Class superType;
 
-	public GCJSerializationInstantiator(Class type) {
-		super(type);
-		this.superType = SerializationInstantiatorHelper.getNonSerializableSuperClass(type);
-	}
+    public GCJSerializationInstantiator(Class type) {
+        super(type);
+        this.superType = SerializationInstantiatorHelper.getNonSerializableSuperClass(type);
+    }
 
-	public Object newInstance() {
-		try {
-			return newObjectMethod.invoke(dummyStream, new Object[] { type, superType });
-		} catch (Exception e) {
-			throw new ObjenesisException(e);
-		}
-	}
+    public Object newInstance() {
+        try {
+            return newObjectMethod.invoke(dummyStream, new Object[] { type, superType });
+        } catch (Exception e) {
+            throw new ObjenesisException(e);
+        }
+    }
 
 }

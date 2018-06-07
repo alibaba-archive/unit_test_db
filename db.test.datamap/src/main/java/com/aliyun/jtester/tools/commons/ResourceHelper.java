@@ -19,14 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.aliyun.jtester.tools.cpdetector.JChardetFacade;
-import com.aliyun.jtester.module.JTesterException;
-import com.aliyun.jtester.tools.cpdetector.CodepageDetectorProxy;
-import com.aliyun.jtester.tools.cpdetector.JChardetFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aliyun.ext.jtester.apache.commons.io.IOUtils;
+import com.aliyun.jtester.module.JTesterException;
+import com.aliyun.jtester.tools.cpdetector.CodepageDetectorProxy;
+import com.aliyun.jtester.tools.cpdetector.JChardetFacade;
 
 @SuppressWarnings("rawtypes")
 public class ResourceHelper {
@@ -483,11 +482,8 @@ public class ResourceHelper {
      * o file:开头读取文件系统 <br>
      * o classpath:开头读取classpath下的文件<br>
      * o 否则读取 classpath下文件
-     * 
-     * @param file
-     * @return
-     * @throws FileNotFoundException
-     */
+     *
+     * */
     public static Properties loadPropertiesFrom(final String file) {
         InputStream in = null;
         try {

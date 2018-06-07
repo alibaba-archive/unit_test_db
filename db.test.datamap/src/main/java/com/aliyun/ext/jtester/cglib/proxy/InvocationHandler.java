@@ -27,10 +27,9 @@ import java.lang.reflect.Method;
  *          $
  */
 public interface InvocationHandler extends Callback {
-	/**
-	 * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object,
-	 *      java.lang.reflect.Method, java.lang.Object)
-	 */
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable;
+    /**
+     * @see java.lang.reflect.InvocationHandler#invoke(Object, Method, Object[])
+     */
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable;
 
 }

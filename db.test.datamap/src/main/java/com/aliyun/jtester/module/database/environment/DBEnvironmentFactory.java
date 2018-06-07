@@ -5,15 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import com.aliyun.jtester.module.database.environment.types.DerbyEnvironment;
-import com.aliyun.jtester.module.database.environment.types.MySqlEnvironment;
-import com.aliyun.jtester.module.database.utility.DataSourceType;
-import com.aliyun.jtester.tools.commons.StringHelper;
-import com.aliyun.jtester.module.database.environment.types.DerbyEnvironment;
-import com.aliyun.jtester.module.database.environment.types.MySqlEnvironment;
-import com.aliyun.jtester.module.database.utility.DataSourceType;
-import com.aliyun.jtester.tools.commons.StringHelper;
 import org.unitils.core.Unitils;
+
+import com.aliyun.jtester.module.database.environment.types.DerbyEnvironment;
+import com.aliyun.jtester.module.database.environment.types.MySqlEnvironment;
+import com.aliyun.jtester.module.database.utility.DataSourceType;
+import com.aliyun.jtester.tools.commons.StringHelper;
 
 public final class DBEnvironmentFactory {
     public static final Properties            unitilscfg   = Unitils.getInstance().getConfiguration();
@@ -84,7 +81,6 @@ public final class DBEnvironmentFactory {
      * 切换数据库环境<br>
      * 先关闭上一个数据库连接，再设置当前数据库连接
      * 
-     * @throws SQLException
      */
     public static void changeDBEnvironment(DBEnvironment environment) {
         // if (currDBEnvironment != null &&

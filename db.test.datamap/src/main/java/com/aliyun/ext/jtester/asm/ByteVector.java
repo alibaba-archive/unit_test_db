@@ -45,7 +45,7 @@ public class ByteVector {
     /**
      * Actual number of bytes in this vector.
      */
-    int length;
+    int    length;
 
     /**
      * Constructs a new {@link ByteVector ByteVector} with a default initial
@@ -259,14 +259,13 @@ public class ByteVector {
      * Puts an array of bytes into this byte vector. The byte vector is
      * automatically enlarged if necessary.
      * 
-     * @param b an array of bytes. May be <tt>null</tt> to put <tt>len</tt>
-     *        null bytes into this byte vector.
+     * @param b an array of bytes. May be <tt>null</tt> to put <tt>len</tt> null
+     *            bytes into this byte vector.
      * @param off index of the fist byte of b that must be copied.
      * @param len number of bytes of b that must be copied.
      * @return this byte vector.
      */
-    public ByteVector putByteArray(final byte[] b, final int off, final int len)
-    {
+    public ByteVector putByteArray(final byte[] b, final int off, final int len) {
         if (length + len > data.length) {
             enlarge(len);
         }
@@ -281,7 +280,7 @@ public class ByteVector {
      * Enlarge this byte vector so that it can receive n more bytes.
      * 
      * @param size number of additional bytes that this byte vector should be
-     *        able to receive.
+     *            able to receive.
      */
     private void enlarge(final int size) {
         int length1 = 2 * data.length;

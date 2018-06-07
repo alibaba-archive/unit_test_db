@@ -20,7 +20,7 @@ public class FieldAccessor<T> {
      * Constructor.
      * 
      * @param fieldName the field name
-     * @param type the class from which to start searching the field
+     * @param claz the class from which to start searching the field
      */
     public FieldAccessor(Class claz, String fieldName) {
         if (fieldName == null || claz == null) {

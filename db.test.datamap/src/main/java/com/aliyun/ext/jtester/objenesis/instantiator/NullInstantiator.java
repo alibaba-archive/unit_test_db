@@ -22,10 +22,10 @@ package com.aliyun.ext.jtester.objenesis.instantiator;
  */
 public class NullInstantiator implements ObjectInstantiator {
 
-	/**
-	 * @return Always null
-	 */
-	public Object newInstance() {
-		return null;
-	}
+    /**
+     * @return Always null
+     */
+    public Object newInstance() {
+        return null;
+    }
 }

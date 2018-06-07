@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.aliyun.jtester.tools.commons.ArrayHelper;
-import com.aliyun.jtester.tools.commons.ArrayHelper;
 
 public class DataProviderIterator<T> implements Iterator<T[]> {
     private List<T[]>     datas = new ArrayList<T[]>();

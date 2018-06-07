@@ -36,40 +36,40 @@ package com.aliyun.ext.jtester.mozilla.intl.chardet;
 
 public class NsDetector extends NsPSMDetector implements INsCharsetDetector {
 
-	NsICharsetDetectionObserver mObserver = null;
+    NsICharsetDetectionObserver mObserver = null;
 
-	public NsDetector() {
-		super();
-	}
+    public NsDetector() {
+        super();
+    }
 
-	public NsDetector(int langFlag) {
-		super(langFlag);
-	}
+    public NsDetector(int langFlag) {
+        super(langFlag);
+    }
 
-	public void init(NsICharsetDetectionObserver aObserver) {
-		mObserver = aObserver;
-		return;
-	}
+    public void init(NsICharsetDetectionObserver aObserver) {
+        mObserver = aObserver;
+        return;
+    }
 
-	public boolean doIt(byte[] aBuf, int aLen, boolean oDontFeedMe) {
-		if (aBuf == null || oDontFeedMe)
-			return false;
+    public boolean doIt(byte[] aBuf, int aLen, boolean oDontFeedMe) {
+        if (aBuf == null || oDontFeedMe)
+            return false;
 
-		this.HandleData(aBuf, aLen);
-		return mDone;
-	}
+        this.HandleData(aBuf, aLen);
+        return mDone;
+    }
 
-	public void report(String charset) {
-		if (mObserver != null)
-			mObserver.notify(charset);
-	}
+    public void report(String charset) {
+        if (mObserver != null)
+            mObserver.notify(charset);
+    }
 
-	public boolean isAscii(byte[] aBuf, int aLen) {
-		for (int i = 0; i < aLen; i++) {
-			if ((0x0080 & aBuf[i]) != 0) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public boolean isAscii(byte[] aBuf, int aLen) {
+        for (int i = 0; i < aLen; i++) {
+            if ((0x0080 & aBuf[i]) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

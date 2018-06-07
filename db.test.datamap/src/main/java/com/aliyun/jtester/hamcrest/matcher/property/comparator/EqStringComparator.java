@@ -6,9 +6,6 @@ import java.util.Date;
 import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
 import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparator;
 import com.aliyun.jtester.tools.commons.DateHelper;
-import com.aliyun.jtester.hamcrest.matcher.property.difference.Difference;
-import com.aliyun.jtester.hamcrest.matcher.property.reflection.ReflectionComparator;
-import com.aliyun.jtester.tools.commons.DateHelper;
 
 @SuppressWarnings("rawtypes")
 public class EqStringComparator implements Comparator {

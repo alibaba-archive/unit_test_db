@@ -12,7 +12,7 @@ import com.aliyun.ext.jtester.hamcrest.Description;
 public class Find extends ArgumentMatcher<String> implements Serializable {
 
     private static final long serialVersionUID = 8895781429480404872L;
-    private final String regex;
+    private final String      regex;
 
     public Find(String regex) {
         this.regex = regex;
