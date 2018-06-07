@@ -1,6 +1,6 @@
 package com.aliyun.datamap.unittest;
 
-import org.jtester.module.ICore;
+import com.aliyun.jtester.module.ICore;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.spring.annotation.SpringApplicationContext;
 

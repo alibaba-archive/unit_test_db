@@ -2,8 +2,8 @@ package com.aliyun.datamap.unittest;
 
 import java.util.Date;
 
-import org.jtester.module.ICore;
-import org.jtester.module.database.IDatabase;
+import com.aliyun.jtester.module.ICore;
+import com.aliyun.jtester.module.database.IDatabase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.unitils.spring.annotation.SpringBeanByName;
