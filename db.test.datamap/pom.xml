@@ -167,16 +167,6 @@
                     <attach>true</attach>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/bvt/**/*.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -191,40 +181,34 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skip>${javadoc.skip}</skip>
                     <encoding>UTF-8</encoding>
                     <charset>UTF-8</charset>
-                    <additionalOptions>
-                        <additionalOption>-Xdoclint:none</additionalOption>
-                    </additionalOptions>
                 </configuration>
             </plugin>
 
             <plugin>
-                <artifactId>maven-gpg-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skip>${gpg.skip}</skip>
+                    <includes>
+                        <include>**/**/*Test.java</include>
+                    </includes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
-    <profiles>
-    <profile>
-        <id>deployment</id>
-        <properties>
-            <!-- 开发时使用较高的Java版本，以避免eclipse的警告，但编译时采用保守的Java 1.5格式。 -->
-            <java.version>1.6</java.version>
-            <!-- 确保生成GPG签名。 -->
-            <gpg.skip>false</gpg.skip>
-        </properties>
-    </profile>
-    </profiles>
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>releases</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <uniqueVersion>true</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
